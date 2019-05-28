@@ -1,0 +1,14 @@
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/bin/Debug/netcoreapp2.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/bin/Debug/netcoreapp2.1/xunit.runner.reporters.netcoreapp10.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/bin/Debug/netcoreapp2.1/xunit.runner.utility.netcoreapp10.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/bin/Debug/netcoreapp2.1/TTT.deps.json
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/bin/Debug/netcoreapp2.1/TTT.runtimeconfig.json
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/bin/Debug/netcoreapp2.1/TTT.runtimeconfig.dev.json
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/bin/Debug/netcoreapp2.1/TTT.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/bin/Debug/netcoreapp2.1/TTT.pdb
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/obj/Debug/netcoreapp2.1/TTT.csprojAssemblyReference.cache
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/obj/Debug/netcoreapp2.1/TTT.csproj.CoreCompileInputs.cache
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/obj/Debug/netcoreapp2.1/TTT.AssemblyInfoInputs.cache
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/obj/Debug/netcoreapp2.1/TTT.AssemblyInfo.cs
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/obj/Debug/netcoreapp2.1/TTT.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/obj/Debug/netcoreapp2.1/TTT.pdb
