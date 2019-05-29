@@ -68,6 +68,54 @@ namespace TicTacToeApp
             Console.WriteLine(instructions);
             return instructions;
         }
+
+        public int getSpace()
+        {
+            Console.WriteLine("Please enter a number 1 - 9:");
+            string position = Console.ReadLine();
+            return Convert.ToInt32(position);
+        }
+        
+        public bool isValidSpace(int position)
+        {
+            if (position <= 9 && position > 1)
+            {
+                return true;
+            }
+            else if (position > 9)
+            {
+                Console.WriteLine("Please choose a lower number");                
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Please enter  1 - 9 only.");
+                return false;
+            }
+        }
+
+
+        // public string move(int position, string playerMarker)
+        // {
+        //     currentBoard.placeMarker(position, playerMarker);
+        //     displayBoard();
+        //     Console.WriteLine("Swap players!");
+        //     return "Good Move!";
+        // }
+
+        public string displayBoard()
+        {
+            var displayBoard = "  ———————————  \n | ";
+            foreach (string space in currentBoard.board)
+            {
+                displayBoard += space + " | ";
+            }
+            displayBoard = displayBoard.Insert(28, " |\n |———|———|———| \n");
+            displayBoard = displayBoard.Insert(60, "|\n |———|———|———|  \n ");
+            displayBoard += "\n  ———————————  ";
+            Console.WriteLine(displayBoard);
+            return displayBoard;
+        }
     }
 }
 
