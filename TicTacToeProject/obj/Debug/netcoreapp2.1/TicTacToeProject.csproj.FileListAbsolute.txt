@@ -1,0 +1,11 @@
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/bin/Debug/netcoreapp2.1/TicTacToeProject.deps.json
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/bin/Debug/netcoreapp2.1/TicTacToeProject.runtimeconfig.json
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/bin/Debug/netcoreapp2.1/TicTacToeProject.runtimeconfig.dev.json
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/bin/Debug/netcoreapp2.1/TicTacToeProject.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/bin/Debug/netcoreapp2.1/TicTacToeProject.pdb
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/obj/Debug/netcoreapp2.1/TicTacToeProject.csprojAssemblyReference.cache
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/obj/Debug/netcoreapp2.1/TicTacToeProject.csproj.CoreCompileInputs.cache
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/obj/Debug/netcoreapp2.1/TicTacToeProject.AssemblyInfoInputs.cache
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/obj/Debug/netcoreapp2.1/TicTacToeProject.AssemblyInfo.cs
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/obj/Debug/netcoreapp2.1/TicTacToeProject.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/obj/Debug/netcoreapp2.1/TicTacToeProject.pdb
