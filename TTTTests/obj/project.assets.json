@@ -5859,11 +5859,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/TTT.csproj",
+      "projectUniqueName": "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTTApp/TTTTests/TTT.csproj",
       "projectName": "TTT",
-      "projectPath": "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/TTT.csproj",
+      "projectPath": "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTTApp/TTTTests/TTT.csproj",
       "packagesPath": "/Users/carolinecessaro/.nuget/packages/",
-      "outputPath": "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTT/obj/",
+      "outputPath": "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTTApp/TTTTests/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
