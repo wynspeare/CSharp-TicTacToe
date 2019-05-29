@@ -1,4 +1,0 @@
-/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTTApp/TTTLogic/obj/Debug/netcoreapp2.2/TTTLogic.csprojAssemblyReference.cache
-/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTTApp/TTTLogic/obj/Debug/netcoreapp2.2/TTTLogic.csproj.CoreCompileInputs.cache
-/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTTApp/TTTLogic/obj/Debug/netcoreapp2.2/TTTLogic.AssemblyInfoInputs.cache
-/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TTTApp/TTTLogic/obj/Debug/netcoreapp2.2/TTTLogic.AssemblyInfo.cs
