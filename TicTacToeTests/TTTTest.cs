@@ -14,12 +14,13 @@ namespace TicTacToeTests
         }
         
         [Fact]
-        public void playerOneCanChooseAMarker()
+        public void newInstancesOfPlayerAreCreatedWhenAMarkerIsChosen()
         {
             TicTacToe myTTT = new TicTacToe();
+            Assert.Null(myTTT.playerOne);
             myTTT.chooseMarker();
-            Assert.NotNull(myTTT.playerOneMarker);
-            Assert.NotNull(myTTT.playerTwoMarker);
+            Assert.NotNull(myTTT.playerOne.marker);
+            Assert.NotNull(myTTT.playerTwo.marker);
         }
 
         [Fact]

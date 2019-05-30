@@ -7,10 +7,12 @@ namespace TicTacToeApp
 {
     public class TicTacToe
     {
-        public string playerOneMarker;
-        public string playerTwoMarker;
+
         public Board currentBoard;
         public string currentTurn;
+
+        public Player playerOne;
+        public Player playerTwo;
 
         static void Main(string[] args)
         {
@@ -38,7 +40,7 @@ namespace TicTacToeApp
                 return startNewGame();
             }
         }
-        
+
         public void chooseMarker()
         {
             Console.WriteLine("Player One - please choose a marker -  X or O");
@@ -46,14 +48,14 @@ namespace TicTacToeApp
             if (marker == "X")
             {
                 Console.WriteLine("Player One - Your Marker is X\nPlayer Two - Your Marker is O\n");
-                playerOneMarker = marker;
-                playerTwoMarker = "O";
+                playerOne = new Player(marker);
+                playerTwo = new Player("O");
             }
             else if (marker == "O" | marker == "0")
             {
                 Console.WriteLine("Player One - Your Marker is O\nPlayer Two - Your Marker is X\n");
-                playerOneMarker = "O";
-                playerTwoMarker = "X";
+                playerOne = new Player("O");
+                playerTwo = new Player("X");
             }
             else
             {
@@ -64,7 +66,7 @@ namespace TicTacToeApp
 
         public string displayInstructions()
         {
-            var instructions = "HOW TO PLAY\n===========\nPlayers alternate placing Xs and Os on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their Xs or three of their Os in a row, then that player wins.\n";
+            var instructions = "\nHOW TO PLAY\n===========\nPlayers alternate placing Xs and Os on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their Xs or three of their Os in a row, then that player wins.\n";
             Console.WriteLine(instructions);
             return instructions;
         }
