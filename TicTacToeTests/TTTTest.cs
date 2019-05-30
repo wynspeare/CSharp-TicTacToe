@@ -47,19 +47,45 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void userCanEnterASpaceAndReturnAnInteger()
+        public void userCanEnterASpaceAndItsReturnsAnInteger()
         {
             TicTacToe myTTT = new TicTacToe();
+            myTTT.startNewGame();
             Assert.Equal(typeof(int), myTTT.getSpace().GetType());
+        }
+
+
+        [Fact]
+        public void userCanEnterASpaceAndANewCurrentInstanceIsCreated()
+        {
+            TicTacToe myTTT = new TicTacToe();
+            myTTT.startNewGame();
+            Assert.Null(myTTT.currentSpace);
+            myTTT.getSpace();
+            Assert.NotNull(myTTT.currentSpace);
+        }
+
+        [Fact]
+        public void whenANewSpaceIsEnteredTheCurrentLocationIsChanged()
+        {
+            TicTacToe myTTT = new TicTacToe();
+            myTTT.startNewGame();
+            Assert.Null(myTTT.currentSpace);
+            myTTT.getSpace(); // Enter 3
+            Assert.Equal(3, myTTT.currentSpace.location);
+            myTTT.getSpace(); // Enter 5
+            Assert.Equal(5, myTTT.currentSpace.location);
         }
 
         [Fact]
         public void userCanKnowIfSelectedSpaceIsValid()
         {
             TicTacToe myTTT = new TicTacToe();
-            Assert.True(myTTT.isValidSpace(9));   
-            Assert.False(myTTT.isValidSpace(-1));
-            Assert.False(myTTT.isValidSpace(11));   
+            myTTT.startNewGame();
+            Assert.True(myTTT.isValidSpace("9"));   
+            Assert.False(myTTT.isValidSpace("-1"));
+            Assert.False(myTTT.isValidSpace("11"));
+            Assert.False(myTTT.isValidSpace("Q"));   
         }
         
         [Fact]
@@ -67,7 +93,7 @@ namespace TicTacToeTests
         {
             TicTacToe myTTT = new TicTacToe();
             myTTT.startNewGame();
-            Assert.True(myTTT.currentBoard.isSpaceEmpty(3));   
+            Assert.True(myTTT.currentBoard.isSpaceEmpty(3));
         }
 
         [Fact]
@@ -81,13 +107,44 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void userKnowIfAMoveWasValid()
+        public void userCanKnowIfAMoveWasSuccessful()
         {
             TicTacToe myTTT = new TicTacToe();
             myTTT.startNewGame();
             myTTT.currentBoard.placeMarker(3, "X");
             Assert.True(myTTT.currentBoard.successfulMove);
         }
+
+        [Fact] //Test behaviour not state
+        public void aSpecificLocationisFilledafterAMove()
+        {
+            TicTacToe myTTT = new TicTacToe();
+            myTTT.startNewGame();
+            myTTT.currentBoard.placeMarker(6, "X");
+            myTTT.displayBoard();
+            Assert.False(myTTT.currentBoard.isSpaceEmpty(6));
+        }
+
+        [Fact] //Test behaviour not state
+        public void aBoardIsNotEmptyafterAMoves()
+        {
+            TicTacToe myTTT = new TicTacToe();
+            myTTT.startNewGame();
+            myTTT.currentBoard.placeMarker(6, "X");
+            myTTT.currentBoard.placeMarker(8, "O");
+            Assert.False(myTTT.currentBoard.isEmpty());
+        }
+
+        // [Fact] //Implement a way to add in a mock board with pre-filled spaces??
+        // public void userIsShownIfTheirLatestMoveWinsTheGame()
+        // {
+        //     TicTacToe myTTT = new TicTacToe();
+        //     myTTT.startNewGame();
+        //     myTTT.currentBoard.placeMarker(6, "X");
+        //     myTTT.currentBoard.placeMarker(9, "X");
+        //     myTTT.currentBoard.placeMarker(3, "X");
+        //     Assert.True(myTTT.currentBoard.isRowComplete());
+        // }
 
     }
 }

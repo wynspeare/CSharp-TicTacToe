@@ -13,10 +13,23 @@ namespace TicTacToeApp
 
         public bool successfulMove = false;
 
+        // public List<List<int>> winCombinations = new List<List<int>>
+        int [,] winCombinations = new int[8, 3]
+        { 
+            { 0, 1, 2 },
+            { 3, 4, 5 },
+            { 6, 7, 8 },
+            { 0, 4, 8 },
+            { 2, 4, 6 },
+            { 0, 3, 6 },
+            { 1, 4, 7 },
+            { 2, 5, 8 },
+        };
+
 
         public bool isEmpty()
         {
-            return !board.Contains("X") ^ board.Contains("O");
+            return !(board.Contains("X") | board.Contains("O"));
         }
 
         public bool isSpaceEmpty(int position)
@@ -56,6 +69,11 @@ namespace TicTacToeApp
             }
         }
 
+        public bool isRowComplete()
+        {
+            // loop thru windCombos and check if player's marker is at all three of the indexes on the board list
+            return true;
+        }
     }
 }
 

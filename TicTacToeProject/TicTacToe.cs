@@ -9,10 +9,11 @@ namespace TicTacToeApp
     {
 
         public Board currentBoard;
-        public string currentTurn;
-
+        // public string currentTurn;
         public Player playerOne;
         public Player playerTwo;
+
+        public Space currentSpace;
 
         static void Main(string[] args)
         {
@@ -73,33 +74,46 @@ namespace TicTacToeApp
 
         public int getSpace()
         {
-            Console.WriteLine("Please enter a number 1 - 9:");
-            string position = Console.ReadLine();
-            return Convert.ToInt32(position);
-        }
-        
-        public bool isValidSpace(int position)
-        {
-            if (position <= 9 && position > 1)
+            Console.WriteLine("Please enter an empty space between 1 - 9:");
+            string location = Console.ReadLine();
+            if (isValidSpace(location))
             {
-                return true;
-            }
-            else if (position > 9)
-            {
-                Console.WriteLine("Please choose a lower number");                
-                return false;
+                currentSpace = new Space(Convert.ToInt32(location));
             }
             else
             {
-                Console.WriteLine("Please enter  1 - 9 only.");
+                getSpace();
+            }
+            return currentSpace.location;
+        }
+        
+        public bool isValidSpace(string location)
+        {   
+            
+            try
+            {
+                var converted_location = Convert.ToInt32(location);
+                if (currentBoard.board.Contains(location))
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Please only choose an empty space between 1 and 9:");
+                    displayBoard();
+                    return false;
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Please only enter a number.");
                 return false;
             }
         }
 
-
-        // public string move(int position, string playerMarker)
+        // public string move(int location, string playerMarker)
         // {
-        //     currentBoard.placeMarker(position, playerMarker);
+        //     currentBoard.placeMarker(location, playerMarker);
         //     displayBoard();
         //     Console.WriteLine("Swap players!");
         //     return "Good Move!";
