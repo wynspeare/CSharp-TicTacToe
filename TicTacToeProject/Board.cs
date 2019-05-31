@@ -32,11 +32,11 @@ namespace TicTacToeApp
             return !(board.Contains("X") | board.Contains("O"));
         }
 
-        public bool isSpaceEmpty(int position)
+        public bool isSpaceEmpty(int location)
         {
-            if (board[position - 1] == position.ToString())
+            if (board[location - 1] == location.ToString())
             {
-                Console.WriteLine(board[position - 1]);
+                Console.WriteLine(board[location - 1]);
                 return true;
             }
             else
@@ -45,12 +45,12 @@ namespace TicTacToeApp
             }
         }
 
-        public bool placeMarker(int position, string marker)
+        public bool placeMarker(Space space)
         {
-            if (isSpaceEmpty(position))
+            if (isSpaceEmpty(space.location))
             {
-                board[position - 1] = marker;
-                Console.WriteLine("Your marker was successfully placed on space " + position.ToString());
+                board[space.location - 1] = space.marker;
+                Console.WriteLine("Your marker was successfully placed on space " + space.location.ToString());
                 successfulMove = true;
                 return successfulMove;
             }

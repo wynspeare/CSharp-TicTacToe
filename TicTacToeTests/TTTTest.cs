@@ -101,9 +101,9 @@ namespace TicTacToeTests
         {
             TicTacToe myTTT = new TicTacToe();
             myTTT.startNewGame();
-            Assert.True(myTTT.currentBoard.placeMarker(3, "X"));
+            Space mySpace = new Space(3, "O");
+            Assert.True(myTTT.currentBoard.placeMarker(mySpace));
             myTTT.displayBoard();
-            // myTTT.currentBoard.checkBoardArray();
         }
 
         [Fact]
@@ -111,7 +111,8 @@ namespace TicTacToeTests
         {
             TicTacToe myTTT = new TicTacToe();
             myTTT.startNewGame();
-            myTTT.currentBoard.placeMarker(3, "X");
+            Space mySpace = new Space(3);
+            myTTT.currentBoard.placeMarker(mySpace);
             Assert.True(myTTT.currentBoard.successfulMove);
         }
 
@@ -120,7 +121,8 @@ namespace TicTacToeTests
         {
             TicTacToe myTTT = new TicTacToe();
             myTTT.startNewGame();
-            myTTT.currentBoard.placeMarker(6, "X");
+            Space mySpace = new Space(6);
+            myTTT.currentBoard.placeMarker(mySpace);
             myTTT.displayBoard();
             Assert.False(myTTT.currentBoard.isSpaceEmpty(6));
         }
@@ -130,21 +132,30 @@ namespace TicTacToeTests
         {
             TicTacToe myTTT = new TicTacToe();
             myTTT.startNewGame();
-            myTTT.currentBoard.placeMarker(6, "X");
-            myTTT.currentBoard.placeMarker(8, "O");
+            Space mySpace = new Space(6);
+            myTTT.currentBoard.placeMarker(mySpace);
+            // mySpace.location = 8;
+            // mySpace.marker = "O";
+            mySpace = new Space(8, "O");
+            myTTT.currentBoard.placeMarker(mySpace);
+            myTTT.displayBoard();
             Assert.False(myTTT.currentBoard.isEmpty());
         }
 
-        // [Fact] //Implement a way to add in a mock board with pre-filled spaces??
-        // public void userIsShownIfTheirLatestMoveWinsTheGame()
-        // {
-        //     TicTacToe myTTT = new TicTacToe();
-        //     myTTT.startNewGame();
-        //     myTTT.currentBoard.placeMarker(6, "X");
-        //     myTTT.currentBoard.placeMarker(9, "X");
-        //     myTTT.currentBoard.placeMarker(3, "X");
-        //     Assert.True(myTTT.currentBoard.isRowComplete());
-        // }
+        [Fact] //Implement a way to add in a mock board with pre-filled spaces??
+        public void userIsShownIfTheirLatestMoveWinsTheGame()
+        {
+            TicTacToe myTTT = new TicTacToe();
+            myTTT.startNewGame();
+            Space mySpace = new Space(6);
+            myTTT.currentBoard.placeMarker(mySpace);
+            mySpace.location = 9;
+            myTTT.currentBoard.placeMarker(mySpace);
+            mySpace.location = 3;
+            myTTT.currentBoard.placeMarker(mySpace);
+            myTTT.displayBoard();
+            Assert.True(myTTT.currentBoard.isRowComplete());
+        }
 
     }
 }
