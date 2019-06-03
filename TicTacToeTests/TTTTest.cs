@@ -54,7 +54,6 @@ namespace TicTacToeTests
             Assert.Equal(typeof(int), myTTT.getSpace().GetType());
         }
 
-
         [Fact]
         public void userCanEnterASpaceAndANewCurrentInstanceIsCreated()
         {
@@ -97,7 +96,7 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void userCanPlaceMarkerOnASpace() //toggle successfulMove?
+        public void userCanPlaceMarkerOnASpace()
         {
             TicTacToe myTTT = new TicTacToe();
             myTTT.startNewGame();
@@ -116,7 +115,7 @@ namespace TicTacToeTests
             Assert.True(myTTT.currentBoard.successfulMove);
         }
 
-        [Fact] //Test behaviour not state
+        [Fact]
         public void aSpecificLocationisFilledafterAMove()
         {
             TicTacToe myTTT = new TicTacToe();
@@ -127,15 +126,13 @@ namespace TicTacToeTests
             Assert.False(myTTT.currentBoard.isSpaceEmpty(6));
         }
 
-        [Fact] //Test behaviour not state
+        [Fact]
         public void aBoardIsNotEmptyafterAMoves()
         {
             TicTacToe myTTT = new TicTacToe();
             myTTT.startNewGame();
             Space mySpace = new Space(6);
             myTTT.currentBoard.placeMarker(mySpace);
-            // mySpace.location = 8;
-            // mySpace.marker = "O";
             mySpace = new Space(8, "O");
             myTTT.currentBoard.placeMarker(mySpace);
             myTTT.displayBoard();

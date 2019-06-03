@@ -7,14 +7,13 @@ namespace TicTacToeApp
 {
     public class Board
     {
-        // static void Main() {}
 
-        public List<string> board = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        public List<string> board = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; // Fill board with instances of Space class
 
         public bool successfulMove = false;
 
-        // public List<List<int>> winCombinations = new List<List<int>>
-        int [,] winCombinations = new int[8, 3]
+        // Move winCombos to another class - board doesn't need to know this!
+        int [,] winCombinations = new int[8, 3] 
         { 
             { 0, 1, 2 },
             { 3, 4, 5 },
@@ -32,20 +31,14 @@ namespace TicTacToeApp
             return !(board.Contains("X") | board.Contains("O"));
         }
 
-        public bool isSpaceEmpty(int location)
+
+        public bool isSpaceEmpty(int location) // Maybe move to Space class? Each space knows if they are empty.
         {
-            if (board[location - 1] == location.ToString())
-            {
-                Console.WriteLine(board[location - 1]);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return board[location - 1] == location.ToString();
         }
 
-        public bool placeMarker(Space space)
+
+        public bool placeMarker(Space space) 
         {
             if (isSpaceEmpty(space.location))
             {
@@ -61,15 +54,7 @@ namespace TicTacToeApp
             }
         }
 
-        public void checkBoardArray()
-        {
-            foreach (string element in board)
-            {
-                Console.Write(element + ", ");
-            }
-        }
-
-        public bool isRowComplete()
+        public bool isRowComplete() // Move to another class with winCombos
         {
             // loop thru windCombos and check if player's marker is at all three of the indexes on the board list
             return true;

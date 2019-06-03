@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
+// Separate out all user input into a different project
 namespace TicTacToeApp
 {
     public class TicTacToe
@@ -15,10 +15,6 @@ namespace TicTacToeApp
 
         public Space currentSpace;
 
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
 
         public string startNewGame()
         {
@@ -41,6 +37,7 @@ namespace TicTacToeApp
                 return startNewGame();
             }
         }
+
 
         public void chooseMarker()
         {
@@ -65,12 +62,14 @@ namespace TicTacToeApp
             }
         }
 
+
         public string displayInstructions()
         {
             var instructions = "\nHOW TO PLAY\n===========\nPlayers alternate placing Xs and Os on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their Xs or three of their Os in a row, then that player wins.\n";
             Console.WriteLine(instructions);
             return instructions;
         }
+
 
         public int getSpace()
         {
@@ -87,9 +86,9 @@ namespace TicTacToeApp
             return currentSpace.location;
         }
         
+
         public bool isValidSpace(string location)
         {   
-            
             try
             {
                 var converted_location = Convert.ToInt32(location);
@@ -111,6 +110,7 @@ namespace TicTacToeApp
             }
         }
 
+
         // public string move(int location, string playerMarker)
         // {
         //     currentBoard.placeMarker(location, playerMarker);
@@ -118,6 +118,7 @@ namespace TicTacToeApp
         //     Console.WriteLine("Swap players!");
         //     return "Good Move!";
         // }
+
 
         public string displayBoard()
         {
