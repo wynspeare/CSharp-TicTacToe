@@ -14,12 +14,6 @@ namespace TicTacToeUserInterface
             Console.WriteLine("Hello World!");
         }
 
-        public string hello()
-        {
-            Console.WriteLine("Hello World!");
-            return "Hello World!";
-        }
-
 
         public string startNewGame()
         {
@@ -66,19 +60,18 @@ namespace TicTacToeUserInterface
             }
         }
 
+
         public bool isValidSpace(string location)
         {   
             try
             {
-                var converted_location = Convert.ToInt32(location);
-                if (newGame.currentBoard.board.Contains(location))
+                var convertedLocation = Convert.ToInt32(location);
+                if (convertedLocation >= 1 && convertedLocation <= 9)
                 {
-                    return true;
+                    return newGame.currentBoard.board[convertedLocation - 1].marker == "_";
                 }
                 else
                 {
-                    Console.WriteLine("Please only choose an empty space between 1 and 9:");
-                    displayBoard();
                     return false;
                 }
             }
@@ -108,13 +101,19 @@ namespace TicTacToeUserInterface
         }
 
         
-        
-        public string displayBoard()
+        public string displayBoard(Board board)
         {
             var displayBoard = "  ———————————  \n | ";
-            foreach (string space in newGame.currentBoard.board)
+            foreach (Space space in board.board)
             {
-                displayBoard += space + " | ";
+                if(space.marker == "_")
+                {
+                    displayBoard += space.location.ToString() + " | ";
+                }
+                else
+                {
+                    displayBoard += space.marker + " | ";
+                }
             }
             displayBoard = displayBoard.Insert(28, " |\n |———|———|———| \n");
             displayBoard = displayBoard.Insert(60, "|\n |———|———|———|  \n ");

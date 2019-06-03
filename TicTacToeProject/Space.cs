@@ -11,10 +11,16 @@ namespace TicTacToeApp
         public string marker;
 
 
-        public Space(int location, string marker = "X")
+        public Space(int location, string marker = "_")
         {
             this.location = location;
             this.marker = marker;
+        }
+
+
+        public bool isSpaceEmpty()
+        {
+            return !(marker == "X" | marker == "O");
         }
 
     }
