@@ -1,0 +1,14 @@
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/bin/Debug/netcoreapp2.1/TicTacToeUserInterface.deps.json
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/bin/Debug/netcoreapp2.1/TicTacToeUserInterface.runtimeconfig.json
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/bin/Debug/netcoreapp2.1/TicTacToeUserInterface.runtimeconfig.dev.json
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/bin/Debug/netcoreapp2.1/TicTacToeUserInterface.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/bin/Debug/netcoreapp2.1/TicTacToeUserInterface.pdb
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/obj/Debug/netcoreapp2.1/TicTacToeUserInterface.csprojAssemblyReference.cache
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/obj/Debug/netcoreapp2.1/TicTacToeUserInterface.csproj.CoreCompileInputs.cache
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/obj/Debug/netcoreapp2.1/TicTacToeUserInterface.AssemblyInfoInputs.cache
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/obj/Debug/netcoreapp2.1/TicTacToeUserInterface.AssemblyInfo.cs
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/obj/Debug/netcoreapp2.1/TicTacToeUserInterface.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/obj/Debug/netcoreapp2.1/TicTacToeUserInterface.pdb
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/bin/Debug/netcoreapp2.1/TicTacToeProject.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/bin/Debug/netcoreapp2.1/TicTacToeProject.pdb
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/obj/Debug/netcoreapp2.1/TicTacToeUserInterface.csproj.CopyComplete

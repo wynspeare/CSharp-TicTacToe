@@ -1688,6 +1688,19 @@
         "runtime": {
           "bin/placeholder/TicTacToeProject.dll": {}
         }
+      },
+      "TicTacToeUserInterface/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "TicTacToeProject": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TicTacToeUserInterface.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TicTacToeUserInterface.dll": {}
+        }
       }
     }
   },
@@ -5857,6 +5870,11 @@
       "type": "project",
       "path": "../TicTacToeProject/TicTacToeProject.csproj",
       "msbuildProject": "../TicTacToeProject/TicTacToeProject.csproj"
+    },
+    "TicTacToeUserInterface/1.0.0": {
+      "type": "project",
+      "path": "../TicTacToeUserInterface/TicTacToeUserInterface.csproj",
+      "msbuildProject": "../TicTacToeUserInterface/TicTacToeUserInterface.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5864,6 +5882,7 @@
       "Microsoft.NET.Test.Sdk >= 15.9.0",
       "Microsoft.NETCore.App >= 2.1.0",
       "TicTacToeProject >= 1.0.0",
+      "TicTacToeUserInterface >= 1.0.0",
       "xunit >= 2.4.1",
       "xunit.runner.visualstudio >= 2.4.1"
     ]
@@ -5898,6 +5917,9 @@
           "projectReferences": {
             "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/TicTacToeProject.csproj": {
               "projectPath": "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeProject/TicTacToeProject.csproj"
+            },
+            "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/TicTacToeUserInterface.csproj": {
+              "projectPath": "/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeUserInterface/TicTacToeUserInterface.csproj"
             }
           }
         }

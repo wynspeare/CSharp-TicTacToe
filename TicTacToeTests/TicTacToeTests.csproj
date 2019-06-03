@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TicTacToeProject\TicTacToeProject.csproj" />
+    <ProjectReference Include="..\TicTacToeUserInterface\TicTacToeUserInterface.csproj" />
   </ItemGroup>
 
 </Project>

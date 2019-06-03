@@ -15,3 +15,5 @@
 /Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeTests/bin/Debug/netcoreapp2.1/TicTacToeProject.dll
 /Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeTests/bin/Debug/netcoreapp2.1/TicTacToeProject.pdb
 /Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeTests/obj/Debug/netcoreapp2.1/TicTacToeTests.csproj.CopyComplete
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeTests/bin/Debug/netcoreapp2.1/TicTacToeUserInterface.dll
+/Users/carolinecessaro/1_LanguageLearning/1_C#/4_TTT/TicTacToeApp/TicTacToeTests/bin/Debug/netcoreapp2.1/TicTacToeUserInterface.pdb

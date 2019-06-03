@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeProject", "TicTacT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeTests", "TicTacToeTests\TicTacToeTests.csproj", "{68ECC574-1132-4943-B50A-CDC083DD9CB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeUserInterface", "TicTacToeUserInterface\TicTacToeUserInterface.csproj", "{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{68ECC574-1132-4943-B50A-CDC083DD9CB3}.Release|x64.Build.0 = Release|Any CPU
 		{68ECC574-1132-4943-B50A-CDC083DD9CB3}.Release|x86.ActiveCfg = Release|Any CPU
 		{68ECC574-1132-4943-B50A-CDC083DD9CB3}.Release|x86.Build.0 = Release|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Debug|x64.Build.0 = Debug|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Debug|x86.Build.0 = Debug|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Release|x64.ActiveCfg = Release|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Release|x64.Build.0 = Release|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Release|x86.ActiveCfg = Release|Any CPU
+		{8175EA4D-2BDD-4B3B-8B73-B033D1A52289}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

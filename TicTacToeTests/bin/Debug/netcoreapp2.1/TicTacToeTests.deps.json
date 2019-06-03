@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "15.9.0",
           "TicTacToeProject": "1.0.0",
+          "TicTacToeUserInterface": "1.0.0",
           "xunit": "2.4.1",
           "xunit.runner.visualstudio": "2.4.1"
         },
@@ -1058,6 +1059,14 @@
         "runtime": {
           "TicTacToeProject.dll": {}
         }
+      },
+      "TicTacToeUserInterface/1.0.0": {
+        "dependencies": {
+          "TicTacToeProject": "1.0.0"
+        },
+        "runtime": {
+          "TicTacToeUserInterface.dll": {}
+        }
       }
     }
   },
@@ -1600,6 +1609,11 @@
       "hashPath": "xunit.runner.visualstudio.2.4.1.nupkg.sha512"
     },
     "TicTacToeProject/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TicTacToeUserInterface/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
