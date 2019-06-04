@@ -1,158 +1,162 @@
 ﻿using Xunit;
 using System;
 using TicTacToeApp;
+using TicTacToeUserInterface;
 
 namespace TicTacToeTests
 {
     public class TTTTest
     {
         [Fact]
-        public void userCanStartNewGame()
+        public void gameInitializesWithNewInstancesOfPlayer()
         {
-            TicTacToe myTTT = new TicTacToe();
-            Assert.Equal("A new game has been started", myTTT.startNewGame());
-        }
-        
-        [Fact]
-        public void newInstancesOfPlayerAreCreatedWhenAMarkerIsChosen()
-        {
-            TicTacToe myTTT = new TicTacToe();
-            Assert.Null(myTTT.playerOne);
-            myTTT.chooseMarker();
-            Assert.NotNull(myTTT.playerOne.marker);
-            Assert.NotNull(myTTT.playerTwo.marker);
+            var subject = new TicTacToe("X");
+            Assert.NotNull(subject.playerOne.marker);
+            Assert.NotNull(subject.playerTwo.marker);
         }
 
         [Fact]
-        public void userCanReadInstructions()
+        public void gameInitializesWithNewInstanceOfBoard()
         {
-            TicTacToe myTTT = new TicTacToe();
-            Assert.Contains("Players alternate placing", myTTT.displayInstructions());
+            var subject = new TicTacToe("X");
+            Assert.NotNull(subject.currentBoard);
         }
 
         [Fact]
-        public void aNewGameHasAnEmptyBoard()
+        public void aNewBoardIsEmpty()
         {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Assert.True(myTTT.currentBoard.isEmpty());
+            var subject = new Board();
+            Assert.True(subject.isEmpty());
         }
 
         [Fact]
-        public void userCanViewTheBoard()
+        public void aNewSpaceIsEmpty()
         {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Assert.Contains( "  ———————————  \n | " , myTTT.displayBoard());
+            var subject = new Space(1);
+            Assert.True(subject.isSpaceEmpty());
         }
 
         [Fact]
-        public void userCanEnterASpaceAndItsReturnsAnInteger()
+        public void aBoardCanMarkaSpace()
         {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Assert.Equal(typeof(int), myTTT.getSpace().GetType());
+            var subject = new Board();
+            Assert.True(subject.placeMarker(5, "O"));
         }
 
         [Fact]
-        public void userCanEnterASpaceAndANewCurrentInstanceIsCreated()
+        public void aNewBoardContainsInstancesOfSpaces()
         {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Assert.Null(myTTT.currentSpace);
-            myTTT.getSpace();
-            Assert.NotNull(myTTT.currentSpace);
+            var subject = new Board();
+            Assert.Equal(9, subject.board[8].location);
         }
 
         [Fact]
-        public void whenANewSpaceIsEnteredTheCurrentLocationIsChanged()
+        public void aNewGameCanMarkaSpace()
         {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Assert.Null(myTTT.currentSpace);
-            myTTT.getSpace(); // Enter 3
-            Assert.Equal(3, myTTT.currentSpace.location);
-            myTTT.getSpace(); // Enter 5
-            Assert.Equal(5, myTTT.currentSpace.location);
+            var subject = new TicTacToe("X");
+            Assert.True(subject.moveMarker(3, "X"));
         }
 
         [Fact]
-        public void userCanKnowIfSelectedSpaceIsValid()
+        public void whenAMarkerIsPlacedTheBoardIsChanged()
         {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Assert.True(myTTT.isValidSpace("9"));   
-            Assert.False(myTTT.isValidSpace("-1"));
-            Assert.False(myTTT.isValidSpace("11"));
-            Assert.False(myTTT.isValidSpace("Q"));   
-        }
-        
-        [Fact]
-        public void userCanKnowIfSpaceIsEmpty()
-        {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Assert.True(myTTT.currentBoard.isSpaceEmpty(3));
+            var subject = new Board();
+            subject.placeMarker(5, "X");
+            Assert.Equal("X", subject.board[4].marker);
         }
 
         [Fact]
-        public void userCanPlaceMarkerOnASpace()
+        public void aSpecificLocationisFilledafterAMarkerIsPlaced()
         {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Space mySpace = new Space(3, "O");
-            Assert.True(myTTT.currentBoard.placeMarker(mySpace));
-            myTTT.displayBoard();
+            var subject = new Board();
+            subject.placeMarker(5, "X");
+            Assert.False(subject.board[4].isSpaceEmpty());
         }
 
         [Fact]
-        public void userCanKnowIfAMoveWasSuccessful()
+        public void aBoardIsNotEmptyafterAMarkerIsPlaced()
         {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Space mySpace = new Space(3);
-            myTTT.currentBoard.placeMarker(mySpace);
-            Assert.True(myTTT.currentBoard.successfulMove);
+            var subject = new Board();
+            subject.placeMarker(5, "X");
+            Assert.False(subject.isEmpty());
         }
 
-        [Fact]
-        public void aSpecificLocationisFilledafterAMove()
-        {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Space mySpace = new Space(6);
-            myTTT.currentBoard.placeMarker(mySpace);
-            myTTT.displayBoard();
-            Assert.False(myTTT.currentBoard.isSpaceEmpty(6));
-        }
 
-        [Fact]
-        public void aBoardIsNotEmptyafterAMoves()
-        {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Space mySpace = new Space(6);
-            myTTT.currentBoard.placeMarker(mySpace);
-            mySpace = new Space(8, "O");
-            myTTT.currentBoard.placeMarker(mySpace);
-            myTTT.displayBoard();
-            Assert.False(myTTT.currentBoard.isEmpty());
-        }
 
         [Fact] //Implement a way to add in a mock board with pre-filled spaces??
-        public void userIsShownIfTheirLatestMoveWinsTheGame()
+        public void aRowOfThreeMarkersWinsTheGame()
         {
-            TicTacToe myTTT = new TicTacToe();
-            myTTT.startNewGame();
-            Space mySpace = new Space(6);
-            myTTT.currentBoard.placeMarker(mySpace);
-            mySpace.location = 9;
-            myTTT.currentBoard.placeMarker(mySpace);
-            mySpace.location = 3;
-            myTTT.currentBoard.placeMarker(mySpace);
-            myTTT.displayBoard();
-            Assert.True(myTTT.currentBoard.isRowComplete());
+            var subject = new TicTacToe("X");           
+            subject.moveMarker(1, "X");
+            subject.moveMarker(2, "X");
+            subject.moveMarker(3, "X");
+
+            // var userInterface = new UserInterface();
+            // userInterface.displayBoard(subject.currentBoard);
+            
+            Assert.True(subject.isRowComplete());
         }
+
+
+
+
+
+
+// User Interface Tests Below
+
+        // [Fact]
+        // public void userCanKnowIfSelectedSpaceIsValid()
+        // {
+        //     var subject = new UserInterface();
+        //     subject.startNewGame();
+        //     Assert.True(subject.isValidSpace("9"));   
+        //     Assert.False(subject.isValidSpace("-1"));
+        //     Assert.False(subject.isValidSpace("11"));
+        //     Assert.False(subject.isValidSpace("Q"));   
+        // }
+
+
+        // [Fact]
+        // public void aBoardDisplaysCorrectly()
+        // {
+        //     var subject = new TicTacToe("X");
+        //     subject.moveMarker(3, "X");
+        //     subject.moveMarker(8, "X");
+        //     var userInterface = new UserInterface();
+        //     userInterface.displayBoard(subject.currentBoard);
+        //     // Assert.True(subject.currentBoard.successfulMove);
+        // }
+
+        // [Fact]
+        // public void userCanViewTheBoard()
+        // {
+        //     var myBoard = new Board();
+        //     var subject = new UserInterface();
+        //     Assert.Contains( "  ———————————  \n | " , subject.displayBoard(myBoard));
+        // }
+
+        // [Fact]
+        // public void userCanEnterASpaceAndItsReturnsAnInteger()
+        // {
+        //     var subject = new UserInterface();
+        //     subject.startNewGame();
+        //     Assert.Equal(typeof(int), subject.getSpace().GetType());
+        // }
+
+        // [Fact]
+        // public void userIntefaceCanStartNewGame() //userinterface test - move to different tests project?
+        // {
+        //     var subject = new UserInterface();
+        //     Assert.Equal("A new game has been started", subject.startNewGame());
+        //     Assert.Equal(1, subject.newGame.currentBoard.board[0].location);
+        // }
+
+        // [Fact]
+        // public void userCanReadInstructions()
+        // {
+        //     var subject = new UserInterface();
+        //     Assert.Contains("Players alternate placing", subject.displayInstructions());
+        // }
 
     }
 }

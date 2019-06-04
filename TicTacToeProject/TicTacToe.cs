@@ -2,137 +2,77 @@
 using System.Collections;
 using System.Collections.Generic;
 
-// Separate out all user input into a different project
 namespace TicTacToeApp
 {
     public class TicTacToe
     {
-
         public Board currentBoard;
-        // public string currentTurn;
         public Player playerOne;
         public Player playerTwo;
 
-        public Space currentSpace;
+        // public string currentTurn;
+        // public Space currentSpace;
 
+        int [,] winCombinations = new int[8, 3] 
+        { 
+            { 0, 1, 2 },
+            { 3, 4, 5 },
+            { 6, 7, 8 },
+            { 0, 4, 8 },
+            { 2, 4, 6 },
+            { 0, 3, 6 },
+            { 1, 4, 7 },
+            { 2, 5, 8 },
+        };
 
-        public string startNewGame()
+        public TicTacToe(string playerOneMarker)
         {
-            Console.WriteLine("Do you want to play a game of Tic Tac Toe? Y/N");
-            string answer = Console.ReadLine();
-
-            if (answer == "Y")
-            {
-                currentBoard = new Board();
-                Console.WriteLine("A new game has been started");
-                return "A new game has been started";
-            }
-            else if (answer == "N")
-            {
-                return "Okay Bye!";
-            }
-            else
-            {
-                Console.WriteLine("Please enter Y or N only.");
-                return startNewGame();
-            }
+            this.currentBoard = new Board();
+            this.playerOne = new Player(playerOneMarker);
+            this.playerTwo = new Player("O"); 
         }
 
-
-        public void chooseMarker()
-        {
-            Console.WriteLine("Player One - please choose a marker -  X or O");
-            string marker = Console.ReadLine();
-            if (marker == "X")
-            {
-                Console.WriteLine("Player One - Your Marker is X\nPlayer Two - Your Marker is O\n");
-                playerOne = new Player(marker);
-                playerTwo = new Player("O");
-            }
-            else if (marker == "O" | marker == "0")
-            {
-                Console.WriteLine("Player One - Your Marker is O\nPlayer Two - Your Marker is X\n");
-                playerOne = new Player("O");
-                playerTwo = new Player("X");
-            }
-            else
-            {
-                Console.WriteLine("Please enter X or O only.");
-                chooseMarker();
-            }
-        }
-
-
-        public string displayInstructions()
-        {
-            var instructions = "\nHOW TO PLAY\n===========\nPlayers alternate placing Xs and Os on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their Xs or three of their Os in a row, then that player wins.\n";
-            Console.WriteLine(instructions);
-            return instructions;
-        }
-
-
-        public int getSpace()
-        {
-            Console.WriteLine("Please enter an empty space between 1 - 9:");
-            string location = Console.ReadLine();
-            if (isValidSpace(location))
-            {
-                currentSpace = new Space(Convert.ToInt32(location));
-            }
-            else
-            {
-                getSpace();
-            }
-            return currentSpace.location;
-        }
-        
-
-        public bool isValidSpace(string location)
-        {   
-            try
-            {
-                var converted_location = Convert.ToInt32(location);
-                if (currentBoard.board.Contains(location))
-                {
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Please only choose an empty space between 1 and 9:");
-                    displayBoard();
-                    return false;
-                }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Please only enter a number.");
-                return false;
-            }
-        }
-
-
-        // public string move(int location, string playerMarker)
+        // static void Main(string[] args)
         // {
-        //     currentBoard.placeMarker(location, playerMarker);
-        //     displayBoard();
-        //     Console.WriteLine("Swap players!");
-        //     return "Good Move!";
+        //     Console.WriteLine("Hello World!!!");
         // }
 
-
-        public string displayBoard()
+        public bool moveMarker(int location, string marker)
         {
-            var displayBoard = "  ———————————  \n | ";
-            foreach (string space in currentBoard.board)
-            {
-                displayBoard += space + " | ";
-            }
-            displayBoard = displayBoard.Insert(28, " |\n |———|———|———| \n");
-            displayBoard = displayBoard.Insert(60, "|\n |———|———|———|  \n ");
-            displayBoard += "\n  ———————————  ";
-            Console.WriteLine(displayBoard);
-            return displayBoard;
+            // Create new class currentMove or currentTurn to hold location/marker
+            return currentBoard.placeMarker(location, marker);
         }
+
+
+        public bool isRowComplete() // This isn't completed yet
+        {
+            // loop thru winCombos and check if player's marker is at all three of the indexes on the board list
+
+            // var isWon = false;
+            // List<string> tempCombo = new List<string>();
+
+            // foreach (int combo in winCombinations)
+            // {
+            //     // Console.WriteLine(combo);
+            //     foreach (int index in winCombinations[combo])
+            //     {
+            //         tempCombo.Add(currentBoard.board[index].marker);
+            //     }
+            //     tempCombo.TrueForAll(allSpacesMatch);
+            //     {
+            //         isWon = true;
+            //         tempCombo.Clear();
+            //     }
+            // }
+            // return isWon;
+            return true;
+        }
+
+        private static bool allSpacesMatch(string marker)
+        {
+            return marker == "X";
+        }
+
     }
 }
 
