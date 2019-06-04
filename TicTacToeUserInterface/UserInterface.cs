@@ -8,12 +8,12 @@ namespace TicTacToeUserInterface
 
         public TicTacToe newGame;
 
-
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Main Method being run!");
+            var game = new UserInterface();
+            game.startNewGame();
         }
-
 
         public string startNewGame()
         {

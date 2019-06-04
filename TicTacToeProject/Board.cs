@@ -9,7 +9,7 @@ namespace TicTacToeApp
     {
 
         public List<Space> board = new List<Space>();
-        public bool successfulMove = false;
+        // public bool successfulMove = false;
 
 
         public Board()
@@ -23,15 +23,7 @@ namespace TicTacToeApp
 
         public bool isEmpty()
         {
-            var isBoardEmpty = true;
-            foreach (Space space in board)
-            {
-                if(!space.isSpaceEmpty())
-                {
-                    isBoardEmpty = false;
-                }
-            }
-            return isBoardEmpty;
+            return board.TrueForAll(space => space.isSpaceEmpty());
         }
 
 
@@ -40,12 +32,11 @@ namespace TicTacToeApp
             if (board[location - 1].isSpaceEmpty())
             {
                 board[location - 1].marker = playerMarker;
-                successfulMove = true;
-                return successfulMove;
+                return true;
             }
             else
             {
-                return successfulMove;
+                return false;
             }
         }
 

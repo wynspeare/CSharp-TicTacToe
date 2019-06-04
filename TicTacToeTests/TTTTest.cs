@@ -40,8 +40,7 @@ namespace TicTacToeTests
         public void aBoardCanMarkaSpace()
         {
             var subject = new Board();
-            subject.placeMarker(5, "O");
-            Assert.True(subject.successfulMove);
+            Assert.True(subject.placeMarker(5, "O"));
         }
 
         [Fact]
@@ -55,8 +54,7 @@ namespace TicTacToeTests
         public void aNewGameCanMarkaSpace()
         {
             var subject = new TicTacToe("X");
-            subject.moveMarker(3, "X");
-            Assert.True(subject.currentBoard.successfulMove);
+            Assert.True(subject.moveMarker(3, "X"));
         }
 
         [Fact]

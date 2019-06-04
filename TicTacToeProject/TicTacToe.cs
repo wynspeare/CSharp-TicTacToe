@@ -32,15 +32,15 @@ namespace TicTacToeApp
             this.playerTwo = new Player("O"); 
         }
 
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+        // static void Main(string[] args)
+        // {
+        //     Console.WriteLine("Hello World!!!");
+        // }
 
-        public void moveMarker(int location, string marker)
+        public bool moveMarker(int location, string marker)
         {
             // Create new class currentMove or currentTurn to hold location/marker
-            currentBoard.placeMarker(location, marker);
+            return currentBoard.placeMarker(location, marker);
         }
 
 
