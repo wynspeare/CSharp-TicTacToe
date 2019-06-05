@@ -25,17 +25,19 @@ namespace TicTacToeApp
             { 2, 5, 8 },
         };
 
-        public TicTacToe(string playerOneMarker)
+
+        public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O")
         {
+            
+            Symbols.X_MARKER = playerOneMarker;
+            Symbols.O_MARKER = playerTwoMarker;
+
             this.currentBoard = new Board();
-            this.playerOne = new Player(playerOneMarker);
-            this.playerTwo = new Player("O"); 
+
+            this.playerOne = new Player(Symbols.X_MARKER);
+            this.playerTwo = new Player(Symbols.O_MARKER); 
         }
 
-        // static void Main(string[] args)
-        // {
-        //     Console.WriteLine("Hello World!!!");
-        // }
 
         public bool moveMarker(int location, string marker)
         {
@@ -68,10 +70,10 @@ namespace TicTacToeApp
             return true;
         }
 
-        private static bool allSpacesMatch(string marker)
-        {
-            return marker == "X";
-        }
+        // private static bool allSpacesMatch(string marker)
+        // {
+        //     return marker == "X";
+        // }
 
     }
 }

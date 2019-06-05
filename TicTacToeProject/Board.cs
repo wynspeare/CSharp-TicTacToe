@@ -11,10 +11,9 @@ namespace TicTacToeApp
         public List<Space> board = new List<Space>();
         // public bool successfulMove = false;
 
-
         public Board()
         {
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i <= Symbols.BOARD_SIZE; i++)
             {
                 this.board.Add(new Space(i));
             }

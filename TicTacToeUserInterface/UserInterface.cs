@@ -7,11 +7,12 @@ namespace TicTacToeUserInterface
     {
 
         public TicTacToe newGame;
+        public Adapter adapter;
 
         static void Main(string[] args)
         {
             Console.WriteLine("Main Method being run!");
-            var game = new UserInterface();
+            var game = new UserInterface(); 
             game.startNewGame();
         }
 
@@ -22,8 +23,15 @@ namespace TicTacToeUserInterface
 
             if (answer == "Y")
             {
-                var marker = chooseMarker();
-                newGame = new TicTacToe(marker);
+                Console.Write("Player One - ");
+                var markerOne = chooseMarker();
+
+                Console.Write("Player Two - ");
+                var markerTwo = chooseMarker();
+
+                adapter = new Adapter(markerOne, markerTwo);
+
+                newGame = new TicTacToe(adapter.X_MARKER, adapter.O_MARKER);
                 Console.WriteLine("A new game has been started");
                 return "A new game has been started";
             }
@@ -41,23 +49,31 @@ namespace TicTacToeUserInterface
 
         public string chooseMarker()
         {
-            Console.WriteLine("Player One - please choose a marker -  X or O");
+            Console.WriteLine("Please choose a marker: X or O");
             string marker = Console.ReadLine();
-            if (marker == "X")
+            if(marker == "")
             {
-                Console.WriteLine("Player One - Your Marker is X\nPlayer Two - Your Marker is O\n");
-                return marker;
-            }
-            else if (marker == "O" | marker == "0")
-            {
-                Console.WriteLine("Player One - Your Marker is O\nPlayer Two - Your Marker is X\n");
-                return "O";
+                return chooseMarker();
             }
             else
             {
-                Console.WriteLine("Please enter X or O only.");
-                return chooseMarker();
+                return marker.Substring(0,1);
             }
+            // if (marker == Adapter.X_MARKER)
+            // {
+            //     Console.WriteLine("Player One - Your Marker is X\nPlayer Two - Your Marker is O\n");
+            //     return Adapter.X_MARKER;
+            // }
+            // else if (marker == Adapter.O_MARKER | marker == "0")
+            // {
+            //     Console.WriteLine("Player One - Your Marker is O\nPlayer Two - Your Marker is X\n");
+            //     return Adapter.O_MARKER;
+            // }
+            // else
+            // {
+            //     Console.WriteLine("Please enter X or O only.");
+            //     return chooseMarker();
+            // }
         }
 
 
@@ -66,9 +82,9 @@ namespace TicTacToeUserInterface
             try
             {
                 var convertedLocation = Convert.ToInt32(location);
-                if (convertedLocation >= 1 && convertedLocation <= 9)
+                if (convertedLocation >= 1 && convertedLocation <= Adapter.BOARD_SIZE)
                 {
-                    return newGame.currentBoard.board[convertedLocation - 1].marker == "_";
+                    return newGame.currentBoard.board[convertedLocation - 1].marker == Adapter.EMPTY;
                 }
                 else
                 {
@@ -106,7 +122,7 @@ namespace TicTacToeUserInterface
             var displayBoard = "  ———————————  \n | ";
             foreach (Space space in board.board)
             {
-                if(space.marker == "_")
+                if(space.marker == Adapter.EMPTY)
                 {
                     displayBoard += space.location.ToString() + " | ";
                 }
