@@ -1,13 +1,13 @@
 ﻿using System;
 using TicTacToeApp;
 
+
 namespace TicTacToeUserInterface
 {
     public class UserInterface
     {
 
         public TicTacToe newGame;
-        // public Options options; //maybe not instance variable 
 
         static void Main(string[] args)
         {
@@ -34,7 +34,7 @@ namespace TicTacToeUserInterface
             else if (answer == "N")
             {
                 return "Okay Bye!";
-            }
+            }   
             else
             {
                 Console.WriteLine("Please enter Y or N only.");

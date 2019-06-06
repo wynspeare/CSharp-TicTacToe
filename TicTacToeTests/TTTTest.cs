@@ -17,13 +17,14 @@ namespace TicTacToeTests
         public void gameInitializesWithDefaultPlayerMarkersXandO()
         {
             var subject = new TicTacToe();
-            Assert.NotNull(subject.playerOne.marker);
-            Assert.NotNull(subject.playerTwo.marker);
+            
+            Assert.Equal("X", subject.playerOne.marker);
+            Assert.Equal("O", subject.playerTwo.marker);
         }
 
 
         [Fact]
-        public void gameInitializesProvidedPlayerMarkers()
+        public void gameInitializesProvidedPlayerMarkers() //Maybe redundant
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);
 
@@ -58,7 +59,7 @@ namespace TicTacToeTests
         }
 
 
-        [Fact] //Implement a way to add in a mock board with pre-filled spaces??
+        [Fact]
         public void aBoardWithThreeHorizontalMarkersInARowWinsGame()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           

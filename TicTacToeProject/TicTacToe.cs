@@ -10,10 +10,7 @@ namespace TicTacToeApp
         public Board currentBoard;
         public Player playerOne;
         public Player playerTwo;
-
         // public string currentTurn;
-        // public Space currentSpace;
-
 
         public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O")
         {
@@ -30,11 +27,10 @@ namespace TicTacToeApp
 
         public bool moveMarker(int location, string marker)
         {
-            // Create new class currentMove or currentTurn to hold location/marker
             return currentBoard.placeMarker(location, marker);
         }
 
-        int [,] winCombinations = new int[8, 3] 
+        int [,] winCombinations = new int[8, 3] //Maybe move to rules class
         { 
             { 0, 1, 2 },
             { 3, 4, 5 },
