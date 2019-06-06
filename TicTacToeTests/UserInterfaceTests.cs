@@ -13,21 +13,22 @@ namespace TicTacToeTests
         public const string P1_MARKER = "+";
         public const string P2_MARKER = "*";
 
+        [Trait("Category", "UITest")]
         [Fact]
         public void userIntefaceCanStartNewGameWithUserGivenSymbols()
         {
             var subject = new UserInterface();
             subject.startNewGame();
 
-            subject.newGame.moveMarker(3, subject.options.P1_MARKER);
-            subject.newGame.moveMarker(6, subject.options.P2_MARKER);
+            subject.newGame.moveMarker(3, subject.newGame.playerOne.marker);
+            subject.newGame.moveMarker(6, subject.newGame.playerTwo.marker);
 
             subject.displayBoard(subject.newGame.currentBoard);
 
             Assert.Equal(1, subject.newGame.currentBoard.board[0].location);
         }
 
-
+        [Trait("Category", "UITest")]
         [Fact]
         public void userCanKnowIfSelectedSpaceIsValid()
         {
@@ -40,6 +41,7 @@ namespace TicTacToeTests
         }
 
 
+        [Trait("Category", "UITest")]
         [Fact]
         public void aBoardDisplaysCorrectly()
         {
@@ -50,6 +52,7 @@ namespace TicTacToeTests
             userInterface.displayBoard(subject.currentBoard);
         }
 
+        [Trait("Category", "UITest")]
         [Fact]
         public void userCanViewTheBoard()
         {
@@ -58,6 +61,7 @@ namespace TicTacToeTests
             Assert.Contains( "  ———————————  \n | " , subject.displayBoard(myBoard));
         }
 
+        [Trait("Category", "UITest")]
         [Fact]
         public void userCanEnterASpaceAndItsReturnsAnInteger()
         {
@@ -66,6 +70,7 @@ namespace TicTacToeTests
             Assert.Equal(typeof(int), subject.getSpace().GetType());
         }
 
+        [Trait("Category", "UITest")]
         [Fact]
         public void userIntefaceCanStartNewGame()
         {
@@ -74,6 +79,7 @@ namespace TicTacToeTests
             Assert.Equal(1, subject.newGame.currentBoard.board[0].location);
         }
 
+        [Trait("Category", "UITest")]
         [Fact]
         public void userCanReadInstructions()
         {

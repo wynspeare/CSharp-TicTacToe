@@ -11,10 +11,10 @@ namespace TicTacToeUserInterface
     public const string EMPTY = Symbols.EMPTY;
     public const int BOARD_SIZE = Symbols.BOARD_SIZE;
 
-    public Options (string playerOneMarker, string playerTwoMarker)
+    public Options (Tuple<string, string> markers)
     {
-      this.P1_MARKER = playerOneMarker;
-      this.P2_MARKER = playerTwoMarker;
+      this.P1_MARKER = markers.Item1;
+      this.P2_MARKER = markers.Item2;
     }
 
   }
