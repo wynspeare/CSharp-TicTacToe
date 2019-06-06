@@ -7,7 +7,7 @@ namespace TicTacToeUserInterface
     {
 
         public TicTacToe newGame;
-        public Options options;
+        // public Options options; //maybe not instance variable 
 
         static void Main(string[] args)
         {
@@ -23,7 +23,8 @@ namespace TicTacToeUserInterface
 
             if (answer == "Y")
             {
-                setMarkers();
+                var options = new Options(setMarkers());
+                
                 newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER);
                 Console.WriteLine("A new game has been started!");
                 Console.WriteLine("Player One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", options.P1_MARKER, options.P2_MARKER);
@@ -41,7 +42,7 @@ namespace TicTacToeUserInterface
             }
         }
 
-        public void setMarkers()
+        public Tuple<string, string> setMarkers()
         {
             Console.Write("Player One - ");
             var markerOne = chooseMarker();
@@ -53,7 +54,7 @@ namespace TicTacToeUserInterface
                 Console.WriteLine("Please select a different symbol from Player One.");
                 markerTwo = chooseMarker();
             }
-            options = new Options(markerOne, markerTwo);
+            return Tuple.Create(markerOne, markerTwo);
         }
 
 

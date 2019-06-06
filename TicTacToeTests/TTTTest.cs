@@ -21,6 +21,7 @@ namespace TicTacToeTests
             Assert.NotNull(subject.playerTwo.marker);
         }
 
+
         [Fact]
         public void gameInitializesProvidedPlayerMarkers()
         {
@@ -38,12 +39,14 @@ namespace TicTacToeTests
             Assert.NotNull(subject.currentBoard);
         }
 
+
         [Fact]
         public void aNewBoardIsEmpty()
         {
             var subject = new Board();
             Assert.True(subject.isEmpty());
         }
+
 
         [Fact]
         public void aNewSpaceIsEmpty()
@@ -52,12 +55,14 @@ namespace TicTacToeTests
             Assert.True(subject.isSpaceEmpty());
         }
 
+
         [Fact]
         public void aBoardCanMarkaSpace()
         {
             var subject = new Board();
             Assert.True(subject.placeMarker(5, P2_MARKER));
         }
+
 
         [Fact]
         public void aNewBoardContainsInstancesOfSpaces()
@@ -73,6 +78,7 @@ namespace TicTacToeTests
             Assert.True(subject.moveMarker(3, P1_MARKER));
         }
 
+
         [Fact]
         public void whenAMarkerIsPlacedTheBoardIsChanged()
         {
@@ -80,6 +86,7 @@ namespace TicTacToeTests
             subject.placeMarker(5, P1_MARKER);
             Assert.Equal(P1_MARKER, subject.board[4].marker);
         }
+
 
         [Fact]
         public void aSpecificLocationIsFilledAfterAMarkerIsPlaced()
@@ -89,6 +96,7 @@ namespace TicTacToeTests
             Assert.False(subject.board[4].isSpaceEmpty());
         }
 
+
         [Fact]
         public void aBoardIsNotEmptyAfterAMarkerIsPlaced()
         {
@@ -97,21 +105,53 @@ namespace TicTacToeTests
             Assert.False(subject.isEmpty());
         }
 
-        [Fact] //Implement a way to add in a mock board with pre-filled spaces??
-        public void aRowOfThreeMarkersWinsTheGame()
+
+        [Fact]
+        public void aRowOfThreeSameMarkersReturnsTrue()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
-            subject.moveMarker(1, subject.playerOne.marker);
-            subject.moveMarker(2, subject.playerOne.marker);
-            subject.moveMarker(3, subject.playerOne.marker);
-            subject.moveMarker(4, subject.playerTwo.marker);
+            var row = new List<string> {P1_MARKER, P1_MARKER, P1_MARKER};
+
+            Assert.True(subject.isRowComplete(row, P1_MARKER));
+        }
+
+
+        [Fact] //Implement a way to add in a mock board with pre-filled spaces??
+        public void aBoardWithThreeHorizontalMarkersInARowWinsGame()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            subject.moveMarker(4, subject.playerOne.marker);
+            subject.moveMarker(5, subject.playerOne.marker);
+            subject.moveMarker(6, subject.playerOne.marker);
 
             // var userInterface = new UserInterface();
             // userInterface.displayBoard(subject.currentBoard);
             
-            var row = new List<string> {"x", "x", "x"};
+            Assert.True(subject.checkIfWon());
+        }
 
-            Assert.True(subject.isRowComplete(row, "x"));
+
+        [Fact]
+        public void aBoardWithThreeDiagonalMarkersInARowWinsGame()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            subject.moveMarker(1, subject.playerOne.marker);
+            subject.moveMarker(5, subject.playerOne.marker);
+            subject.moveMarker(9, subject.playerOne.marker);
+
+            Assert.True(subject.checkIfWon());
+        }
+
+
+        [Fact]
+        public void aBoardWithThreeVerticalMarkersInARowWinsGame()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            subject.moveMarker(3, subject.playerOne.marker);
+            subject.moveMarker(6, subject.playerOne.marker);
+            subject.moveMarker(9, subject.playerOne.marker);
+
+            Assert.True(subject.checkIfWon());
         }
 
     }

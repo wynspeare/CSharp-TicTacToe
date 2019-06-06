@@ -19,8 +19,8 @@ namespace TicTacToeTests
             var subject = new UserInterface();
             subject.startNewGame();
 
-            subject.newGame.moveMarker(3, subject.options.P1_MARKER);
-            subject.newGame.moveMarker(6, subject.options.P2_MARKER);
+            subject.newGame.moveMarker(3, subject.newGame.playerOne.marker);
+            subject.newGame.moveMarker(6, subject.newGame.playerTwo.marker);
 
             subject.displayBoard(subject.newGame.currentBoard);
 

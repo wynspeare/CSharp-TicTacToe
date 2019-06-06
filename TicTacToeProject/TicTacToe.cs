@@ -14,18 +14,6 @@ namespace TicTacToeApp
         // public string currentTurn;
         // public Space currentSpace;
 
-        int [,] winCombinations = new int[8, 3] 
-        { 
-            { 0, 1, 2 },
-            { 3, 4, 5 },
-            { 6, 7, 8 },
-            { 0, 4, 8 },
-            { 2, 4, 6 },
-            { 0, 3, 6 },
-            { 1, 4, 7 },
-            { 2, 5, 8 },
-        };
-
 
         public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O")
         {
@@ -46,24 +34,39 @@ namespace TicTacToeApp
             return currentBoard.placeMarker(location, marker);
         }
 
-        // public bool checkIfWon()
-        // {
-        //     List<string> tempCombo = new List<string>();
+        int [,] winCombinations = new int[8, 3] 
+        { 
+            { 0, 1, 2 },
+            { 3, 4, 5 },
+            { 6, 7, 8 },
+            { 0, 4, 8 },
+            { 2, 4, 6 },
+            { 0, 3, 6 },
+            { 1, 4, 7 },
+            { 2, 5, 8 },
+        };
 
-        //     foreach (int combo in winCombinations)
-        //     {
-        //         Console.WriteLine(combo);
-        //         foreach (int index in winCombinations[combo])
-        //         {
-        //             tempCombo.Add(currentBoard.board[index].marker);
-        //         }
-        //         tempCombo.TrueForAll(allSpacesMatch);
-        //         {
-        //             isWon = true;
-        //             tempCombo.Clear();
-        //         }
-        //     }
-        // }
+        public bool checkIfWon()
+        {
+            List<string> tempRow = new List<string>();
+            var isWon = false;
+
+            for (int i = 0; i < winCombinations.GetLength(0); i++)
+            {
+                for (int j = 0; j < winCombinations.GetLength(1); j++)
+                {
+                    int index = winCombinations[i, j];
+                    tempRow.Add(currentBoard.board[index].marker);
+                }
+                var currentPlayersMarker_PLACEHOLDER = playerOne.marker;
+                if (isRowComplete(tempRow, currentPlayersMarker_PLACEHOLDER))
+                {
+                    isWon = true;
+                }
+                tempRow.Clear();
+            }
+            return isWon;
+        }
 
 
         public bool isRowComplete(List <string> row, string marker) 
