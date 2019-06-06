@@ -7,7 +7,7 @@ namespace TicTacToeUserInterface
     {
 
         public TicTacToe newGame;
-        public Adapter adapter;
+        public Options options;
 
         static void Main(string[] args)
         {
@@ -23,16 +23,11 @@ namespace TicTacToeUserInterface
 
             if (answer == "Y")
             {
-                Console.Write("Player One - ");
-                var markerOne = chooseMarker();
+                setMarkers();
+                newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER);
+                Console.WriteLine("A new game has been started!");
+                Console.WriteLine("Player One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", options.P1_MARKER, options.P2_MARKER);
 
-                Console.Write("Player Two - ");
-                var markerTwo = chooseMarker();
-
-                adapter = new Adapter(markerOne, markerTwo);
-
-                newGame = new TicTacToe(adapter.X_MARKER, adapter.O_MARKER);
-                Console.WriteLine("A new game has been started");
                 return "A new game has been started";
             }
             else if (answer == "N")
@@ -46,10 +41,31 @@ namespace TicTacToeUserInterface
             }
         }
 
+        public void setMarkers()
+        {
+            Console.Write("Player One - ");
+            var markerOne = chooseMarker();
+            Console.Write("Player Two - ");
+            var markerTwo = chooseMarker();
+
+            while (!isMarkerDifferent(markerOne, markerTwo))
+            {
+                Console.WriteLine("Please select a different symbol from Player One.");
+                markerTwo = chooseMarker();
+            }
+            options = new Options(markerOne, markerTwo);
+        }
+
+
+        public bool isMarkerDifferent(string marker1, string marker2)
+        {
+            return marker1 != marker2;
+        }
+
 
         public string chooseMarker()
         {
-            Console.WriteLine("Please choose a marker: X or O");
+            Console.WriteLine("Please choose a symbol for your marker:");
             string marker = Console.ReadLine();
             if(marker == "")
             {
@@ -59,21 +75,6 @@ namespace TicTacToeUserInterface
             {
                 return marker.Substring(0,1);
             }
-            // if (marker == Adapter.X_MARKER)
-            // {
-            //     Console.WriteLine("Player One - Your Marker is X\nPlayer Two - Your Marker is O\n");
-            //     return Adapter.X_MARKER;
-            // }
-            // else if (marker == Adapter.O_MARKER | marker == "0")
-            // {
-            //     Console.WriteLine("Player One - Your Marker is O\nPlayer Two - Your Marker is X\n");
-            //     return Adapter.O_MARKER;
-            // }
-            // else
-            // {
-            //     Console.WriteLine("Please enter X or O only.");
-            //     return chooseMarker();
-            // }
         }
 
 
@@ -82,9 +83,9 @@ namespace TicTacToeUserInterface
             try
             {
                 var convertedLocation = Convert.ToInt32(location);
-                if (convertedLocation >= 1 && convertedLocation <= Adapter.BOARD_SIZE)
+                if (convertedLocation >= 1 && convertedLocation <= Options.BOARD_SIZE)
                 {
-                    return newGame.currentBoard.board[convertedLocation - 1].marker == Adapter.EMPTY;
+                    return newGame.currentBoard.board[convertedLocation - 1].marker == Options.EMPTY;
                 }
                 else
                 {
@@ -101,13 +102,12 @@ namespace TicTacToeUserInterface
         
         public int getSpace()
         {
-            Console.WriteLine("Please enter an empty space between 1 - 9:");
+            Console.WriteLine("Please enter an empty space between 1 - {0}:", Convert.ToInt32(Options.BOARD_SIZE));
             string location = Console.ReadLine();
             int locationInt = 0;
             if (isValidSpace(location))
             {
                 locationInt = Convert.ToInt32(location);
-                // currentSpace = locationInt;
             }
             else
             {
@@ -122,7 +122,7 @@ namespace TicTacToeUserInterface
             var displayBoard = "  ———————————  \n | ";
             foreach (Space space in board.board)
             {
-                if(space.marker == Adapter.EMPTY)
+                if(space.marker == Options.EMPTY)
                 {
                     displayBoard += space.location.ToString() + " | ";
                 }
@@ -141,7 +141,7 @@ namespace TicTacToeUserInterface
 
         public string displayInstructions()
         {
-            var instructions = "\nHOW TO PLAY\n===========\nPlayers alternate placing Xs and Os on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their Xs or three of their Os in a row, then that player wins.\n";
+            var instructions = "\nHOW TO PLAY\n===========\nPlayers alternate placing different markers on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their markers in a row, then that player wins.\n";
             Console.WriteLine(instructions);
             return instructions;
         }
