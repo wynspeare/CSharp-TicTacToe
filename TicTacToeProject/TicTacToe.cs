@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TicTacToeApp
 {
@@ -25,17 +26,19 @@ namespace TicTacToeApp
             { 2, 5, 8 },
         };
 
-        public TicTacToe(string playerOneMarker)
+
+        public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O")
         {
+            
+            Symbols.P1_MARKER = playerOneMarker;
+            Symbols.P2_MARKER = playerTwoMarker;
+
             this.currentBoard = new Board();
-            this.playerOne = new Player(playerOneMarker);
-            this.playerTwo = new Player("O"); 
+
+            this.playerOne = new Player(Symbols.P1_MARKER);
+            this.playerTwo = new Player(Symbols.P2_MARKER); 
         }
 
-        // static void Main(string[] args)
-        // {
-        //     Console.WriteLine("Hello World!!!");
-        // }
 
         public bool moveMarker(int location, string marker)
         {
@@ -43,35 +46,31 @@ namespace TicTacToeApp
             return currentBoard.placeMarker(location, marker);
         }
 
+        // public bool checkIfWon()
+        // {
+        //     List<string> tempCombo = new List<string>();
 
-        public bool isRowComplete() // This isn't completed yet
+        //     foreach (int combo in winCombinations)
+        //     {
+        //         Console.WriteLine(combo);
+        //         foreach (int index in winCombinations[combo])
+        //         {
+        //             tempCombo.Add(currentBoard.board[index].marker);
+        //         }
+        //         tempCombo.TrueForAll(allSpacesMatch);
+        //         {
+        //             isWon = true;
+        //             tempCombo.Clear();
+        //         }
+        //     }
+        // }
+
+
+        public bool isRowComplete(List <string> row, string marker) 
         {
-            // loop thru winCombos and check if player's marker is at all three of the indexes on the board list
-
-            // var isWon = false;
-            // List<string> tempCombo = new List<string>();
-
-            // foreach (int combo in winCombinations)
-            // {
-            //     // Console.WriteLine(combo);
-            //     foreach (int index in winCombinations[combo])
-            //     {
-            //         tempCombo.Add(currentBoard.board[index].marker);
-            //     }
-            //     tempCombo.TrueForAll(allSpacesMatch);
-            //     {
-            //         isWon = true;
-            //         tempCombo.Clear();
-            //     }
-            // }
-            // return isWon;
-            return true;
+            return row.All(space => space == marker) ? true : false; 
         }
 
-        private static bool allSpacesMatch(string marker)
-        {
-            return marker == "X";
-        }
 
     }
 }
