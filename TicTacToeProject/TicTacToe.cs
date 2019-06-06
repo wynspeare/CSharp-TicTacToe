@@ -10,25 +10,8 @@ namespace TicTacToeApp
         public Board currentBoard;
         public Player playerOne;
         public Player playerTwo;
-        // public string currentTurn;
-
-        public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O")
-        {
-            
-            Symbols.P1_MARKER = playerOneMarker;
-            Symbols.P2_MARKER = playerTwoMarker;
-
-            this.currentBoard = new Board();
-
-            this.playerOne = new Player(Symbols.P1_MARKER);
-            this.playerTwo = new Player(Symbols.P2_MARKER); 
-        }
-
-
-        public bool moveMarker(int location, string marker)
-        {
-            return currentBoard.placeMarker(location, marker);
-        }
+        
+        public Player currentPlayer;
 
         int [,] winCombinations = new int[8, 3] //Maybe move to rules class
         { 
@@ -42,6 +25,46 @@ namespace TicTacToeApp
             { 2, 5, 8 },
         };
 
+        public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O")
+        {
+            
+            Symbols.P1_MARKER = playerOneMarker;
+            Symbols.P2_MARKER = playerTwoMarker;
+
+            this.currentBoard = new Board();
+
+            this.playerOne = new Player(Symbols.P1_MARKER);
+            this.playerTwo = new Player(Symbols.P2_MARKER);
+            currentPlayer = this.playerOne;
+        }
+
+        public bool turn(int location)
+        {
+            moveMarker(location, currentPlayer.marker);
+            if (!checkIfWon())
+            {
+                switchPlayer();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        public void switchPlayer()
+        {
+            currentPlayer = (currentPlayer == playerOne) ? playerTwo : playerOne;
+        }
+
+
+        public bool moveMarker(int location, string marker)
+        {
+            return currentBoard.placeMarker(location, marker);
+        }
+
+
         public bool checkIfWon()
         {
             List<string> tempRow = new List<string>();
@@ -54,7 +77,7 @@ namespace TicTacToeApp
                     int index = winCombinations[i, j];
                     tempRow.Add(currentBoard.board[index].marker);
                 }
-                var currentPlayersMarker_PLACEHOLDER = playerOne.marker;
+                var currentPlayersMarker_PLACEHOLDER = currentPlayer.marker;
                 if (isRowComplete(tempRow, currentPlayersMarker_PLACEHOLDER))
                 {
                     isWon = true;

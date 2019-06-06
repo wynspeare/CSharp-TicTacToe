@@ -8,6 +8,8 @@ namespace TicTacToeUserInterface
     {
 
         public TicTacToe newGame;
+        public bool isWon = false;
+
 
         static void Main(string[] args)
         {
@@ -16,7 +18,7 @@ namespace TicTacToeUserInterface
             game.startNewGame();
         }
 
-        public string startNewGame()
+        public void startNewGame()
         {
             Console.WriteLine("Do you want to play a game of Tic Tac Toe? Y/N");
             string answer = Console.ReadLine();
@@ -29,18 +31,38 @@ namespace TicTacToeUserInterface
                 Console.WriteLine("A new game has been started!");
                 Console.WriteLine("Player One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", options.P1_MARKER, options.P2_MARKER);
 
-                return "A new game has been started";
+                while (!isWon)
+                {
+                    playGame();
+                }
+                
             }
             else if (answer == "N")
             {
-                return "Okay Bye!";
+                Console.WriteLine("Okay Bye!");
             }   
             else
             {
                 Console.WriteLine("Please enter Y or N only.");
-                return startNewGame();
+                startNewGame();
             }
         }
+
+
+        public void playGame()
+        {
+            if (newGame.turn(getSpace()))
+            {
+                playGame();
+            }
+            else
+            {
+                Console.WriteLine("Player \"{0}\" has WON!", newGame.currentPlayer.marker);
+                isWon = true;
+            }
+        }
+
+
 
         public Tuple<string, string> setMarkers()
         {
@@ -103,6 +125,7 @@ namespace TicTacToeUserInterface
         
         public int getSpace()
         {
+            displayBoard(newGame.currentBoard);
             Console.WriteLine("Please enter an empty space between 1 - {0}:", Convert.ToInt32(Options.BOARD_SIZE));
             string location = Console.ReadLine();
             int locationInt = 0;
