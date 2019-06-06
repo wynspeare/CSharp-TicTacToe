@@ -15,5 +15,21 @@ namespace TicTacToeTests
             var subject = new Space(1);
             Assert.True(subject.isSpaceEmpty());
         }
+
+        [Fact]
+        public void aSpacesMarkerCanBeChanged()
+        {
+            var subject = new Space(1);
+            subject.marker = "X";
+            Assert.Equal("X", subject.marker);
+        }
+
+        [Fact]
+        public void aMarkedSpaceIsNotEmpty()
+        {
+            var subject = new Space(1);
+            subject.marker = "X";
+            Assert.False(subject.isSpaceEmpty());
+        }
     }
 }
