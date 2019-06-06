@@ -41,68 +41,10 @@ namespace TicTacToeTests
 
 
         [Fact]
-        public void aNewBoardIsEmpty()
-        {
-            var subject = new Board();
-            Assert.True(subject.isEmpty());
-        }
-
-
-        [Fact]
-        public void aNewSpaceIsEmpty()
-        {
-            var subject = new Space(1);
-            Assert.True(subject.isSpaceEmpty());
-        }
-
-
-        [Fact]
-        public void aBoardCanMarkaSpace()
-        {
-            var subject = new Board();
-            Assert.True(subject.placeMarker(5, P2_MARKER));
-        }
-
-
-        [Fact]
-        public void aNewBoardContainsInstancesOfSpaces()
-        {
-            var subject = new Board();
-            Assert.Equal(9, subject.board[8].location);
-        }
-
-        [Fact]
         public void aNewGameCanMarkaSpace()
         {
             var subject = new TicTacToe(P1_MARKER);
             Assert.True(subject.moveMarker(3, P1_MARKER));
-        }
-
-
-        [Fact]
-        public void whenAMarkerIsPlacedTheBoardIsChanged()
-        {
-            var subject = new Board();
-            subject.placeMarker(5, P1_MARKER);
-            Assert.Equal(P1_MARKER, subject.board[4].marker);
-        }
-
-
-        [Fact]
-        public void aSpecificLocationIsFilledAfterAMarkerIsPlaced()
-        {
-            var subject = new Board();
-            subject.placeMarker(5, P1_MARKER);
-            Assert.False(subject.board[4].isSpaceEmpty());
-        }
-
-
-        [Fact]
-        public void aBoardIsNotEmptyAfterAMarkerIsPlaced()
-        {
-            var subject = new Board();
-            subject.placeMarker(5, P1_MARKER);
-            Assert.False(subject.isEmpty());
         }
 
 
