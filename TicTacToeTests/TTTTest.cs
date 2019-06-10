@@ -24,7 +24,7 @@ namespace TicTacToeTests
 
 
         [Fact]
-        public void gameInitializesProvidedPlayerMarkers() //Maybe redundant
+        public void gameInitializesProvidedPlayerMarkers()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);
 
@@ -55,7 +55,7 @@ namespace TicTacToeTests
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
             var row = new List<string> {P1_MARKER, P1_MARKER, P1_MARKER};
 
-            Assert.True(subject.isRowComplete(row, P1_MARKER));
+            Assert.True(subject.rules.isRowComplete(row, P1_MARKER));
         }
 
 
@@ -70,7 +70,7 @@ namespace TicTacToeTests
             // var userInterface = new UserInterface();
             // userInterface.displayBoard(subject.currentBoard);
             
-            Assert.True(subject.checkIfWon());
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
         }
 
 
@@ -82,7 +82,7 @@ namespace TicTacToeTests
             subject.moveMarker(5, subject.playerOne.marker);
             subject.moveMarker(9, subject.playerOne.marker);
 
-            Assert.True(subject.checkIfWon());
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
         }
 
 
@@ -94,7 +94,7 @@ namespace TicTacToeTests
             subject.moveMarker(6, subject.playerOne.marker);
             subject.moveMarker(9, subject.playerOne.marker);
 
-            Assert.True(subject.checkIfWon());
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
         }
 
     }
