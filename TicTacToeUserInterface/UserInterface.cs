@@ -126,7 +126,9 @@ namespace TicTacToeUserInterface
         public int getSpace()
         {
             displayBoard(newGame.currentBoard);
-            Console.WriteLine("Please enter an empty space between 1 - {0}:", Convert.ToInt32(Options.BOARD_SIZE));
+
+            Console.WriteLine("Player \"{0}\" please enter an empty space between 1 - {1}:", newGame.currentPlayer.marker, Convert.ToInt32(Options.BOARD_SIZE));
+            
             string location = Console.ReadLine();
             int locationInt = 0;
             if (isValidSpace(location))
@@ -135,7 +137,7 @@ namespace TicTacToeUserInterface
             }
             else
             {
-                getSpace();
+                getSpace(); //BUG
             }
             return locationInt;
         }

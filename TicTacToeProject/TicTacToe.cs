@@ -13,7 +13,7 @@ namespace TicTacToeApp
         
         public Player currentPlayer;
 
-        int [,] winCombinations = new int[8, 3] //Maybe move to rules class
+        int [,] winCombinations = new int[8, 3]
         { 
             { 0, 1, 2 },
             { 3, 4, 5 },
