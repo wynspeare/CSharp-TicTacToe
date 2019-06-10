@@ -25,6 +25,12 @@ namespace TicTacToeApp
         }
 
 
+        public bool isFilled()
+        {
+            return board.TrueForAll(space => !space.isSpaceEmpty());
+        }
+
+
         public bool placeMarker(int location, string playerMarker) 
         {
             if (board[location - 1].isSpaceEmpty())

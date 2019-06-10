@@ -24,7 +24,7 @@ namespace TicTacToeTests
 
 
         [Fact]
-        public void gameInitializesProvidedPlayerMarkers() //Maybe redundant
+        public void gameInitializesProvidedPlayerMarkers()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);
 
@@ -55,7 +55,7 @@ namespace TicTacToeTests
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
             var row = new List<string> {P1_MARKER, P1_MARKER, P1_MARKER};
 
-            Assert.True(subject.isRowComplete(row, P1_MARKER));
+            Assert.True(subject.rules.isRowComplete(row, P1_MARKER));
         }
 
 
@@ -70,7 +70,7 @@ namespace TicTacToeTests
             // var userInterface = new UserInterface();
             // userInterface.displayBoard(subject.currentBoard);
             
-            Assert.True(subject.checkIfWon());
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
         }
 
 
@@ -82,7 +82,7 @@ namespace TicTacToeTests
             subject.moveMarker(5, subject.playerOne.marker);
             subject.moveMarker(9, subject.playerOne.marker);
 
-            Assert.True(subject.checkIfWon());
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
         }
 
 
@@ -94,7 +94,47 @@ namespace TicTacToeTests
             subject.moveMarker(6, subject.playerOne.marker);
             subject.moveMarker(9, subject.playerOne.marker);
 
-            Assert.True(subject.checkIfWon());
+            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
+        }
+
+        [Fact]
+        public void aFullBoardWithNoWinnerIsADraw()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            subject.moveMarker(1, subject.playerOne.marker);
+            subject.moveMarker(2, subject.playerOne.marker);
+            subject.moveMarker(6, subject.playerOne.marker);
+            subject.moveMarker(7, subject.playerOne.marker);
+            subject.moveMarker(9, subject.playerOne.marker);
+            subject.moveMarker(3, subject.playerTwo.marker);
+            subject.moveMarker(4, subject.playerTwo.marker);
+            subject.moveMarker(5, subject.playerTwo.marker);
+            subject.moveMarker(8, subject.playerTwo.marker);
+
+            // var userInterface = new UserInterface();
+            // userInterface.displayBoard(subject.currentBoard);
+
+            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
+        }
+
+        [Fact]
+        public void aTurnMethodWorks()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            subject.turn(1);
+            subject.turn(3);
+            subject.turn(2);
+            subject.turn(4);
+            subject.turn(6);
+            subject.turn(5);
+            subject.turn(7);
+            subject.turn(8);
+            subject.turn(9);
+
+            Assert.False(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
+            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
+            
         }
 
     }

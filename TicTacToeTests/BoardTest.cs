@@ -61,5 +61,26 @@ namespace TicTacToeTests
             subject.placeMarker(5, P1_MARKER);
             Assert.False(subject.isEmpty());
         }
+
+
+        [Fact]
+        public void aBoardCanBeCompletelyFull()
+        {
+            var subject = new Board();
+            subject.placeMarker(1, P1_MARKER);
+            subject.placeMarker(2, P1_MARKER);
+            subject.placeMarker(6, P1_MARKER);
+            subject.placeMarker(7, P1_MARKER);
+            subject.placeMarker(9, P1_MARKER);
+            subject.placeMarker(3, P2_MARKER);
+            subject.placeMarker(4, P2_MARKER);
+            subject.placeMarker(5, P2_MARKER);
+            subject.placeMarker(8, P2_MARKER);
+
+            Assert.False(subject.isEmpty());
+            Assert.True(subject.isFilled());
+
+        }
+
     }
 }

@@ -8,12 +8,11 @@ namespace TicTacToeUserInterface
     {
 
         public TicTacToe newGame;
-        public bool isWon = false;
+        public bool isGameOver = false;
 
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Main Method being run!");
             var game = new UserInterface(); 
             game.startNewGame();
         }
@@ -25,13 +24,13 @@ namespace TicTacToeUserInterface
 
             if (answer == "Y")
             {
+                displayInstructions();
                 var options = new Options(setMarkers());
-                
                 newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER);
-                Console.WriteLine("A new game has been started!");
-                Console.WriteLine("Player One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", options.P1_MARKER, options.P2_MARKER);
 
-                while (!isWon)
+                Console.WriteLine("\nA new game has been started!\n\nPlayer One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", options.P1_MARKER, options.P2_MARKER);
+
+                while (!isGameOver)
                 {
                     playGame();
                 }
@@ -51,17 +50,31 @@ namespace TicTacToeUserInterface
 
         public void playGame()
         {
+            displayBoard(newGame.currentBoard);
             if (newGame.turn(getSpace()))
             {
                 playGame();
             }
             else
             {
-                Console.WriteLine("Player \"{0}\" has WON!", newGame.currentPlayer.marker);
-                isWon = true;
+                winOrDraw();
+                isGameOver = true;
             }
         }
 
+
+        public void winOrDraw()
+        {
+            displayBoard(newGame.currentBoard);            
+            if (newGame.rules.checkIfDraw(newGame.currentBoard, newGame.currentPlayer.marker))
+            {
+                Console.WriteLine("This game is a draw, better luck next time.");
+            }
+            else
+            {
+                Console.WriteLine("Player \"{0}\" has WON!", newGame.currentPlayer.marker);                
+            }
+        }
 
 
         public Tuple<string, string> setMarkers()
@@ -125,8 +138,6 @@ namespace TicTacToeUserInterface
         
         public int getSpace()
         {
-            displayBoard(newGame.currentBoard);
-
             Console.WriteLine("Player \"{0}\" please enter an empty space between 1 - {1}:", newGame.currentPlayer.marker, Convert.ToInt32(Options.BOARD_SIZE));
             
             string location = Console.ReadLine();
