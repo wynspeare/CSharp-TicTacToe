@@ -10,7 +10,7 @@ namespace TicTacToeApp
         public Rules rules;
         public Player playerOne;
         public Player playerTwo;
-        
+
         public Board currentBoard;
         public Player currentPlayer;
 
@@ -31,7 +31,7 @@ namespace TicTacToeApp
         public bool turn(int location)
         {
             moveMarker(location, currentPlayer.marker);
-            if (!rules.checkIfWon(currentBoard.board, currentPlayer.marker))
+            if (!rules.checkIfWon(currentBoard.board, currentPlayer.marker) && !rules.checkIfDraw(currentBoard, currentPlayer.marker))
             {
                 switchPlayer();
                 return true;
