@@ -8,10 +8,8 @@ namespace TicTacToeApp
     public class Board
     {
 
-        public List<Space> board = new List<Space>(); //List of tuples, dictionaries??
+        public List<Space> board = new List<Space>(); 
         
-        // public bool successfulMove = false;
-
         public Board()
         {
             for (int i = 1; i <= Symbols.BOARD_SIZE; i++)
