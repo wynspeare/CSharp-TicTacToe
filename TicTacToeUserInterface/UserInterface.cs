@@ -8,7 +8,7 @@ namespace TicTacToeUserInterface
     {
 
         public TicTacToe newGame;
-        public bool isWon = false;
+        public bool isGameOver = false;
 
 
         static void Main(string[] args)
@@ -31,7 +31,7 @@ namespace TicTacToeUserInterface
                 Console.WriteLine("A new game has been started!");
                 Console.WriteLine("Player One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", options.P1_MARKER, options.P2_MARKER);
 
-                while (!isWon)
+                while (!isGameOver)
                 {
                     playGame();
                 }
@@ -57,11 +57,23 @@ namespace TicTacToeUserInterface
             }
             else
             {
-                Console.WriteLine("Player \"{0}\" has WON!", newGame.currentPlayer.marker);
-                isWon = true;
+                winOrDraw();
+                isGameOver = true;
             }
         }
 
+
+        public void winOrDraw()
+        {
+            if (newGame.rules.checkIfDraw(newGame.currentBoard, newGame.currentPlayer.marker))
+            {
+                Console.WriteLine("This game is a draw, better luck next time.");
+            }
+            else
+            {
+                Console.WriteLine("Player \"{0}\" has WON!", newGame.currentPlayer.marker);                
+            }
+        }
 
 
         public Tuple<string, string> setMarkers()
