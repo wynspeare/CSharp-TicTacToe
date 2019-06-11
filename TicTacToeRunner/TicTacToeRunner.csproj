@@ -2,10 +2,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TicTacToeProject\TicTacToeProject.csproj" />
+    <ProjectReference Include="..\TicTacToeUserInterface\TicTacToeUserInterface.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
-    <!-- <OutputType>Exe</OutputType> -->
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 

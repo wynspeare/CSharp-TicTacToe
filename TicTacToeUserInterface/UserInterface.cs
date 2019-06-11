@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using TicTacToeApp;
 
 
@@ -7,66 +9,34 @@ namespace TicTacToeUserInterface
     public class UserInterface
     {
 
-        public TicTacToe newGame;
-        public bool isGameOver = false;
-
-
-        static void Main(string[] args)
+        public bool startNewGame()
         {
-            var game = new UserInterface(); 
-            game.startNewGame();
-        }
-
-
-        public void startNewGame()
-        {
-            Console.WriteLine("Do you want to play a game of Tic Tac Toe? Y/N");
+            Console.WriteLine("Are you ready to play Tic Tac Toe? Y/N");
             string answer = Console.ReadLine();
 
             if (answer == "Y")
             {
                 displayInstructions();
-                var options = new Options(setMarkers());
-                newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER);
-
-                Console.WriteLine("\nA new game has been started!\n\nPlayer One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", options.P1_MARKER, options.P2_MARKER);
-
-                while (!isGameOver)
-                {
-                    playGame();
-                }
+                return true;
             }
             else if (answer == "N")
             {
                 Console.WriteLine("Okay Bye!");
+                return false;
             }   
             else
             {
                 Console.WriteLine("Please enter Y or N only.");
-                startNewGame();
+                return startNewGame();
             }
         }
 
 
-        public void playGame()
+        public int getValidSpace(List<Space> board)
         {
-            if (newGame.turn(getValidSpace()))
-            {
-                playGame();
-            }
-            else
-            {
-                winOrDraw();
-                isGameOver = true;
-            }
-        }
-
-
-        public int getValidSpace()
-        {
-            displayBoard(newGame.currentBoard);
+            displayBoard(board);
             var location = getSpace();
-            while (!isValidSpace(location))
+            while (!isValidSpace(location, board))
             {   
                 Console.WriteLine("That space has already been taken!");
                 location = getSpace();
@@ -75,18 +45,19 @@ namespace TicTacToeUserInterface
         }
 
 
-        public void winOrDraw()
-        {
-            displayBoard(newGame.currentBoard);            
-            if (newGame.rules.checkIfDraw(newGame.currentBoard, newGame.currentPlayer.marker))
-            {
-                Console.WriteLine("This game is a draw, better luck next time.");
-            }
-            else
-            {
-                Console.WriteLine("Player \"{0}\" has WON!", newGame.currentPlayer.marker);                
-            }
-        }
+        // public void winOrDraw(List <Space> board) Modify not to reach into board and check - just send it the message of W/D
+        // {
+        //     displayBoard(board);            
+        //     // if (newGame.rules.checkIfDraw(newGame.currentBoard, newGame.currentPlayer.marker))
+        //     if (false))
+        //     {
+        //         Console.WriteLine("This game is a draw, better luck next time.");
+        //     }
+        //     else
+        //     {
+        //         Console.WriteLine("Player \"{0}\" has WON!", newGame.currentPlayer.marker);                
+        //     }
+        // }
 
 
         public Tuple<string, string> setMarkers()
@@ -101,6 +72,8 @@ namespace TicTacToeUserInterface
                 Console.WriteLine("Please select a different symbol from Player One.");
                 markerTwo = chooseMarker();
             }
+            Console.WriteLine("\nA new game has been started!\n\nPlayer One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", markerOne, markerTwo);
+
             return Tuple.Create(markerOne, markerTwo);
         }
 
@@ -126,14 +99,14 @@ namespace TicTacToeUserInterface
         }
 
 
-        public bool isValidSpace(string location)
+        public bool isValidSpace(string location, List <Space> board)
         {   
             try
             {
                 var convertedLocation = Convert.ToInt32(location);
                 if (convertedLocation >= 1 && convertedLocation <= Options.BOARD_SIZE)
                 {
-                    return newGame.currentBoard.board[convertedLocation - 1].marker == Options.EMPTY;
+                    return board[convertedLocation - 1].marker == Options.EMPTY;
                 }
                 else
                 {
@@ -150,15 +123,17 @@ namespace TicTacToeUserInterface
 
         public string getSpace()
         {
-            Console.WriteLine("Player \"{0}\" please enter an empty space between 1 - {1}:", newGame.currentPlayer.marker, Convert.ToInt32(Options.BOARD_SIZE));
+            // Console.WriteLine("Player \"{0}\" please enter an empty space between 1 - {1}:", newGame.currentPlayer.marker, Convert.ToInt32(Options.BOARD_SIZE));
+            Console.WriteLine("Player please enter an empty space between 1 - {0}:", Convert.ToInt32(Options.BOARD_SIZE));
+
             return Console.ReadLine();
         }
 
         
-        public string displayBoard(Board board)
+        public string displayBoard(List <Space> board)
         {
             var displayBoard = "  ———————————  \n | ";
-            foreach (Space space in board.board)
+            foreach (Space space in board)
             {
                 if(space.marker == Options.EMPTY)
                 {
