@@ -12,6 +12,18 @@ namespace TicTacToeTests
         public const string EMPTY = "_";
         public const string P1_MARKER = "+";
         public const string P2_MARKER = "o";
+        Dictionary<int, string> MY_BOARD = new Dictionary<int, string>()
+                                            {
+                                                {1,"_"},
+                                                {2,"_"},
+                                                {3,"_"},
+                                                {4,"_"},
+                                                {5,"_"},
+                                                {6,"_"},
+                                                {7,"_"},
+                                                {8,"_"},
+                                                {9,"_"}
+                                            };
 
 
         [Trait("Category", "UITest")]
@@ -54,12 +66,11 @@ namespace TicTacToeTests
         public void userCanKnowIfSelectedSpaceIsValid()
         {
             var subject = new UserInterface();
-            var myBoard = new Board();
 
-            Assert.True(subject.isValidSpace("9", myBoard.board));   
-            Assert.False(subject.isValidSpace("-1", myBoard.board));
-            Assert.False(subject.isValidSpace("11", myBoard.board));
-            Assert.False(subject.isValidSpace("Q", myBoard.board));   
+            Assert.True(subject.isValidSpace("9", MY_BOARD));   
+            Assert.False(subject.isValidSpace("-1", MY_BOARD));
+            Assert.False(subject.isValidSpace("11", MY_BOARD));
+            Assert.False(subject.isValidSpace("Q", MY_BOARD));   
         }
 
 
@@ -68,8 +79,7 @@ namespace TicTacToeTests
         public void userCanEnterASpaceAndItsReturnsAnInteger()
         {
             var subject = new UserInterface();
-            var myBoard = new Board();
-            Assert.Equal(typeof(int), subject.getValidSpace(myBoard.board, P1_MARKER).GetType());
+            Assert.Equal(typeof(int), subject.getValidSpace(MY_BOARD, P1_MARKER).GetType());
         }
 
         [Trait("Category", "UITest")]

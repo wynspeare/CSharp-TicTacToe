@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using TicTacToeApp;
-
-
 namespace TicTacToeUserInterface
 {
     public class UserInterface
@@ -32,7 +29,7 @@ namespace TicTacToeUserInterface
         }
 
 
-        public int getValidSpace(List<Space> board, string marker)
+        public int getValidSpace(Dictionary<int, string> board, string marker)
         {
             displayBoard(board);
             var location = getSpace(marker);
@@ -43,16 +40,16 @@ namespace TicTacToeUserInterface
             }
             return Convert.ToInt32(location);
         }
-
         
-        public bool isValidSpace(string location, List<Space> board)
+
+        public bool isValidSpace(string location, Dictionary<int, string> board)
         {   
             try
             {
                 var convertedLocation = Convert.ToInt32(location);
                 if (convertedLocation >= 1 && convertedLocation <= Options.BOARD_SIZE)
                 {
-                    return board[convertedLocation - 1].marker == Options.EMPTY;
+                    return board[convertedLocation] == Options.EMPTY;
                 }
                 else
                 {
@@ -125,19 +122,22 @@ namespace TicTacToeUserInterface
             }
         }
 
-        
-        public string displayBoard(List <Space> board)
+
+        public string displayBoard(Dictionary<int, string> board)
         {
             var displayBoard = "  ———————————  \n | ";
-            foreach (Space space in board)
+            foreach (KeyValuePair<int, string> space in board)
             {
-                if(space.marker == Options.EMPTY)
+                var marker = space.Value;
+                var location = space.Key;
+
+                if(marker == Options.EMPTY)
                 {
-                    displayBoard += space.location.ToString() + " | ";
+                    displayBoard += location.ToString() + " | ";
                 }
                 else
                 {
-                    displayBoard += space.marker + " | ";
+                    displayBoard += marker + " | ";
                 }
             }
             displayBoard = displayBoard.Insert(28, " |\n |———|———|———| \n");
@@ -154,7 +154,6 @@ namespace TicTacToeUserInterface
             Console.WriteLine(instructions);
             return instructions;
         }
-
 
     }
 }

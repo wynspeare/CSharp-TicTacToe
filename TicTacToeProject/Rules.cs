@@ -18,6 +18,7 @@ namespace TicTacToeApp
             { 2, 5, 8 },
         };
 
+
         public bool checkIfWon(List<Space> board, string currentMarker)
         {
             List<string> tempRow = new List<string>();
@@ -50,7 +51,6 @@ namespace TicTacToeApp
         {
             return row.All(space => space == marker) ? true : false; 
         }
-
 
     }
 }

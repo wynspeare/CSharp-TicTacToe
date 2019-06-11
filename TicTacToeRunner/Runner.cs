@@ -1,7 +1,7 @@
 ﻿using System;
 using TicTacToeApp;
 using TicTacToeUserInterface;
-
+using System.Collections.Generic;
 
 namespace TicTacToeRunner
 {
@@ -26,7 +26,6 @@ namespace TicTacToeRunner
             {
                 var options = new Options(gameUI.setMarkers());
                 newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER);
-                
 
                 while (!isGameOver)
                 {
@@ -36,9 +35,23 @@ namespace TicTacToeRunner
         }
 
 
+        public Dictionary<int, string> createPrimitiveBoard()
+        {
+            var primitiveBoard = new Dictionary<int, string>();
+            foreach (Space space in newGame.currentBoard.board)
+            {
+                primitiveBoard.Add(space.location, space.marker);
+            }
+            return primitiveBoard;
+        }
+
+
         public void playGameLoop()
         {
-            if (newGame.turn(gameUI.getValidSpace(newGame.currentBoard.board, newGame.currentPlayer.marker)))
+            int selectedSpace = gameUI.getValidSpace(createPrimitiveBoard(), newGame.currentPlayer.marker);
+            bool successfulTurn = newGame.turn(selectedSpace);
+
+            if (successfulTurn)
             {
                 playGameLoop();
             }
@@ -50,14 +63,13 @@ namespace TicTacToeRunner
         }
 
 
-        public void getCompletedGameStatus(Board board, string marker)
+        public void getCompletedGameStatus(Board boardObject, string marker)
         {
-            var isDraw = newGame.rules.checkIfDraw(board, marker);
+            var isDraw = newGame.rules.checkIfDraw(boardObject, marker);
 
-            gameUI.displayBoard(board.board);
+            gameUI.displayBoard(createPrimitiveBoard());
             gameUI.displayWinOrDraw(isDraw, marker);
         }
-
 
     }
 }
