@@ -24,6 +24,7 @@ namespace TicTacToeTests
             Assert.Equal(typeof(string), options.P1_MARKER.GetType());
         }
 
+
         [Trait("Category", "UITest")]
         [Fact]
         public void markersCanBeSetWithGivenSymbols()

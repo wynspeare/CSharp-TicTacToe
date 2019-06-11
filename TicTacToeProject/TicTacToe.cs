@@ -30,7 +30,11 @@ namespace TicTacToeApp
         public bool turn(int location)
         {
             moveMarker(location, currentPlayer.marker);
-            if (!rules.checkIfWon(currentBoard.board, currentPlayer.marker) && !rules.checkIfDraw(currentBoard, currentPlayer.marker))
+            bool notWon = !rules.checkIfWon(currentBoard.board, currentPlayer.marker);
+            bool notDrawn = !rules.checkIfDraw(currentBoard, currentPlayer.marker);
+            bool notOver = notWon && notDrawn;
+            
+            if (notOver)
             {
                 switchPlayer();
                 return true;

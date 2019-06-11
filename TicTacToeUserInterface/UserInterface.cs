@@ -38,7 +38,7 @@ namespace TicTacToeUserInterface
             var location = getSpace(marker);
             while (!isValidSpace(location, board))
             {   
-                Console.WriteLine("That space has already been taken!");
+                Console.Write("Try again! ");
                 location = getSpace(marker);
             }
             return Convert.ToInt32(location);

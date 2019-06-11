@@ -26,6 +26,7 @@ namespace TicTacToeRunner
             {
                 var options = new Options(gameUI.setMarkers());
                 newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER);
+                
 
                 while (!isGameOver)
                 {
