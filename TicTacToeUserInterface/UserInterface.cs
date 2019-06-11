@@ -32,32 +32,59 @@ namespace TicTacToeUserInterface
         }
 
 
-        public int getValidSpace(List<Space> board)
+        public int getValidSpace(List<Space> board, string marker)
         {
             displayBoard(board);
-            var location = getSpace();
+            var location = getSpace(marker);
             while (!isValidSpace(location, board))
             {   
                 Console.WriteLine("That space has already been taken!");
-                location = getSpace();
+                location = getSpace(marker);
             }
             return Convert.ToInt32(location);
         }
 
+        
+        public bool isValidSpace(string location, List<Space> board)
+        {   
+            try
+            {
+                var convertedLocation = Convert.ToInt32(location);
+                if (convertedLocation >= 1 && convertedLocation <= Options.BOARD_SIZE)
+                {
+                    return board[convertedLocation - 1].marker == Options.EMPTY;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Please only enter a number.");
+                return false;
+            }
+        }
 
-        // public void winOrDraw(List <Space> board) Modify not to reach into board and check - just send it the message of W/D
-        // {
-        //     displayBoard(board);            
-        //     // if (newGame.rules.checkIfDraw(newGame.currentBoard, newGame.currentPlayer.marker))
-        //     if (false))
-        //     {
-        //         Console.WriteLine("This game is a draw, better luck next time.");
-        //     }
-        //     else
-        //     {
-        //         Console.WriteLine("Player \"{0}\" has WON!", newGame.currentPlayer.marker);                
-        //     }
-        // }
+
+        public string getSpace(string marker)
+        {
+            Console.WriteLine("Player \"{0}\" please enter an empty space between 1 - {1}:", marker, Convert.ToInt32(Options.BOARD_SIZE));
+            return Console.ReadLine();
+        }
+
+
+        public void displayWinOrDraw(bool isDraw, string winnersMarker)
+        {
+            if (isDraw)
+            {
+                Console.WriteLine("This game is a draw, better luck next time.");
+            }
+            else
+            {
+                Console.WriteLine("Player \"{0}\" has WON!", winnersMarker);    
+            }
+        }
 
 
         public Tuple<string, string> setMarkers()
@@ -96,37 +123,6 @@ namespace TicTacToeUserInterface
             {
                 return marker.Substring(0,1);
             }
-        }
-
-
-        public bool isValidSpace(string location, List <Space> board)
-        {   
-            try
-            {
-                var convertedLocation = Convert.ToInt32(location);
-                if (convertedLocation >= 1 && convertedLocation <= Options.BOARD_SIZE)
-                {
-                    return board[convertedLocation - 1].marker == Options.EMPTY;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Please only enter a number.");
-                return false;
-            }
-        }
-
-
-        public string getSpace()
-        {
-            // Console.WriteLine("Player \"{0}\" please enter an empty space between 1 - {1}:", newGame.currentPlayer.marker, Convert.ToInt32(Options.BOARD_SIZE));
-            Console.WriteLine("Player please enter an empty space between 1 - {0}:", Convert.ToInt32(Options.BOARD_SIZE));
-
-            return Console.ReadLine();
         }
 
         

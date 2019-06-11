@@ -9,8 +9,8 @@ namespace TicTacToeRunner
     {
         public TicTacToe newGame;
         public UserInterface gameUI;
-
         public bool isGameOver = false;
+
 
         static void Main(string[] args)
         {
@@ -18,10 +18,10 @@ namespace TicTacToeRunner
             runner.createGame();
         }
 
+
         public void createGame()
         {
             gameUI = new UserInterface();
-
             if (gameUI.startNewGame())
             {
                 var options = new Options(gameUI.setMarkers());
@@ -29,27 +29,33 @@ namespace TicTacToeRunner
 
                 while (!isGameOver)
                 {
-                    playGame();
+                    playGameLoop();
                 }
             }
         }
 
 
-
-        public void playGame()
+        public void playGameLoop()
         {
-            if (newGame.turn(gameUI.getValidSpace(newGame.currentBoard.board)))
+            if (newGame.turn(gameUI.getValidSpace(newGame.currentBoard.board, newGame.currentPlayer.marker)))
             {
-                playGame();
+                playGameLoop();
             }
             else
             {
-                // gameUI.winOrDraw(newGame.currentBoard);
+                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayer.marker);
                 isGameOver = true;
             }
         }
 
 
+        public void getCompletedGameStatus(Board board, string marker)
+        {
+            var isDraw = newGame.rules.checkIfDraw(board, marker);
+
+            gameUI.displayBoard(board.board);
+            gameUI.displayWinOrDraw(isDraw, marker);
+        }
 
 
     }
