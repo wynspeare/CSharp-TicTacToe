@@ -16,7 +16,6 @@ namespace TicTacToeApp
 
         public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O")
         {
-            
             Symbols.P1_MARKER = playerOneMarker;
             Symbols.P2_MARKER = playerTwoMarker;
 

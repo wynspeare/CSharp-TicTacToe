@@ -17,6 +17,7 @@ namespace TicTacToeUserInterface
             game.startNewGame();
         }
 
+
         public void startNewGame()
         {
             Console.WriteLine("Do you want to play a game of Tic Tac Toe? Y/N");
@@ -34,7 +35,6 @@ namespace TicTacToeUserInterface
                 {
                     playGame();
                 }
-                
             }
             else if (answer == "N")
             {
@@ -50,8 +50,7 @@ namespace TicTacToeUserInterface
 
         public void playGame()
         {
-            displayBoard(newGame.currentBoard);
-            if (newGame.turn(getSpace()))
+            if (newGame.turn(getValidSpace()))
             {
                 playGame();
             }
@@ -60,6 +59,19 @@ namespace TicTacToeUserInterface
                 winOrDraw();
                 isGameOver = true;
             }
+        }
+
+
+        public int getValidSpace()
+        {
+            displayBoard(newGame.currentBoard);
+            var location = getSpace();
+            while (!isValidSpace(location))
+            {   
+                Console.WriteLine("That space has already been taken!");
+                location = getSpace();
+            }
+            return Convert.ToInt32(location);
         }
 
 
@@ -135,22 +147,11 @@ namespace TicTacToeUserInterface
             }
         }
 
-        
-        public int getSpace()
+
+        public string getSpace()
         {
             Console.WriteLine("Player \"{0}\" please enter an empty space between 1 - {1}:", newGame.currentPlayer.marker, Convert.ToInt32(Options.BOARD_SIZE));
-            
-            string location = Console.ReadLine();
-            int locationInt = 0;
-            if (isValidSpace(location))
-            {
-                locationInt = Convert.ToInt32(location);
-            }
-            else
-            {
-                getSpace(); //BUG
-            }
-            return locationInt;
+            return Console.ReadLine();
         }
 
         

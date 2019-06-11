@@ -50,6 +50,28 @@ namespace TicTacToeTests
 
 
         [Fact]
+        public void aPlayerCanBeSwitched()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            Assert.Equal("+", subject.currentPlayer.marker);
+            
+            subject.switchPlayer();
+            Assert.Equal("*", subject.currentPlayer.marker);
+        }
+
+
+        [Fact]
+        public void aTurnCanBePlayedAndThePlayerIsSwitched()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            Assert.Equal("+", subject.currentPlayer.marker);
+
+            subject.turn(1);
+            Assert.Equal("*", subject.currentPlayer.marker);
+        }
+
+
+        [Fact]
         public void aRowOfThreeSameMarkersReturnsTrue()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
@@ -66,9 +88,6 @@ namespace TicTacToeTests
             subject.moveMarker(4, subject.playerOne.marker);
             subject.moveMarker(5, subject.playerOne.marker);
             subject.moveMarker(6, subject.playerOne.marker);
-
-            // var userInterface = new UserInterface();
-            // userInterface.displayBoard(subject.currentBoard);
             
             Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
         }
@@ -112,14 +131,11 @@ namespace TicTacToeTests
             subject.moveMarker(5, subject.playerTwo.marker);
             subject.moveMarker(8, subject.playerTwo.marker);
 
-            // var userInterface = new UserInterface();
-            // userInterface.displayBoard(subject.currentBoard);
-
             Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
         }
 
         [Fact]
-        public void aTurnMethodWorks()
+        public void aDrawGameCanBePlayedWIthPlayersSwitching()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
             subject.turn(1);
@@ -134,7 +150,6 @@ namespace TicTacToeTests
 
             Assert.False(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
             Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
-            
         }
 
     }
