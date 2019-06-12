@@ -14,6 +14,7 @@ namespace TicTacToeApp
         public Board currentBoard;
         public Player currentPlayer;
 
+
         public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O")
         {
             Symbols.P1_MARKER = playerOneMarker;
@@ -27,10 +28,16 @@ namespace TicTacToeApp
             currentPlayer = this.playerOne;
         }
 
+
         public bool turn(int location)
         {
             moveMarker(location, currentPlayer.marker);
-            if (!rules.checkIfWon(currentBoard.board, currentPlayer.marker) && !rules.checkIfDraw(currentBoard, currentPlayer.marker))
+            
+            bool notWon = !rules.checkIfWon(currentBoard.board, currentPlayer.marker);
+            bool notDrawn = !rules.checkIfDraw(currentBoard, currentPlayer.marker);
+            bool notOver = notWon && notDrawn;
+            
+            if (notOver)
             {
                 switchPlayer();
                 return true;

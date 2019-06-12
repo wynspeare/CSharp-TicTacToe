@@ -11,6 +11,5 @@ namespace TicTacToeApp
             this.marker = marker;
         }
 
-
     }
 }

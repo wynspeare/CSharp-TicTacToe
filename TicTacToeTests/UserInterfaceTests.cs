@@ -11,42 +11,75 @@ namespace TicTacToeTests
 
         public const string EMPTY = "_";
         public const string P1_MARKER = "+";
-        public const string P2_MARKER = "*";
+        public const string P2_MARKER = "o";
+        Dictionary<int, string> MY_BOARD = new Dictionary<int, string>()
+                                            {
+                                                {1,"_"},
+                                                {2,"_"},
+                                                {3,"_"},
+                                                {4,"_"},
+                                                {5,"_"},
+                                                {6,"_"},
+                                                {7,"_"},
+                                                {8,"_"},
+                                                {9,"_"}
+                                            };
+
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void userIntefaceCanStartNewGameWithUserGivenSymbols()
+        public void markersCanBeSetWithUserProvidedSymbols()
         {
             var subject = new UserInterface();
-            subject.startNewGame();
+            var options = new Options(subject.setMarkers());
 
-            subject.newGame.moveMarker(3, subject.newGame.playerOne.marker);
-            subject.newGame.moveMarker(6, subject.newGame.playerTwo.marker);
-
-            subject.displayBoard(subject.newGame.currentBoard);
-
-            Assert.Equal(1, subject.newGame.currentBoard.board[0].location);
+            Assert.Equal(typeof(string), options.P1_MARKER.GetType());
         }
+
+
+        [Trait("Category", "UITest")]
+        [Fact]
+        public void markersCanBeSetWithGivenSymbols()
+        {
+            var subject = new UserInterface();
+            var markers = new Tuple<string, string> ( P1_MARKER, P2_MARKER );
+            var options = new Options(markers);
+
+            Assert.Equal("+", options.P1_MARKER);
+            Assert.Equal("o", options.P2_MARKER);
+        }
+
+
+        [Trait("Category", "UITest")]
+        [Fact]
+        public void markersCannotBeTheSame()
+        {
+            var subject = new UserInterface();
+
+            Assert.True(subject.isMarkerDifferent(P1_MARKER, P2_MARKER));
+            Assert.False(subject.isMarkerDifferent(P1_MARKER, P1_MARKER));
+        }
+
 
         [Trait("Category", "UITest")]
         [Fact]
         public void userCanKnowIfSelectedSpaceIsValid()
         {
             var subject = new UserInterface();
-            subject.startNewGame();
-            Assert.True(subject.isValidSpace("9"));   
-            Assert.False(subject.isValidSpace("-1"));
-            Assert.False(subject.isValidSpace("11"));
-            Assert.False(subject.isValidSpace("Q"));   
+
+            Assert.True(subject.isValidSpace("9", MY_BOARD));   
+            Assert.False(subject.isValidSpace("-1", MY_BOARD));
+            Assert.False(subject.isValidSpace("11", MY_BOARD));
+            Assert.False(subject.isValidSpace("Q", MY_BOARD));   
         }
+
 
         [Trait("Category", "UITest")]
         [Fact]
         public void userCanEnterASpaceAndItsReturnsAnInteger()
         {
             var subject = new UserInterface();
-            subject.startNewGame();
-            Assert.Equal(typeof(int), subject.getValidSpace().GetType());
+            Assert.Equal(typeof(int), subject.getValidSpace(MY_BOARD, P1_MARKER).GetType());
         }
 
         [Trait("Category", "UITest")]
