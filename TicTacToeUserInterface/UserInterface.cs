@@ -10,7 +10,6 @@ namespace TicTacToeUserInterface
         {
             Console.WriteLine("Are you ready to play Tic Tac Toe? Y/N");
             string answer = Console.ReadLine();
-
             if (answer == "Y")
             {
                 displayInstructions();
@@ -28,7 +27,6 @@ namespace TicTacToeUserInterface
             }
         }
 
-
         public int getValidSpace(Dictionary<int, string> board, string marker)
         {
             displayBoard(board);
@@ -41,7 +39,6 @@ namespace TicTacToeUserInterface
             return Convert.ToInt32(location);
         }
         
-
         public bool isValidSpace(string location, Dictionary<int, string> board)
         {   
             try
@@ -63,13 +60,11 @@ namespace TicTacToeUserInterface
             }
         }
 
-
         public string getSpace(string marker)
         {
             Console.WriteLine("Player \"{0}\" please enter an empty space between 1 - {1}:", marker, Convert.ToInt32(Options.BOARD_SIZE));
             return Console.ReadLine();
         }
-
 
         public void displayWinOrDraw(bool isDraw, string winnersMarker)
         {
@@ -83,30 +78,25 @@ namespace TicTacToeUserInterface
             }
         }
 
-
         public Tuple<string, string> setMarkers()
         {
             Console.Write("Player One - ");
             var markerOne = chooseMarker();
             Console.Write("Player Two - ");
             var markerTwo = chooseMarker();
-
             while (!isMarkerDifferent(markerOne, markerTwo))
             {
                 Console.WriteLine("Please select a different symbol from Player One.");
                 markerTwo = chooseMarker();
             }
             Console.WriteLine("\nA new game has been started!\n\nPlayer One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", markerOne, markerTwo);
-
             return Tuple.Create(markerOne, markerTwo);
         }
-
 
         public bool isMarkerDifferent(string marker1, string marker2)
         {
             return marker1 != marker2;
         }
-
 
         public string chooseMarker()
         {
@@ -122,7 +112,6 @@ namespace TicTacToeUserInterface
             }
         }
 
-
         public string displayBoard(Dictionary<int, string> board)
         {
             var displayBoard = "  ———————————  \n | ";
@@ -130,7 +119,6 @@ namespace TicTacToeUserInterface
             {
                 var marker = space.Value;
                 var location = space.Key;
-
                 if(marker == Options.EMPTY)
                 {
                     displayBoard += location.ToString() + " | ";
@@ -146,7 +134,6 @@ namespace TicTacToeUserInterface
             Console.WriteLine(displayBoard);
             return displayBoard;
         }
-
 
         public string displayInstructions()
         {

@@ -17,18 +17,15 @@ namespace TicTacToeApp
             }
         }
 
-
         public bool isEmpty()
         {
             return board.TrueForAll(space => space.isSpaceEmpty());
         }
 
-
         public bool isFilled()
         {
             return board.TrueForAll(space => !space.isSpaceEmpty());
         }
-
 
         public bool placeMarker(int location, string playerMarker) 
         {
@@ -43,6 +40,36 @@ namespace TicTacToeApp
             }
         }
 
+        // public string getBoardString()
+        // {
+        //     var boardString = "";
+        //     foreach (Space space in board)
+        //     {
+        //         var marker = space.marker;
+        //         var location = space.location;
+
+        //         if(marker == Symbols.EMPTY)
+        //         {
+        //             boardString += location.ToString() + " ";
+        //         }
+        //         else
+        //         {
+        //             boardString += marker + " ";
+        //         }
+        //     }
+        //     Console.WriteLine(boardString);
+        //     return boardString;
+        // }
+
+        public Dictionary<int, string> createDictBoard()
+        {
+            var dictBoard = new Dictionary<int, string>();
+            foreach (Space space in board)
+            {
+                dictBoard.Add(space.location, space.marker);
+            }
+            return dictBoard;
+        }
     }
 }
 
