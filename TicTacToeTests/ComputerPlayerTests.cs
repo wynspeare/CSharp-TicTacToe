@@ -67,7 +67,5 @@ namespace TicTacToeTests
             Assert.Equal(8, subject.getValidSpace(myBoard));
         }
 
-        
-
     }
 }

@@ -25,8 +25,6 @@ namespace TicTacToeApp
             return board[location] == Symbols.EMPTY;
         }
 
-
-
         public int getValidSpace(Dictionary<int, string> board)
         {
             
