@@ -12,7 +12,6 @@ namespace TicTacToeApp
         public HumanPlayer playerTwo;
         public ComputerPlayer compPlayer;
         public Board currentBoard;
-        
         public string currentPlayerMarker;
         public bool isSinglePlayer;
 
@@ -23,7 +22,7 @@ namespace TicTacToeApp
             this.currentBoard = new Board();
             this.rules = new Rules();
             this.playerOne = new HumanPlayer(Symbols.P1_MARKER);
-                        
+            
             if (isSinglePlayer) 
             {
                 this.compPlayer = new ComputerPlayer(Symbols.P2_MARKER);
@@ -33,7 +32,6 @@ namespace TicTacToeApp
             {
                 this.playerTwo = new HumanPlayer(Symbols.P2_MARKER);
             }
-
             this.currentPlayerMarker = this.playerOne.marker;
         }
 
@@ -55,7 +53,6 @@ namespace TicTacToeApp
                 return false;
             }
         }
-
 
         public void switchPlayer()
         {

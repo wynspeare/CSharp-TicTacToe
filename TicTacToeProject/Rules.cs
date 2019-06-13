@@ -18,7 +18,6 @@ namespace TicTacToeApp
             { 2, 5, 8 },
         };
 
-
         public bool checkIfWon(List<Space> board, string currentMarker)
         {
             List<string> tempRow = new List<string>();
@@ -40,12 +39,10 @@ namespace TicTacToeApp
             return isWon;
         }
 
-
         public bool checkIfDraw(Board board, string currentMarker)
         {
             return board.isFilled() && !checkIfWon(board.board, currentMarker);
         }
-
 
         public bool isRowComplete(List <string> row, string marker) 
         {

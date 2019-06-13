@@ -36,7 +36,6 @@ namespace TicTacToeTests
         public void aComputerPlayerCanGenerateARandomNumberBetweenOneAndNine()
         {
             var subject = new ComputerPlayer();
-
             Assert.InRange(subject.getRandomSpace(), 1, 9);
         }
 
@@ -44,7 +43,6 @@ namespace TicTacToeTests
         public void aComputerPlayerKnowIfSelectedSpaceIsValid()
         {
             var subject = new ComputerPlayer();
-
             Assert.True(subject.isValidSpace(1, MY_BOARD));
         }
 

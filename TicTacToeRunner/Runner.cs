@@ -23,8 +23,11 @@ namespace TicTacToeRunner
             gameUI = new UserInterface();
             if (gameUI.startNewGame())
             {
-                options = new Options(gameUI.setMarkers());
+                var isSinglePlayer = gameUI.isSinglePlayerGame(gameUI.getTypeOfGame());
+                options = new Options(gameUI.setMarkers(), isSinglePlayer);
+
                 newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER, options.IS_SINGLE_PLAYER);
+
                 while (!isGameOver)
                 {
                     playGameLoop();
@@ -50,20 +53,20 @@ namespace TicTacToeRunner
             else
             {
                 getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayerMarker);
-                isGameOver = true;
             }
         }
 
         public void computerPlayerTurn()
         {
-            if (newGame.turn(newGame.compPlayer.getValidSpace(newGame.currentBoard.createDictBoard())))
+            int compSelectedSpace = newGame.compPlayer.getValidSpace(newGame.currentBoard.createDictBoard());
+            if (newGame.turn(compSelectedSpace))
             {
+                gameUI.displayComputersMove(compSelectedSpace);
                 playGameLoop();
             }
             else
             {
                 getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayerMarker);
-                isGameOver = true;
             }
         }
 
@@ -72,7 +75,16 @@ namespace TicTacToeRunner
             var isDraw = newGame.rules.checkIfDraw(boardObject, marker);
             gameUI.displayBoard(newGame.currentBoard.createDictBoard());
             gameUI.displayWinOrDraw(isDraw, marker);
-        }
 
+            if ((options.IS_SINGLE_PLAYER != isDraw) && (marker == newGame.playerOne.marker))
+            {
+                gameUI.displaySinglePlayerGameStatus(true);
+            }
+            else if (options.IS_SINGLE_PLAYER != isDraw)
+            {
+                gameUI.displaySinglePlayerGameStatus(false);
+            }
+            isGameOver = true;
+        }
     }
 }

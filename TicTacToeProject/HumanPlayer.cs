@@ -5,7 +5,6 @@ namespace TicTacToeApp
     {
         public string marker;
 
-
         public HumanPlayer(string marker)
         {
             this.marker = marker;

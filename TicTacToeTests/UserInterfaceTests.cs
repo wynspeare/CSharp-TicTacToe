@@ -25,7 +25,6 @@ namespace TicTacToeTests
                                                 {9,"_"}
                                             };
 
-
         [Trait("Category", "UITest")]
         [Fact]
         public void markersCanBeSetWithUserProvidedSymbols()
@@ -35,7 +34,6 @@ namespace TicTacToeTests
 
             Assert.Equal(typeof(string), options.P1_MARKER.GetType());
         }
-
 
         [Trait("Category", "UITest")]
         [Fact]
@@ -49,7 +47,6 @@ namespace TicTacToeTests
             Assert.Equal("o", options.P2_MARKER);
         }
 
-
         [Trait("Category", "UITest")]
         [Fact]
         public void markersCannotBeTheSame()
@@ -59,7 +56,6 @@ namespace TicTacToeTests
             Assert.True(subject.isMarkerDifferent(P1_MARKER, P2_MARKER));
             Assert.False(subject.isMarkerDifferent(P1_MARKER, P1_MARKER));
         }
-
 
         [Trait("Category", "UITest")]
         [Fact]
@@ -72,7 +68,6 @@ namespace TicTacToeTests
             Assert.False(subject.isValidSpace("11", MY_BOARD));
             Assert.False(subject.isValidSpace("Q", MY_BOARD));   
         }
-
 
         [Trait("Category", "UITest")]
         [Fact]
@@ -88,6 +83,23 @@ namespace TicTacToeTests
         {
             var subject = new UserInterface();
             Assert.Contains("Players alternate placing", subject.displayInstructions());
+        }
+
+        [Trait("Category", "UITest")]
+        [Fact]
+        public void singlePlayerGameCanBeSelected()
+        {
+            var subject = new UserInterface();
+            var typeOfGame = "Y";
+            Assert.True(subject.isSinglePlayerGame(typeOfGame));
+        }
+
+        [Trait("Category", "UITest")]
+        [Fact]
+        public void userCanEnterYesIfSinglePlayerGame()
+        {
+            var subject = new UserInterface();            
+            Assert.Equal(("Y"), subject.getTypeOfGame());
         }
 
     }
