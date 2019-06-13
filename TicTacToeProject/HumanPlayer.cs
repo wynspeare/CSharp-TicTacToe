@@ -1,12 +1,12 @@
 
 namespace TicTacToeApp
 {
-    public class Player
+    public class HumanPlayer
     {
         public string marker;
 
 
-        public Player(string marker)
+        public HumanPlayer(string marker)
         {
             this.marker = marker;
         }

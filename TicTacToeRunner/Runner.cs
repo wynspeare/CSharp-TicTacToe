@@ -26,25 +26,87 @@ namespace TicTacToeRunner
                 newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER);
                 while (!isGameOver)
                 {
-                    playGameLoop();
+                    // playGameLoop();
+                    singlePlayerGameLoop();
                 }
             }
         }
 
         public void playGameLoop()
         {
-            int selectedSpace = gameUI.getValidSpace(newGame.currentBoard.createDictBoard(), newGame.currentPlayer.marker);
+            int selectedSpace = gameUI.getValidSpace(newGame.currentBoard.createDictBoard(), newGame.currentPlayerMarker);
+
             bool successfulTurn = newGame.turn(selectedSpace);
+
             if (successfulTurn)
             {
                 playGameLoop();
             }
             else
             {
-                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayer.marker);
+                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayerMarker);
                 isGameOver = true;
             }
         }
+
+
+        public void singlePlayerGameLoop()
+        {
+            int selectedHumanSpace = gameUI.getValidSpace(newGame.currentBoard.createDictBoard(), newGame.currentPlayerMarker);
+
+            bool successfulHumanTurn = newGame.turn(selectedHumanSpace);
+
+            if (successfulHumanTurn)
+            {
+                if (newGame.turn(newGame.compPlayer.getValidSpace(newGame.currentBoard.createDictBoard())))
+                {
+                    singlePlayerGameLoop();
+                }
+                else
+                {
+                    getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayerMarker);
+                    isGameOver = true;
+                }
+            }
+            else
+            {
+                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayerMarker);
+                isGameOver = true;
+            }
+        }
+
+
+
+        
+        // public void singlePlayerGameLoop()
+        // {
+        //     int selectedSpace = gameUI.getValidSpace(newGame.currentBoard.createDictBoard(), newGame.currentPlayerMarker);
+        //     bool successfulTurn = newGame.turn(selectedSpace);
+
+        //     if (successfulTurn)
+        //     {
+        //         int computerSpace = newGame.compPlayer.getRandomSpace();
+        //         if (gameUI.isValidSpace(computerSpace.ToString(), newGame.currentBoard.createDictBoard()))
+        //         {
+        //             if (newGame.computerTurn(computerSpace))
+        //             {
+        //                 singlePlayerGameLoop();
+        //             }
+        //             else
+        //             {
+        //                 getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayerMarker);
+        //                 isGameOver = true;
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayerMarker);
+        //         isGameOver = true;
+        //     }
+        // }
+
+
 
         public void getCompletedGameStatus(Board boardObject, string marker)
         {

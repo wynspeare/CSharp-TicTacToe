@@ -11,10 +11,11 @@ namespace TicTacToeTests
 
         public const string EMPTY = "_";
         public const string P1_MARKER = "+";
-        public const string P2_MARKER = "*";
+        public const string P2_MARKER = "o";
+        public const bool IS_SINGLE_PLAYER = true;
 
         [Fact]
-        public void gameInitializesWithDefaultPlayerMarkersXandO()
+        public void twoPlayerGameInitializesWithDefaultPlayerMarkersXandO()
         {
             var subject = new TicTacToe();
             
@@ -24,12 +25,21 @@ namespace TicTacToeTests
 
 
         [Fact]
-        public void gameInitializesProvidedPlayerMarkers()
+        public void twoPlayerGameInitializesProvidedPlayerMarkers()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);
 
             Assert.Equal(P1_MARKER, subject.playerOne.marker);
             Assert.Equal(P2_MARKER, subject.playerTwo.marker);
+        }
+        
+        
+        [Fact]
+        public void currentMarkerInTwoPlayerGameIsPlayerOne()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);
+
+            Assert.Equal(P1_MARKER, subject.currentPlayerMarker);
         }
 
 
@@ -40,7 +50,6 @@ namespace TicTacToeTests
             Assert.NotNull(subject.currentBoard);
         }
 
-
         [Fact]
         public void aNewGameCanMarkaSpace()
         {
@@ -48,38 +57,34 @@ namespace TicTacToeTests
             Assert.True(subject.moveMarker(3, P1_MARKER));
         }
 
-
         [Fact]
-        public void aPlayerCanBeSwitched()
+        public void twoPlayerGameAPlayerCanBeSwitched()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
-            Assert.Equal("+", subject.currentPlayer.marker);
+            Assert.Equal("+", subject.currentPlayerMarker);
             
             subject.switchPlayer();
-            Assert.Equal("*", subject.currentPlayer.marker);
+            Assert.Equal(P2_MARKER, subject.currentPlayerMarker);
         }
 
-
         [Fact]
-        public void aTurnCanBePlayedAndThePlayerIsSwitched()
+        public void twoPlayerGameATurnCanBePlayedAndThePlayerIsSwitched()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
-            Assert.Equal("+", subject.currentPlayer.marker);
+            Assert.Equal("+", subject.currentPlayerMarker);
 
             subject.turn(1);
-            Assert.Equal("*", subject.currentPlayer.marker);
+            Assert.Equal(P2_MARKER, subject.currentPlayerMarker);
         }
 
-
         [Fact]
-        public void aRowOfThreeSameMarkersReturnsTrue()
+        public void RowOfThreeSameMarkersReturnsTrue()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
             var row = new List<string> {P1_MARKER, P1_MARKER, P1_MARKER};
 
             Assert.True(subject.rules.isRowComplete(row, P1_MARKER));
         }
-
 
         [Fact]
         public void aBoardWithThreeHorizontalMarkersInARowWinsGame()
@@ -89,7 +94,7 @@ namespace TicTacToeTests
             subject.moveMarker(5, subject.playerOne.marker);
             subject.moveMarker(6, subject.playerOne.marker);
             
-            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
         }
 
 
@@ -101,7 +106,7 @@ namespace TicTacToeTests
             subject.moveMarker(5, subject.playerOne.marker);
             subject.moveMarker(9, subject.playerOne.marker);
 
-            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
         }
 
 
@@ -113,8 +118,8 @@ namespace TicTacToeTests
             subject.moveMarker(6, subject.playerOne.marker);
             subject.moveMarker(9, subject.playerOne.marker);
 
-            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
-            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
+            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
         }
 
         [Fact]
@@ -131,11 +136,11 @@ namespace TicTacToeTests
             subject.moveMarker(5, subject.playerTwo.marker);
             subject.moveMarker(8, subject.playerTwo.marker);
 
-            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
+            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
         }
 
         [Fact]
-        public void aDrawGameCanBePlayedWIthPlayersSwitching()
+        public void aTwoPlayerGameCanBeADrawWithPlayersSwitchingTurns()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
             subject.turn(1);
@@ -148,8 +153,145 @@ namespace TicTacToeTests
             subject.turn(8);
             subject.turn(9);
 
-            Assert.False(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
-            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
+            Assert.False(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
+            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+        }
+
+        [Fact]
+        public void aTwoPlayerGameCanBeWonWithPlayersSwitchingTurns()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            subject.turn(1);
+            subject.turn(6);
+            subject.turn(9);
+            subject.turn(4);
+            subject.turn(3);
+            subject.turn(5);
+
+            // var ui = new UserInterface();
+            // ui.displayBoard(subject.currentBoard.createDictBoard());
+
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
+            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+        }
+
+        // [Fact]
+        // public void singlePlayerGameInitializesWithDefaultPlayerMarkersXandO()
+        // {
+        //     var subject = new TicTacToe(isSinglePlayer = true);
+            
+        //     Assert.Equal("X", subject.playerOne.marker);
+        //     Assert.Equal("O", subject.compPlayer.marker);
+        // }
+
+        [Fact]
+        public void singlePlayerGameInitializesProvidedPlayerMarkers()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
+
+            Assert.Equal(P1_MARKER, subject.playerOne.marker);
+            Assert.Equal(P2_MARKER, subject.compPlayer.marker);
+        }
+                
+        [Fact]
+        public void currentMarkerInSinglePlayerGameIsPlayerOne()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
+
+            Assert.Equal(P1_MARKER, subject.currentPlayerMarker);
+        }
+
+        [Fact]
+        public void singlePlayerGameAPlayerCanBeSwitched()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);           
+            Assert.Equal("+", subject.currentPlayerMarker);
+            
+            subject.switchPlayer();
+            Assert.Equal(P2_MARKER, subject.currentPlayerMarker);
+        }
+
+        [Fact]
+        public void aSinglePlayerGameCanBeADrawWithMockedLocations()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);           
+            subject.turn(1);
+            subject.turn(3);
+            subject.turn(2);
+            subject.turn(4);
+            subject.turn(6);
+            subject.turn(5);
+            subject.turn(7);
+            subject.turn(8);
+            subject.turn(9);
+
+            Assert.False(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
+            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+        }
+
+        [Fact]
+        public void aSinglePlayerGameCanBeWonWithMockedLocations()
+        {
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);           
+            subject.turn(1);
+            subject.turn(6);
+            subject.turn(9);
+            subject.turn(4);
+            subject.turn(3);
+            subject.turn(5);
+
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
+            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+        }
+
+        [Fact]
+        public void aSinglePlayerGameCanBePlayedWithComputerCreatedMoves()
+        {
+            var ui = new UserInterface();
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
+            var possibleMoves = new List<int>() { 1, 2, 3, 4, 5, 6, 8, 9 };
+
+            // Human's Turn
+            subject.turn(1);
+            Console.WriteLine("Human's Move 1");
+
+            
+            // Computer's Turn
+            var compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.createDictBoard());
+            Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
+            subject.turn(compsCurrentSpace);
+            Assert.InRange(compsCurrentSpace, 2, 9);
+
+            possibleMoves.Remove(compsCurrentSpace);
+            ui.displayBoard(subject.currentBoard.createDictBoard());
+
+            // Human's Turn
+            subject.turn(possibleMoves[1]);
+            Console.WriteLine("Human's Move {0}", possibleMoves[1]);
+            possibleMoves.Remove(possibleMoves[1]);
+
+
+            // Computer's Turn
+            compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.createDictBoard());
+            Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
+
+            subject.turn(compsCurrentSpace);
+            possibleMoves.Remove(compsCurrentSpace);
+            ui.displayBoard(subject.currentBoard.createDictBoard());
+
+
+            // Human's Turn
+            subject.turn(possibleMoves[1]);
+            Console.WriteLine("Human's Move {0}", possibleMoves[1]);
+            possibleMoves.Remove(possibleMoves[1]);
+            
+
+             // Computer's Turn
+            compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.createDictBoard());
+            Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
+            subject.turn(compsCurrentSpace);
+            possibleMoves.Remove(compsCurrentSpace);
+            ui.displayBoard(subject.currentBoard.createDictBoard());
         }
 
     }
