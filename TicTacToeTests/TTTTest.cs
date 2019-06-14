@@ -51,7 +51,7 @@ namespace TicTacToeTests
         {
             var subject = new TicTacToe(P1_MARKER);
             subject.moveMarker(3, P1_MARKER);
-            Assert.Equal(P1_MARKER, subject.currentBoard.board[2].marker);
+            Assert.Equal(P1_MARKER, subject.currentBoard.markerAtLocation(3));
         }
 
         [Fact]
@@ -69,7 +69,6 @@ namespace TicTacToeTests
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
             Assert.Equal("+", subject.currentPlayerMarker);
-
             subject.turn(1);
             Assert.Equal(P2_MARKER, subject.currentPlayerMarker);
         }
@@ -79,7 +78,6 @@ namespace TicTacToeTests
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
             var row = new List<string> {P1_MARKER, P1_MARKER, P1_MARKER};
-
             Assert.True(subject.rules.isRowComplete(row, P1_MARKER));
         }
 
@@ -93,7 +91,6 @@ namespace TicTacToeTests
             
             Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
         }
-
 
         [Fact]
         public void aBoardWithThreeDiagonalMarkersInARowWinsGame()

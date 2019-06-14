@@ -56,7 +56,9 @@ namespace TicTacToeRunner
 
         public void computerPlayerTurn()
         {
-            int compSelectedSpace = newGame.compPlayer.getValidSpace(newGame.currentBoard.board);
+            // int compSelectedSpace = newGame.compPlayer.getValidSpace(newGame.currentBoard.board);
+            int compSelectedSpace = newGame.playerTwo.getValidSpace(newGame.currentBoard.board);
+
             gameUI.displayComputersMove(compSelectedSpace);
             if (newGame.turn(compSelectedSpace))
             {
