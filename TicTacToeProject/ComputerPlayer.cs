@@ -20,16 +20,15 @@ namespace TicTacToeApp
             
         }
 
-        public bool isValidSpace(int location, Dictionary<int, string> board)
+        public bool isFilledSpace(int location, List<Space> board)
         {   
-            return board[location] == Symbols.EMPTY;
+            return board[location - 1].isSpaceFilled();
         }
 
-        public int getValidSpace(Dictionary<int, string> board)
+        public int getValidSpace(List<Space> board)
         {
-            
             var location = getRandomSpace();
-            while (!isValidSpace(location, board))
+            while (isFilledSpace(location, board))
             {   
                 location = getRandomSpace();
             }

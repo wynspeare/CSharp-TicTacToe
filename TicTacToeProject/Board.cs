@@ -27,17 +27,9 @@ namespace TicTacToeApp
             return board.TrueForAll(space => !space.isSpaceEmpty());
         }
 
-        public bool placeMarker(int location, string playerMarker) 
+        public void placeMarker(int location, string playerMarker) 
         {
-            if (board[location - 1].isSpaceEmpty())
-            {
-                board[location - 1].marker = playerMarker;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            board[location - 1].marker = playerMarker;
         }
 
         public Dictionary<int, string> createDictBoard()

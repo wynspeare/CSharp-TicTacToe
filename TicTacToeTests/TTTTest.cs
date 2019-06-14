@@ -50,7 +50,8 @@ namespace TicTacToeTests
         public void aNewGameCanMarkaSpace()
         {
             var subject = new TicTacToe(P1_MARKER);
-            Assert.True(subject.moveMarker(3, P1_MARKER));
+            subject.moveMarker(3, P1_MARKER);
+            Assert.Equal(P1_MARKER, subject.currentBoard.board[2].marker);
         }
 
         [Fact]
@@ -238,7 +239,7 @@ namespace TicTacToeTests
             Console.WriteLine("Human's Move 1");
 
             // Computer's Turn
-            var compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.createDictBoard());
+            var compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.board);
             Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
             subject.turn(compsCurrentSpace);
             Assert.InRange(compsCurrentSpace, 2, 9);
@@ -252,7 +253,7 @@ namespace TicTacToeTests
             possibleMoves.Remove(possibleMoves[1]);
 
             // Computer's Turn
-            compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.createDictBoard());
+            compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.board);
             Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
 
             subject.turn(compsCurrentSpace);
@@ -265,7 +266,7 @@ namespace TicTacToeTests
             possibleMoves.Remove(possibleMoves[1]);
 
              // Computer's Turn
-            compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.createDictBoard());
+            compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.board);
             Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
             subject.turn(compsCurrentSpace);
             possibleMoves.Remove(compsCurrentSpace);

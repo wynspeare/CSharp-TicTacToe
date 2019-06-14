@@ -37,6 +37,7 @@ namespace TicTacToeApp
 
         public bool turn(int location)
         {
+            
             moveMarker(location, currentPlayerMarker);
             
             bool notWon = !rules.checkIfWon(currentBoard.board, currentPlayerMarker);
@@ -66,9 +67,9 @@ namespace TicTacToeApp
             }
         }
 
-        public bool moveMarker(int location, string marker)
+        public void moveMarker(int location, string marker)
         {
-            return currentBoard.placeMarker(location, marker);
+            currentBoard.placeMarker(location, marker);
         }
 
     }

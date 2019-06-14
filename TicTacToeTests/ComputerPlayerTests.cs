@@ -10,25 +10,11 @@ namespace TicTacToeTests
     {
         public const string P1_MARKER = "+";
         public const string P2_MARKER = "*";
-        
-        Dictionary<int, string> MY_BOARD = new Dictionary<int, string>()
-                                            {
-                                                {1,"_"},
-                                                {2,"_"},
-                                                {3,"_"},
-                                                {4,"_"},
-                                                {5,"_"},
-                                                {6,"_"},
-                                                {7,"_"},
-                                                {8,"_"},
-                                                {9,"_"}
-                                            };
 
         [Fact]
         public void aComputerPlayerInstantiatesWithAMarker()
         {
             var subject = new ComputerPlayer("X");
-            
             Assert.Equal("X", subject.marker);
         }
 
@@ -40,29 +26,29 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void aComputerPlayerKnowIfSelectedSpaceIsValid()
+        public void aComputerPlayerKnowsIfSelectedSpaceIsAlreadyFilled()
         {
             var subject = new ComputerPlayer();
-            Assert.True(subject.isValidSpace(1, MY_BOARD));
+            var myBoard = new Board();
+            myBoard.placeMarker(1, P1_MARKER);
+            Assert.True(subject.isFilledSpace(1, myBoard.board));
         }
 
         [Fact]
         public void aComputerPlayerCanFindAValidMove()
         {
             var subject = new ComputerPlayer();
-            Dictionary<int, string> myBoard = new Dictionary<int, string>()
-                                            {
-                                                {1,"X"},
-                                                {2,"X"},
-                                                {3,"X"},
-                                                {4,"X"},
-                                                {5,"X"},
-                                                {6,"X"},
-                                                {7,"X"},
-                                                {8,"_"},
-                                                {9,"X"}
-                                            };
-            Assert.Equal(8, subject.getValidSpace(myBoard));
+            var myBoard = new Board();
+            myBoard.placeMarker(1, P1_MARKER);
+            myBoard.placeMarker(2, P1_MARKER);
+            myBoard.placeMarker(6, P1_MARKER);
+            myBoard.placeMarker(7, P1_MARKER);
+            myBoard.placeMarker(9, P1_MARKER);
+            myBoard.placeMarker(3, P2_MARKER);
+            myBoard.placeMarker(4, P2_MARKER);
+            myBoard.placeMarker(5, P2_MARKER);
+            
+            Assert.Equal(8, subject.getValidSpace(myBoard.board));
         }
 
     }

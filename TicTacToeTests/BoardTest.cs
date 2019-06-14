@@ -23,7 +23,8 @@ namespace TicTacToeTests
         public void aBoardCanMarkaSpace()
         {
             var subject = new Board();
-            Assert.True(subject.placeMarker(5, P2_MARKER));
+            subject.placeMarker(5, P2_MARKER);
+            Assert.Equal(P2_MARKER, subject.board[4].marker);
         }
 
         [Fact]

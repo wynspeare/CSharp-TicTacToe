@@ -58,10 +58,11 @@ namespace TicTacToeRunner
 
         public void computerPlayerTurn()
         {
-            int compSelectedSpace = newGame.compPlayer.getValidSpace(newGame.currentBoard.createDictBoard());
+            int compSelectedSpace = newGame.compPlayer.getValidSpace(newGame.currentBoard.board);
+            gameUI.displayComputersMove(compSelectedSpace);
+
             if (newGame.turn(compSelectedSpace))
             {
-                gameUI.displayComputersMove(compSelectedSpace);
                 playGameLoop();
             }
             else
@@ -79,7 +80,6 @@ namespace TicTacToeRunner
             getSinglePlayerGameStatus(marker, isDraw);
             isGameOver = true;
         }
-
 
         public void getSinglePlayerGameStatus(string marker, bool isDraw)
         {

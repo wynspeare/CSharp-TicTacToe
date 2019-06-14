@@ -21,5 +21,10 @@ namespace TicTacToeApp
             return marker == Symbols.EMPTY;
         }
 
+        public bool isSpaceFilled()
+        {
+            return marker != Symbols.EMPTY;
+        }
+
     }
 }  
