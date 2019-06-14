@@ -41,7 +41,7 @@ namespace TicTacToeApp
 
         public bool checkIfDraw(Board board, string currentMarker)
         {
-            return board.isFilled() && !checkIfWon(board.board, currentMarker);
+            return board.isBoardFilled() && !checkIfWon(board.board, currentMarker);
         }
 
         public bool isRowComplete(List <string> row, string marker) 

@@ -227,51 +227,51 @@ namespace TicTacToeTests
             Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
         }
 
-        [Fact]
-        public void aSinglePlayerGameCanBePlayedWithComputerCreatedMoves()
-        {
-            var ui = new UserInterface();
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
-            var possibleMoves = new List<int>() { 1, 2, 3, 4, 5, 6, 8, 9 };
+        // [Fact]
+        // public void aSinglePlayerGameCanBePlayedWithComputerCreatedMoves()
+        // {
+        //     var ui = new UserInterface();
+        //     var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
+        //     var possibleMoves = new List<int>() { 1, 2, 3, 4, 5, 6, 8, 9 };
 
-            // Human's Turn
-            subject.turn(1);
-            Console.WriteLine("Human's Move 1");
+        //     // Human's Turn
+        //     subject.turn(1);
+        //     Console.WriteLine("Human's Move 1");
 
-            // Computer's Turn
-            var compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.board);
-            Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
-            subject.turn(compsCurrentSpace);
-            Assert.InRange(compsCurrentSpace, 2, 9);
+        //     // Computer's Turn
+        //     var compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.board);
+        //     Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
+        //     subject.turn(compsCurrentSpace);
+        //     Assert.InRange(compsCurrentSpace, 2, 9);
 
-            possibleMoves.Remove(compsCurrentSpace);
-            ui.displayBoard(subject.currentBoard.createDictBoard());
+        //     possibleMoves.Remove(compsCurrentSpace);
+        //     ui.displayBoard(subject.currentBoard.createDictBoard());
 
-            // Human's Turn
-            subject.turn(possibleMoves[1]);
-            Console.WriteLine("Human's Move {0}", possibleMoves[1]);
-            possibleMoves.Remove(possibleMoves[1]);
+        //     // Human's Turn
+        //     subject.turn(possibleMoves[1]);
+        //     Console.WriteLine("Human's Move {0}", possibleMoves[1]);
+        //     possibleMoves.Remove(possibleMoves[1]);
 
-            // Computer's Turn
-            compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.board);
-            Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
+        //     // Computer's Turn
+        //     compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.board);
+        //     Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
 
-            subject.turn(compsCurrentSpace);
-            possibleMoves.Remove(compsCurrentSpace);
-            ui.displayBoard(subject.currentBoard.createDictBoard());
+        //     subject.turn(compsCurrentSpace);
+        //     possibleMoves.Remove(compsCurrentSpace);
+        //     ui.displayBoard(subject.currentBoard.createDictBoard());
 
-            // Human's Turn
-            subject.turn(possibleMoves[1]);
-            Console.WriteLine("Human's Move {0}", possibleMoves[1]);
-            possibleMoves.Remove(possibleMoves[1]);
+        //     // Human's Turn
+        //     subject.turn(possibleMoves[1]);
+        //     Console.WriteLine("Human's Move {0}", possibleMoves[1]);
+        //     possibleMoves.Remove(possibleMoves[1]);
 
-             // Computer's Turn
-            compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.board);
-            Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
-            subject.turn(compsCurrentSpace);
-            possibleMoves.Remove(compsCurrentSpace);
-            ui.displayBoard(subject.currentBoard.createDictBoard());
-        }
+        //      // Computer's Turn
+        //     compsCurrentSpace = subject.compPlayer.getValidSpace(subject.currentBoard.board);
+        //     Console.WriteLine("Computer's Move {0}", compsCurrentSpace);
+        //     subject.turn(compsCurrentSpace);
+        //     possibleMoves.Remove(compsCurrentSpace);
+        //     ui.displayBoard(subject.currentBoard.createDictBoard());
+        // }
 
     }
 }

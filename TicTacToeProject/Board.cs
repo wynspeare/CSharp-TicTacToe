@@ -17,12 +17,12 @@ namespace TicTacToeApp
             }
         }
 
-        public bool isEmpty()
+        public bool isBoardEmpty()
         {
             return board.TrueForAll(space => space.isSpaceEmpty());
         }
 
-        public bool isFilled()
+        public bool isBoardFilled()
         {
             return board.TrueForAll(space => !space.isSpaceEmpty());
         }
@@ -30,6 +30,16 @@ namespace TicTacToeApp
         public void placeMarker(int location, string playerMarker) 
         {
             board[location - 1].marker = playerMarker;
+        }
+
+        public string markerAtLocation(int location) 
+        {
+            return board[location - 1].marker;
+        }
+
+        public bool isSpaceOnBoardEmpty(int location)
+        {
+            return board[location - 1].isSpaceEmpty();
         }
 
         public Dictionary<int, string> createDictBoard()

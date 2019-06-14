@@ -16,8 +16,7 @@ namespace TicTacToeApp
         public int getRandomSpace()
         {
             Random random = new Random();
-            return random.Next(1, 10);  
-            
+            return random.Next(1, 10);
         }
 
         public bool isFilledSpace(int location, List<Space> board)

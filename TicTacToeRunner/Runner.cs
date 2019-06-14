@@ -25,9 +25,7 @@ namespace TicTacToeRunner
             {
                 var isSinglePlayer = gameUI.isSinglePlayerGame(gameUI.getTypeOfGame());
                 options = new Options(gameUI.setMarkers(), isSinglePlayer);
-
                 newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER, options.IS_SINGLE_PLAYER);
-
                 while (!isGameOver)
                 {
                     playGameLoop();
@@ -60,7 +58,6 @@ namespace TicTacToeRunner
         {
             int compSelectedSpace = newGame.compPlayer.getValidSpace(newGame.currentBoard.board);
             gameUI.displayComputersMove(compSelectedSpace);
-
             if (newGame.turn(compSelectedSpace))
             {
                 playGameLoop();

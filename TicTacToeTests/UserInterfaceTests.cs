@@ -8,8 +8,6 @@ namespace TicTacToeTests
 {
     public class UITest
     {
-
-        public const string EMPTY = "_";
         public const string P1_MARKER = "+";
         public const string P2_MARKER = "o";
         Dictionary<int, string> MY_BOARD = new Dictionary<int, string>()
@@ -27,22 +25,11 @@ namespace TicTacToeTests
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void markersCanBeSetWithUserProvidedSymbols()
-        {
-            var subject = new UserInterface();
-            var options = new Options(subject.setMarkers());
-
-            Assert.Equal(typeof(string), options.P1_MARKER.GetType());
-        }
-
-        [Trait("Category", "UITest")]
-        [Fact]
         public void markersCanBeSetWithGivenSymbols()
         {
             var subject = new UserInterface();
             var markers = new Tuple<string, string> ( P1_MARKER, P2_MARKER );
             var options = new Options(markers);
-
             Assert.Equal("+", options.P1_MARKER);
             Assert.Equal("o", options.P2_MARKER);
         }
@@ -52,7 +39,6 @@ namespace TicTacToeTests
         public void markersCannotBeTheSame()
         {
             var subject = new UserInterface();
-
             Assert.True(subject.isMarkerDifferent(P1_MARKER, P2_MARKER));
             Assert.False(subject.isMarkerDifferent(P1_MARKER, P1_MARKER));
         }
@@ -62,19 +48,10 @@ namespace TicTacToeTests
         public void userCanKnowIfSelectedSpaceIsValid()
         {
             var subject = new UserInterface();
-
             Assert.True(subject.isValidSpace("9", MY_BOARD));   
             Assert.False(subject.isValidSpace("-1", MY_BOARD));
             Assert.False(subject.isValidSpace("11", MY_BOARD));
             Assert.False(subject.isValidSpace("Q", MY_BOARD));   
-        }
-
-        [Trait("Category", "UITest")]
-        [Fact]
-        public void userCanEnterASpaceAndItsReturnsAnInteger()
-        {
-            var subject = new UserInterface();
-            Assert.Equal(typeof(int), subject.getValidSpace(MY_BOARD, P1_MARKER).GetType());
         }
 
         [Trait("Category", "UITest")]
@@ -92,14 +69,6 @@ namespace TicTacToeTests
             var subject = new UserInterface();
             var typeOfGame = "Y";
             Assert.True(subject.isSinglePlayerGame(typeOfGame));
-        }
-
-        [Trait("Category", "UITest")]
-        [Fact]
-        public void userCanEnterYesIfSinglePlayerGame()
-        {
-            var subject = new UserInterface();            
-            Assert.Equal(("Y"), subject.getTypeOfGame());
         }
 
     }

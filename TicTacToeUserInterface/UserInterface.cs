@@ -44,7 +44,6 @@ namespace TicTacToeUserInterface
 
         public void displayComputersMove(int compSpace)
         {
-            
             Console.WriteLine("\nThe computer selected space {0}.", compSpace.ToString());
         }
 
