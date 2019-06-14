@@ -72,19 +72,28 @@ namespace TicTacToeRunner
 
         public void getCompletedGameStatus(Board boardObject, string marker)
         {
-            var isDraw = newGame.rules.checkIfDraw(boardObject, marker);
+            bool isDraw = newGame.rules.checkIfDraw(boardObject, marker);
+
             gameUI.displayBoard(newGame.currentBoard.createDictBoard());
             gameUI.displayWinOrDraw(isDraw, marker);
+            getSinglePlayerGameStatus(marker, isDraw);
+            isGameOver = true;
+        }
 
-            if ((options.IS_SINGLE_PLAYER != isDraw) && (marker == newGame.playerOne.marker))
+
+        public void getSinglePlayerGameStatus(string marker, bool isDraw)
+        {
+            bool isSinglePlayerAndNotDraw = options.IS_SINGLE_PLAYER != isDraw;
+            bool isHumansTurn = marker == newGame.playerOne.marker;
+
+            if ((isSinglePlayerAndNotDraw) && (isHumansTurn))
             {
                 gameUI.displaySinglePlayerGameStatus(true);
             }
-            else if (options.IS_SINGLE_PLAYER != isDraw)
+            else if (isSinglePlayerAndNotDraw)
             {
                 gameUI.displaySinglePlayerGameStatus(false);
             }
-            isGameOver = true;
         }
     }
 }
