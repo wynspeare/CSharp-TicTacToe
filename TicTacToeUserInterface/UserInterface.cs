@@ -78,7 +78,7 @@ namespace TicTacToeUserInterface
             }
         }
 
-        public string getSpace(string marker)
+        private string getSpace(string marker)
         {
             Console.Write("Player \"{0}\" please enter an empty space between 1 - {1}: ", marker, Convert.ToInt32(Options.BOARD_SIZE));
             return Console.ReadLine();
@@ -129,7 +129,7 @@ namespace TicTacToeUserInterface
             return marker1 != marker2;
         }
 
-        public string chooseMarker()
+        private string chooseMarker()
         {
             string marker = Console.ReadLine();
             if(marker == "")
@@ -165,7 +165,7 @@ namespace TicTacToeUserInterface
             return displayBoard;
         }
 
-        public string displayInstructions()
+        private string displayInstructions()
         {
             var instructions = "\nHOW TO PLAY\n===========\nPlayers alternate placing different markers on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their markers in a row, then that player wins.\n";
             Console.WriteLine(instructions);
