@@ -42,6 +42,19 @@ namespace TicTacToeApp
             return board[location - 1].isSpaceEmpty();
         }
 
+        public List<int> getAvailableSpaces()
+        {
+            var availableSpaces = new List<int>();
+            foreach (Space space in board)
+            {
+                if (space.isSpaceEmpty())
+                {
+                    availableSpaces.Add(space.location);
+                }
+            }
+            return availableSpaces;
+        }
+
         public Dictionary<int, string> createDictBoard()
         {
             var dictBoard = new Dictionary<int, string>();

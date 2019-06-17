@@ -7,10 +7,10 @@ namespace TicTacToeRunner
 {
     class Runner
     {
-        public TicTacToe newGame;
-        public UserInterface gameUI;
-        public Options options;
-        public bool isGameOver = false;
+        private TicTacToe newGame;
+        private UserInterface gameUI;
+        private Options options;
+        private bool isGameOver = false;
 
         static void Main(string[] args)
         {
@@ -18,7 +18,7 @@ namespace TicTacToeRunner
             runner.createGame();
         }
 
-        public void createGame()
+        private void createGame()
         {
             gameUI = new UserInterface();
             if (gameUI.startNewGame())
@@ -33,15 +33,18 @@ namespace TicTacToeRunner
             }
         }
 
-        public void playGameLoop()
+        private void playGameLoop()
         {
-            int selectedSpace = gameUI.getValidSpace(newGame.currentBoard.createDictBoard(), newGame.currentPlayerMarker);
+            var availableSpaces = newGame.currentBoard.getAvailableSpaces();
+            
+            int selectedSpace = gameUI.getValidSpace(availableSpaces, newGame.currentPlayerMarker, newGame.currentBoard.createDictBoard());
+
             bool successfulTurn = newGame.turn(selectedSpace);
             if (successfulTurn)
             {
-                if(options.IS_SINGLE_PLAYER)
+                if(newGame.playerTwo.GetType() == typeof(IComputerPlayer))
                 {
-                    computerPlayerTurn();
+                    compTurn();
                 }
                 else
                 {
@@ -54,10 +57,9 @@ namespace TicTacToeRunner
             }
         }
 
-        public void computerPlayerTurn()
+        private void compTurn()
         {
-            // int compSelectedSpace = newGame.compPlayer.getValidSpace(newGame.currentBoard.board);
-            int compSelectedSpace = newGame.playerTwo.getValidSpace(newGame.currentBoard.board);
+            int compSelectedSpace = newGame.playerTwo.getRandomSpace(newGame.currentBoard.getAvailableSpaces());
 
             gameUI.displayComputersMove(compSelectedSpace);
             if (newGame.turn(compSelectedSpace))
@@ -70,7 +72,7 @@ namespace TicTacToeRunner
             }
         }
 
-        public void getCompletedGameStatus(Board boardObject, string marker)
+        private void getCompletedGameStatus(Board boardObject, string marker)
         {
             bool isDraw = newGame.rules.checkIfDraw(boardObject, marker);
 
@@ -80,7 +82,7 @@ namespace TicTacToeRunner
             isGameOver = true;
         }
 
-        public void getSinglePlayerGameStatus(string marker, bool isDraw)
+        private void getSinglePlayerGameStatus(string marker, bool isDraw)
         {
             bool isSinglePlayerAndNotDraw = options.IS_SINGLE_PLAYER != isDraw;
             bool isHumansTurn = marker == newGame.playerOne.marker;

@@ -10,18 +10,7 @@ namespace TicTacToeTests
     {
         public const string P1_MARKER = "+";
         public const string P2_MARKER = "o";
-        Dictionary<int, string> MY_BOARD = new Dictionary<int, string>()
-                                            {
-                                                {1,"_"},
-                                                {2,"_"},
-                                                {3,"_"},
-                                                {4,"_"},
-                                                {5,"_"},
-                                                {6,"_"},
-                                                {7,"_"},
-                                                {8,"_"},
-                                                {9,"_"}
-                                            };
+        List<int> AVAILABLE_SPACES = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };                                          
 
         [Trait("Category", "UITest")]
         [Fact]
@@ -48,18 +37,10 @@ namespace TicTacToeTests
         public void userCanKnowIfSelectedSpaceIsValid()
         {
             var subject = new UserInterface();
-            Assert.True(subject.isValidSpace("9", MY_BOARD));   
-            Assert.False(subject.isValidSpace("-1", MY_BOARD));
-            Assert.False(subject.isValidSpace("11", MY_BOARD));
-            Assert.False(subject.isValidSpace("Q", MY_BOARD));   
-        }
-
-        [Trait("Category", "UITest")]
-        [Fact]
-        public void userCanReadInstructions()
-        {
-            var subject = new UserInterface();
-            Assert.Contains("Players alternate placing", subject.displayInstructions());
+            Assert.True(subject.isValidSpace(AVAILABLE_SPACES, "9"));   
+            Assert.False(subject.isValidSpace(AVAILABLE_SPACES, "-1"));
+            Assert.False(subject.isValidSpace(AVAILABLE_SPACES, "11"));
+            Assert.False(subject.isValidSpace(AVAILABLE_SPACES, "Q"));   
         }
 
         [Trait("Category", "UITest")]

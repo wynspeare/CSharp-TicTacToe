@@ -6,7 +6,7 @@ namespace TicTacToeApp
 {
     public class Rules
     {
-        int [,] winCombinations = new int[8, 3]
+        private int [,] winCombinations = new int[8, 3]
         { 
             { 0, 1, 2 },
             { 3, 4, 5 },
@@ -47,6 +47,11 @@ namespace TicTacToeApp
         public bool isRowComplete(List <string> row, string marker) 
         {
             return row.All(space => space == marker) ? true : false; 
+        }
+        
+        public bool isValidSpace(int location, List<int> availableSpaces)
+        {
+            return availableSpaces.Contains(location);
         }
 
     }

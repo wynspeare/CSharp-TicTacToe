@@ -8,19 +8,14 @@ namespace TicTacToeApp
     public class TicTacToe
     {
         public Rules rules;
-        // public HumanPlayer playerOne;
-        // public HumanPlayer playerTwo;
-        // public ComputerPlayer compPlayer;
         public Board currentBoard;
+        public PlayerInterface playerOne;
+        public PlayerInterface playerTwo;
 
         public string currentPlayerMarker;
         public bool isSinglePlayer;
 
-        public PlayerInterface playerOne;
-        public PlayerInterface playerTwo;
-
-
-
+        
         public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O", bool isSinglePlayer = false)
         {
             Symbols.P1_MARKER = playerOneMarker;
@@ -31,7 +26,6 @@ namespace TicTacToeApp
             
             if (isSinglePlayer) 
             {
-                // this.compPlayer = new ComputerPlayer(Symbols.P2_MARKER);
                 this.playerTwo = new IComputerPlayer(Symbols.P2_MARKER);
                 this.isSinglePlayer = true;
             }
@@ -44,7 +38,6 @@ namespace TicTacToeApp
 
         public bool turn(int location)
         {
-            
             moveMarker(location, currentPlayerMarker);
             
             bool notWon = !rules.checkIfWon(currentBoard.board, currentPlayerMarker);
@@ -64,14 +57,7 @@ namespace TicTacToeApp
 
         public void switchPlayer()
         {
-            // if (isSinglePlayer) 
-            // {
-            //     currentPlayerMarker = (currentPlayerMarker == playerOne.marker) ? compPlayer.marker : playerOne.marker;
-            // }
-            // else 
-            // {
-                currentPlayerMarker = (currentPlayerMarker == playerOne.marker) ? playerTwo.marker : playerOne.marker;
-            // }
+            currentPlayerMarker = (currentPlayerMarker == playerOne.marker) ? playerTwo.marker : playerOne.marker;
         }
 
         public void moveMarker(int location, string marker)

@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace TicTacToeApp
 {
-
     public interface PlayerInterface
     {
         string marker
@@ -12,10 +11,7 @@ namespace TicTacToeApp
             get;
             set;
         }
-
-        int getRandomSpace();
-        bool isFilledSpace(int location, List<Space> board);
-        int getValidSpace(List<Space> board);
+        int getRandomSpace(List<int> availableSpaces);
     }
 
     class IHumanPlayer : PlayerInterface
@@ -33,68 +29,48 @@ namespace TicTacToeApp
             {
                 return _marker;
             }
-
             set
             {
                 _marker = value;
             }
         }
 
-        public int getRandomSpace()
+        public int getRandomSpace(List<int> availableSpaces)
         {
             Random random = new Random();
-            return random.Next(1, 10);
-        }
-
-        public bool isFilledSpace(int location, List<Space> board)
-        {   
-            return board[location - 1].isSpaceFilled();
-        }
-
-        public int getValidSpace(List<Space> board)
-        {
-            var location = getRandomSpace();
-            while (isFilledSpace(location, board))
-            {   
-                location = getRandomSpace();
-            }
-            return location;
+            int index = random.Next(availableSpaces.Count);
+            return availableSpaces[index];
         }
     }
 
-    class IComputerPlayer : PlayerInterface
+    public class IComputerPlayer : PlayerInterface
     {
-        public string marker
-        {
-            get;
-            set;
-        }
+        private string _marker;
 
         public IComputerPlayer(string marker)
         {
-            this.marker = marker;
+            _marker = marker;
         }
 
-        public int getRandomSpace()
+        public string marker
+        {
+            get
+            {
+                return _marker;
+            }
+            set
+            {
+                _marker = value;
+            }
+        }       
+
+        public int getRandomSpace(List<int> availableSpaces)
         {
             Random random = new Random();
-            return random.Next(1, 10);
+            int index = random.Next(availableSpaces.Count);
+            return availableSpaces[index];
         }
 
-        public bool isFilledSpace(int location, List<Space> board)
-        {   
-            return board[location - 1].isSpaceFilled();
-        }
-
-        public int getValidSpace(List<Space> board)
-        {
-            var location = getRandomSpace();
-            while (isFilledSpace(location, board))
-            {   
-                location = getRandomSpace();
-            }
-            return location;
-        }
     }
 
 }

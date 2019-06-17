@@ -52,31 +52,24 @@ namespace TicTacToeUserInterface
             return isSinglePlayer == "Y" ? true : false;
         }
 
-        public int getValidSpace(Dictionary<int, string> board, string marker)
+        public int getValidSpace(List<int> availableSpaces, string marker, Dictionary<int, string> board)
         {
             displayBoard(board);
             var location = getSpace(marker);
-            while (!isValidSpace(location, board))
-            {   
-                Console.Write("Try again! ");
+            while(!isValidSpace(availableSpaces, location))
+            {
+                Console.Write("Try again! ");                
                 location = getSpace(marker);
             }
             return Convert.ToInt32(location);
         }
-        
-        public bool isValidSpace(string location, Dictionary<int, string> board)
+
+        public bool isValidSpace(List<int> availableSpaces, string location)
         {   
             try
             {
                 var convertedLocation = Convert.ToInt32(location);
-                if (convertedLocation >= 1 && convertedLocation <= Options.BOARD_SIZE)
-                {
-                    return board[convertedLocation] == Options.EMPTY;
-                }
-                else
-                {
-                    return false;
-                }
+                return availableSpaces.Contains(convertedLocation);
             }
             catch (FormatException)
             {
