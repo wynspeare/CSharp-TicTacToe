@@ -14,14 +14,14 @@ namespace TicTacToeTests
         [Fact]
         public void aComputerPlayerInstantiatesWithAMarker()
         {
-            var subject = new IComputerPlayer("X");
+            var subject = new ComputerPlayer("X");
             Assert.Equal("X", subject.marker);
         }
 
         [Fact]
         public void aComputerPlayerCanGenerateARandomNumberBetweenOneAndNine()
         {
-            var subject = new IComputerPlayer("X");
+            var subject = new ComputerPlayer("X");
             string selectedSpace = subject.getMove(AVAILABLE_SPACES);
             Assert.InRange(Convert.ToInt32(selectedSpace), 1, 9);
         }

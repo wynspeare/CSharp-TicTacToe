@@ -42,7 +42,7 @@ namespace TicTacToeRunner
             bool successfulTurn = newGame.turn(selectedSpace);
             if (successfulTurn)
             {
-                if(newGame.playerTwo.GetType() == typeof(IComputerPlayer))
+                if(newGame.playerTwo.GetType() == typeof(ComputerPlayer))
                 {
                     compTurn();
                 }
