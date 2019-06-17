@@ -37,7 +37,7 @@ namespace TicTacToeRunner
         {
             var availableSpaces = newGame.currentBoard.getAvailableSpaces();
             
-            int selectedSpace = gameUI.getValidSpace(availableSpaces, newGame.currentPlayerMarker, newGame.currentBoard.createDictBoard());
+            int selectedSpace = gameUI.getValidSpace(availableSpaces, newGame.currentBoard.createDictBoard(), newGame.currentPlayer);
 
             bool successfulTurn = newGame.turn(selectedSpace);
             if (successfulTurn)
@@ -53,13 +53,13 @@ namespace TicTacToeRunner
             }
             else
             {
-                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayerMarker);
+                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayer.marker);
             }
         }
 
         private void compTurn()
         {
-            int compSelectedSpace = newGame.playerTwo.getRandomSpace(newGame.currentBoard.getAvailableSpaces());
+            int compSelectedSpace = Convert.ToInt32(newGame.playerTwo.getMove(newGame.currentBoard.getAvailableSpaces()));
 
             gameUI.displayComputersMove(compSelectedSpace);
             if (newGame.turn(compSelectedSpace))
@@ -68,7 +68,7 @@ namespace TicTacToeRunner
             }
             else
             {
-                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayerMarker);
+                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayer.marker);
             }
         }
 

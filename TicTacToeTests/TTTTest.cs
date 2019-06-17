@@ -36,7 +36,7 @@ namespace TicTacToeTests
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);
 
-            Assert.Equal(P1_MARKER, subject.currentPlayerMarker);
+            Assert.Equal(P1_MARKER, subject.currentPlayer.marker);
         }
 
         [Fact]
@@ -58,19 +58,19 @@ namespace TicTacToeTests
         public void twoPlayerGameAPlayerCanBeSwitched()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
-            Assert.Equal("+", subject.currentPlayerMarker);
+            Assert.Equal("+", subject.currentPlayer.marker);
             
             subject.switchPlayer();
-            Assert.Equal(P2_MARKER, subject.currentPlayerMarker);
+            Assert.Equal(P2_MARKER, subject.currentPlayer.marker);
         }
 
         [Fact]
         public void twoPlayerGameATurnCanBePlayedAndThePlayerIsSwitched()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
-            Assert.Equal("+", subject.currentPlayerMarker);
+            Assert.Equal("+", subject.currentPlayer.marker);
             subject.turn(1);
-            Assert.Equal(P2_MARKER, subject.currentPlayerMarker);
+            Assert.Equal(P2_MARKER, subject.currentPlayer.marker);
         }
 
         [Fact]
@@ -89,7 +89,7 @@ namespace TicTacToeTests
             subject.moveMarker(5, subject.playerOne.marker);
             subject.moveMarker(6, subject.playerOne.marker);
             
-            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace TicTacToeTests
             subject.moveMarker(5, subject.playerOne.marker);
             subject.moveMarker(9, subject.playerOne.marker);
 
-            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
         }
 
         [Fact]
@@ -111,8 +111,8 @@ namespace TicTacToeTests
             subject.moveMarker(6, subject.playerOne.marker);
             subject.moveMarker(9, subject.playerOne.marker);
 
-            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
-            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
+            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
         }
 
         [Fact]
@@ -129,7 +129,7 @@ namespace TicTacToeTests
             subject.moveMarker(5, subject.playerTwo.marker);
             subject.moveMarker(8, subject.playerTwo.marker);
 
-            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
         }
 
         [Fact]
@@ -146,8 +146,8 @@ namespace TicTacToeTests
             subject.turn(8);
             subject.turn(9);
 
-            Assert.False(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
-            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+            Assert.False(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
+            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
         }
 
         [Fact]
@@ -161,8 +161,8 @@ namespace TicTacToeTests
             subject.turn(3);
             subject.turn(5);
 
-            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
-            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
+            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
         }
 
         [Fact]
@@ -178,17 +178,17 @@ namespace TicTacToeTests
         public void currentMarkerInSinglePlayerGameIsPlayerOne()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
-            Assert.Equal(P1_MARKER, subject.currentPlayerMarker);
+            Assert.Equal(P1_MARKER, subject.currentPlayer.marker);
         }
 
         [Fact]
         public void singlePlayerGameAPlayerCanBeSwitched()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);           
-            Assert.Equal("+", subject.currentPlayerMarker);
+            Assert.Equal("+", subject.currentPlayer.marker);
             
             subject.switchPlayer();
-            Assert.Equal(P2_MARKER, subject.currentPlayerMarker);
+            Assert.Equal(P2_MARKER, subject.currentPlayer.marker);
         }
 
         [Fact]
@@ -205,8 +205,8 @@ namespace TicTacToeTests
             subject.turn(8);
             subject.turn(9);
 
-            Assert.False(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
-            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+            Assert.False(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
+            Assert.True(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
         }
 
         [Fact]
@@ -220,8 +220,8 @@ namespace TicTacToeTests
             subject.turn(3);
             subject.turn(5);
 
-            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayerMarker));
-            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayerMarker));
+            Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
+            Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
         }
     }
 }

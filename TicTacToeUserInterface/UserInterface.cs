@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using TicTacToeApp;
+
 
 namespace TicTacToeUserInterface
 {
@@ -52,14 +54,14 @@ namespace TicTacToeUserInterface
             return isSinglePlayer == "Y" ? true : false;
         }
 
-        public int getValidSpace(List<int> availableSpaces, string marker, Dictionary<int, string> board)
+        public int getValidSpace(List<int> availableSpaces, Dictionary<int, string> board, PlayerInterface player)
         {
             displayBoard(board);
-            var location = getSpace(marker);
+            var location = getSpace(player, availableSpaces);
             while(!isValidSpace(availableSpaces, location))
             {
                 Console.Write("Try again! ");                
-                location = getSpace(marker);
+                location = getSpace(player, availableSpaces);
             }
             return Convert.ToInt32(location);
         }
@@ -78,10 +80,10 @@ namespace TicTacToeUserInterface
             }
         }
 
-        private string getSpace(string marker)
+        private string getSpace(PlayerInterface player, List<int> availableSpaces)
         {
-            Console.Write("Player \"{0}\" please enter an empty space between 1 - {1}: ", marker, Convert.ToInt32(Options.BOARD_SIZE));
-            return Console.ReadLine();
+            Console.Write("Player \"{0}\" please enter an empty space between 1 - {1}: ", player.marker, Convert.ToInt32(Options.BOARD_SIZE));
+            return player.getMove(availableSpaces);
         }
 
         public void displayWinOrDraw(bool isDraw, string winnersMarker)

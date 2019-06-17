@@ -22,7 +22,8 @@ namespace TicTacToeTests
         public void aComputerPlayerCanGenerateARandomNumberBetweenOneAndNine()
         {
             var subject = new IComputerPlayer("X");
-            Assert.InRange(subject.getRandomSpace(AVAILABLE_SPACES), 1, 9);
+            string selectedSpace = subject.getMove(AVAILABLE_SPACES);
+            Assert.InRange(Convert.ToInt32(selectedSpace), 1, 9);
         }
 
     }

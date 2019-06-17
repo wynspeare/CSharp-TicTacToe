@@ -11,7 +11,7 @@ namespace TicTacToeApp
             get;
             set;
         }
-        int getRandomSpace(List<int> availableSpaces);
+        string getMove(List<int> availableSpaces);
     }
 
     class IHumanPlayer : PlayerInterface
@@ -35,11 +35,9 @@ namespace TicTacToeApp
             }
         }
 
-        public int getRandomSpace(List<int> availableSpaces)
+        public string getMove(List<int> availableSpaces)
         {
-            Random random = new Random();
-            int index = random.Next(availableSpaces.Count);
-            return availableSpaces[index];
+            return Console.ReadLine();
         }
     }
 
@@ -64,7 +62,13 @@ namespace TicTacToeApp
             }
         }       
 
-        public int getRandomSpace(List<int> availableSpaces)
+        public string getMove(List<int> availableSpaces)
+        {
+            var move = getRandomSpace(availableSpaces);
+            return move.ToString();
+        }
+
+        private int getRandomSpace(List<int> availableSpaces)
         {
             Random random = new Random();
             int index = random.Next(availableSpaces.Count);
