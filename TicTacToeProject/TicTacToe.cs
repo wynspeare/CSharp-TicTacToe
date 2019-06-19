@@ -21,16 +21,16 @@ namespace TicTacToeApp
             Symbols.P2_MARKER = playerTwoMarker;
             this.currentBoard = new Board();
             this.rules = new Rules();
-            this.playerOne = new HumanPlayer(Symbols.P1_MARKER);
+            this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);
             
             if (isSinglePlayer) 
             {
-                this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER);
+                this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, this.currentBoard);
                 this.isSinglePlayer = true;
             }
             else
             {
-                this.playerTwo = new HumanPlayer(Symbols.P2_MARKER);
+                this.playerTwo = new HumanPlayer(Symbols.P2_MARKER, this.currentBoard);
             }
             this.currentPlayer = this.playerOne;
         }

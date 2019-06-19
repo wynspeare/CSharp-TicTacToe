@@ -42,7 +42,7 @@ namespace TicTacToeRunner
             bool successfulTurn = newGame.turn(selectedSpace);
             if (successfulTurn)
             {
-                if(newGame.playerTwo.GetType() == typeof(ComputerPlayer))
+                if (newGame.playerTwo.GetType() == typeof(ComputerPlayer))
                 {
                     compTurn();
                 }
@@ -59,7 +59,7 @@ namespace TicTacToeRunner
 
         private void compTurn()
         {
-            int compSelectedSpace = Convert.ToInt32(newGame.playerTwo.getMove(newGame.currentBoard.getAvailableSpaces()));
+            int compSelectedSpace = Convert.ToInt32(newGame.playerTwo.getMove());
 
             gameUI.displayComputersMove(compSelectedSpace);
             if (newGame.turn(compSelectedSpace))

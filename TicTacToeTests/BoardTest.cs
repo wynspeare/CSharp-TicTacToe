@@ -28,21 +28,6 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void aNewBoardContainsInstancesOfSpaces()
-        {
-            var subject = new Board();
-            Assert.Equal(typeof(Space), subject.board[8].GetType());
-        }
-
-        [Fact]
-        public void whenAMarkerIsPlacedTheBoardIsChanged()
-        {
-            var subject = new Board();
-            subject.placeMarker(5, P1_MARKER);
-            Assert.Equal(P1_MARKER, subject.markerAtLocation(5));
-        }
-
-        [Fact]
         public void aSpecificLocationIsFilledAfterAMarkerIsPlaced()
         {
             var subject = new Board();
@@ -59,7 +44,7 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void aBoardCanBeCompletelyFull()
+        public void aWhenNineMarkersArePlacedABoardIsFull()
         {
             var subject = new Board();
             subject.placeMarker(1, P1_MARKER);
@@ -74,6 +59,17 @@ namespace TicTacToeTests
 
             Assert.False(subject.isBoardEmpty());
             Assert.True(subject.isBoardFilled());
+        }
+
+        [Fact]
+        public void aBoardKnowsWhatSpacesAreStillAvailable()
+        {
+            var subject = new Board();
+            subject.placeMarker(1, P1_MARKER);
+            subject.placeMarker(2, P1_MARKER);
+            subject.placeMarker(3, P1_MARKER);
+            
+            Assert.Equal(new List<int> { 4, 5, 6, 7, 8, 9 }, subject.getAvailableSpaces());
         }
 
     }

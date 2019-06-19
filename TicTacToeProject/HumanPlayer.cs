@@ -7,10 +7,12 @@ namespace TicTacToeApp
     class HumanPlayer : PlayerInterface
     {
         private string _marker;
-
-        public HumanPlayer(string marker)
+        private Board _board;
+        
+        public HumanPlayer(string marker, Board board)
         {
             _marker = marker;
+            _board = board;
         }
 
         public string marker
@@ -24,8 +26,20 @@ namespace TicTacToeApp
                 _marker = value;
             }
         }
+        
+        public Board board
+        {
+            get
+            {
+                return _board;
+            }
+            set
+            {
+                _board = value;
+            }
+        }       
 
-        public string getMove(List<int> availableSpaces)
+        public string getMove()
         {
             return Console.ReadLine();
         }

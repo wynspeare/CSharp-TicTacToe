@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TicTacToeApp
 {
@@ -44,15 +45,10 @@ namespace TicTacToeApp
 
         public List<int> getAvailableSpaces()
         {
-            var availableSpaces = new List<int>();
-            foreach (Space space in board)
-            {
-                if (space.isSpaceEmpty())
-                {
-                    availableSpaces.Add(space.location);
-                }
-            }
-            return availableSpaces;
+            return board
+                .Where(space => space.isSpaceEmpty())
+                .Select(space => space.location)
+                .ToList();
         }
 
         public Dictionary<int, string> createDictBoard()

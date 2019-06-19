@@ -7,10 +7,13 @@ namespace TicTacToeApp
     public class ComputerPlayer : PlayerInterface
     {
         private string _marker;
+        private Board _board;
 
-        public ComputerPlayer(string marker)
+
+        public ComputerPlayer(string marker, Board board)
         {
             _marker = marker;
+            _board = board;
         }
 
         public string marker
@@ -25,17 +28,28 @@ namespace TicTacToeApp
             }
         }       
 
-        public string getMove(List<int> availableSpaces)
+        public Board board
         {
-            var move = getRandomSpace(availableSpaces);
-            return move.ToString();
+            get
+            {
+                return _board;
+            }
+            set
+            {
+                _board = value;
+            }
+        }       
+
+        public string getMove()
+        {
+            return getRandomSpace().ToString();
         }
 
-        private int getRandomSpace(List<int> availableSpaces)
+        private int getRandomSpace()
         {
             Random random = new Random();
-            int index = random.Next(availableSpaces.Count);
-            return availableSpaces[index];
+            int index = random.Next(_board.getAvailableSpaces().Count);
+            return _board.getAvailableSpaces()[index];
         }
 
     }

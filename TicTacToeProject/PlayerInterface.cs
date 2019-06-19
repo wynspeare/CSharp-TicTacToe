@@ -11,6 +11,7 @@ namespace TicTacToeApp
             get;
             set;
         }
-        string getMove(List<int> availableSpaces);
+
+        string getMove();
     }
 }
