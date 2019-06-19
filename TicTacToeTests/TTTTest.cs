@@ -43,6 +43,7 @@ namespace TicTacToeTests
         public void gameInitializesWithNewInstanceOfBoard()
         {
             var subject = new TicTacToe();
+
             Assert.NotNull(subject.currentBoard);
         }
 
@@ -51,15 +52,16 @@ namespace TicTacToeTests
         {
             var subject = new TicTacToe(P1_MARKER);
             subject.moveMarker(3, P1_MARKER);
+
             Assert.Equal(P1_MARKER, subject.currentBoard.markerAtLocation(3));
         }
 
         [Fact]
         public void twoPlayerGameAPlayerCanBeSwitched()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            var subject = new TicTacToe(P1_MARKER, P2_MARKER);
             Assert.Equal("+", subject.currentPlayer.marker);
-            
+
             subject.switchPlayer();
             Assert.Equal(P2_MARKER, subject.currentPlayer.marker);
         }
@@ -78,6 +80,7 @@ namespace TicTacToeTests
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
             var row = new List<string> {P1_MARKER, P1_MARKER, P1_MARKER};
+
             Assert.True(subject.rules.isRowComplete(row, P1_MARKER));
         }
 
@@ -178,6 +181,7 @@ namespace TicTacToeTests
         public void currentMarkerInSinglePlayerGameIsPlayerOne()
         {
             var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
+
             Assert.Equal(P1_MARKER, subject.currentPlayer.marker);
         }
 

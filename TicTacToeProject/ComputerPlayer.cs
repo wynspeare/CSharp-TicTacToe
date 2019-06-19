@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace TicTacToeApp
 {
@@ -8,7 +6,6 @@ namespace TicTacToeApp
     {
         private string _marker;
         private Board _board;
-
 
         public ComputerPlayer(string marker, Board board)
         {
@@ -42,7 +39,9 @@ namespace TicTacToeApp
 
         public string getMove()
         {
-            return getRandomSpace().ToString();
+            string location = getRandomSpace().ToString();
+            Console.WriteLine("\nThe computer selected space {0}.", location);
+            return location;
         }
 
         private int getRandomSpace()
@@ -51,7 +50,5 @@ namespace TicTacToeApp
             int index = random.Next(_board.getAvailableSpaces().Count);
             return _board.getAvailableSpaces()[index];
         }
-
     }
-
 }

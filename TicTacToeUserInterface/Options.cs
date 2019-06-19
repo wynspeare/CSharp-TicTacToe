@@ -18,6 +18,5 @@ namespace TicTacToeUserInterface
             this.P2_MARKER = markers.Item2;
             this.IS_SINGLE_PLAYER = isSinglePlayer;
         }
-
     }
 }

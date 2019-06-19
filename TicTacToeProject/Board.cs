@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +5,6 @@ namespace TicTacToeApp
 {
     public class Board
     {
-
         public List<Space> board = new List<Space>(); 
         
         public Board()

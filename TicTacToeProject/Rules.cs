@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -49,10 +48,5 @@ namespace TicTacToeApp
             return row.All(space => space == marker) ? true : false; 
         }
         
-        public bool isValidSpace(int location, List<int> availableSpaces)
-        {
-            return availableSpaces.Contains(location);
-        }
-
     }
 }

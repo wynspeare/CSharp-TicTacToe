@@ -1,8 +1,6 @@
 using Xunit;
 using System;
-using System.Collections.Generic;
 using TicTacToeApp;
-using TicTacToeUserInterface;
 
 namespace TicTacToeTests
 {
@@ -28,6 +26,5 @@ namespace TicTacToeTests
 
             Assert.InRange(Convert.ToInt32(selectedSpace), 1, 9);
         }
-
     }
 }

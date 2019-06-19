@@ -34,17 +34,6 @@ namespace TicTacToeTests
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void userCanKnowIfSelectedSpaceIsValid()
-        {
-            var subject = new UserInterface();
-            Assert.True(subject.isValidSpace(AVAILABLE_SPACES, "9"));   
-            Assert.False(subject.isValidSpace(AVAILABLE_SPACES, "-1"));
-            Assert.False(subject.isValidSpace(AVAILABLE_SPACES, "11"));
-            Assert.False(subject.isValidSpace(AVAILABLE_SPACES, "Q"));   
-        }
-
-        [Trait("Category", "UITest")]
-        [Fact]
         public void singlePlayerGameCanBeSelected()
         {
             var subject = new UserInterface();

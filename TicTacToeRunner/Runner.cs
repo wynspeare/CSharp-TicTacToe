@@ -1,7 +1,5 @@
-﻿using System;
-using TicTacToeApp;
+﻿using TicTacToeApp;
 using TicTacToeUserInterface;
-using System.Collections.Generic;
 
 namespace TicTacToeRunner
 {
@@ -35,34 +33,12 @@ namespace TicTacToeRunner
 
         private void playGameLoop()
         {
-            var availableSpaces = newGame.currentBoard.getAvailableSpaces();
+            gameUI.displayBoard(newGame.currentBoard.createDictBoard());
+            gameUI.askForMove(newGame.currentPlayer.marker);
+            int location = newGame.getCurrentMove(newGame.currentPlayer);
             
-            int selectedSpace = gameUI.getValidSpace(availableSpaces, newGame.currentBoard.createDictBoard(), newGame.currentPlayer);
-
-            bool successfulTurn = newGame.turn(selectedSpace);
+            bool successfulTurn = newGame.turn(location);
             if (successfulTurn)
-            {
-                if (newGame.playerTwo.GetType() == typeof(ComputerPlayer))
-                {
-                    compTurn();
-                }
-                else
-                {
-                    playGameLoop();
-                }
-            }
-            else
-            {
-                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayer.marker);
-            }
-        }
-
-        private void compTurn()
-        {
-            int compSelectedSpace = Convert.ToInt32(newGame.playerTwo.getMove());
-
-            gameUI.displayComputersMove(compSelectedSpace);
-            if (newGame.turn(compSelectedSpace))
             {
                 playGameLoop();
             }

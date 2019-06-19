@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using TicTacToeApp;
-
 
 namespace TicTacToeUserInterface
 {
     public class UserInterface
     {
-
         public bool startNewGame()
         {
             Console.WriteLine("Are you ready to play Tic Tac Toe? Y/N");
@@ -44,47 +41,14 @@ namespace TicTacToeUserInterface
             }
         }
 
-        public void displayComputersMove(int compSpace)
-        {
-            Console.WriteLine("\nThe computer selected space {0}.", compSpace.ToString());
-        }
-
         public bool isSinglePlayerGame(string isSinglePlayer)
         {
             return isSinglePlayer == "Y" ? true : false;
         }
 
-        public int getValidSpace(List<int> availableSpaces, Dictionary<int, string> board, PlayerInterface player)
+        public void askForMove(string marker)
         {
-            displayBoard(board);
-            var location = getSpace(player);
-            while(!isValidSpace(availableSpaces, location))
-            {
-                Console.Write("Try again! ");                
-                location = getSpace(player);
-            }
-            return Convert.ToInt32(location);
-        }
-
-        public bool isValidSpace(List<int> availableSpaces, string location)
-        {   
-            try
-            {
-                var convertedLocation = Convert.ToInt32(location);
-                return availableSpaces.Contains(convertedLocation);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Please only enter a number.");
-                return false;
-            }
-        }
-
-        private string getSpace(PlayerInterface player)
-        {
-            Console.Write("Player \"{0}\" please enter an empty space between 1 - {1}: ", player.marker, Convert.ToInt32(Options.BOARD_SIZE));
-
-            return player.getMove();
+            Console.Write("Player \"{0}\" please enter an empty space between 1 - {1}: ", marker, Convert.ToInt32(Options.BOARD_SIZE));
         }
 
         public void displayWinOrDraw(bool isDraw, string winnersMarker)

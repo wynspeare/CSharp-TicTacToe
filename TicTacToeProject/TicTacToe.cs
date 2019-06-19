@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace TicTacToeApp
 {
@@ -12,8 +9,6 @@ namespace TicTacToeApp
         public PlayerInterface playerOne;
         public PlayerInterface playerTwo;
         public PlayerInterface currentPlayer;
-
-        public bool isSinglePlayer;
         
         public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O", bool isSinglePlayer = false)
         {
@@ -22,17 +17,21 @@ namespace TicTacToeApp
             this.currentBoard = new Board();
             this.rules = new Rules();
             this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);
+            this.currentPlayer = this.playerOne;
             
             if (isSinglePlayer) 
             {
                 this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, this.currentBoard);
-                this.isSinglePlayer = true;
             }
             else
             {
                 this.playerTwo = new HumanPlayer(Symbols.P2_MARKER, this.currentBoard);
             }
-            this.currentPlayer = this.playerOne;
+        }
+
+        public int getCurrentMove(PlayerInterface player)
+        {
+            return Convert.ToInt32(player.getMove());
         }
 
         public bool turn(int location)
@@ -62,7 +61,6 @@ namespace TicTacToeApp
         {
             currentBoard.placeMarker(location, marker);
         }
-
     }
 }
 
