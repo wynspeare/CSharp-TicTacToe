@@ -1,33 +1,38 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace TicTacToeApp
 {
     public class TicTacToe
     {
         public Rules rules;
-        public Player playerOne;
-        public Player playerTwo;
-
         public Board currentBoard;
-        public Player currentPlayer;
-
-
-        public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O")
+        public PlayerInterface playerOne;
+        public PlayerInterface playerTwo;
+        public PlayerInterface currentPlayer;
+        
+        public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O", bool isSinglePlayer = false)
         {
             Symbols.P1_MARKER = playerOneMarker;
             Symbols.P2_MARKER = playerTwoMarker;
-
             this.currentBoard = new Board();
             this.rules = new Rules();
-
-            this.playerOne = new Player(Symbols.P1_MARKER);
-            this.playerTwo = new Player(Symbols.P2_MARKER);
-            currentPlayer = this.playerOne;
+            this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);
+            this.currentPlayer = this.playerOne;
+            
+            if (isSinglePlayer) 
+            {
+                this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, this.currentBoard);
+            }
+            else
+            {
+                this.playerTwo = new HumanPlayer(Symbols.P2_MARKER, this.currentBoard);
+            }
         }
 
+        public int getCurrentMove(PlayerInterface player)
+        {
+            return Convert.ToInt32(player.getMove());
+        }
 
         public bool turn(int location)
         {
@@ -36,7 +41,6 @@ namespace TicTacToeApp
             bool notWon = !rules.checkIfWon(currentBoard.board, currentPlayer.marker);
             bool notDrawn = !rules.checkIfDraw(currentBoard, currentPlayer.marker);
             bool notOver = notWon && notDrawn;
-            
             if (notOver)
             {
                 switchPlayer();
@@ -48,18 +52,15 @@ namespace TicTacToeApp
             }
         }
 
-
         public void switchPlayer()
         {
             currentPlayer = (currentPlayer == playerOne) ? playerTwo : playerOne;
         }
 
-
-        public bool moveMarker(int location, string marker)
+        public void moveMarker(int location, string marker)
         {
-            return currentBoard.placeMarker(location, marker);
+            currentBoard.placeMarker(location, marker);
         }
-
     }
 }
 

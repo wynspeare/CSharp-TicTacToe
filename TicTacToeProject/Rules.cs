@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +5,7 @@ namespace TicTacToeApp
 {
     public class Rules
     {
-        int [,] winCombinations = new int[8, 3]
+        private int [,] winCombinations = new int[8, 3]
         { 
             { 0, 1, 2 },
             { 3, 4, 5 },
@@ -17,7 +16,6 @@ namespace TicTacToeApp
             { 1, 4, 7 },
             { 2, 5, 8 },
         };
-
 
         public bool checkIfWon(List<Space> board, string currentMarker)
         {
@@ -40,17 +38,15 @@ namespace TicTacToeApp
             return isWon;
         }
 
-
         public bool checkIfDraw(Board board, string currentMarker)
         {
-            return board.isFilled() && !checkIfWon(board.board, currentMarker);
+            return board.isBoardFilled() && !checkIfWon(board.board, currentMarker);
         }
-
 
         public bool isRowComplete(List <string> row, string marker) 
         {
             return row.All(space => space == marker) ? true : false; 
         }
-
+        
     }
 }

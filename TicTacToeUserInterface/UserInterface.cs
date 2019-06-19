@@ -5,12 +5,10 @@ namespace TicTacToeUserInterface
 {
     public class UserInterface
     {
-
         public bool startNewGame()
         {
             Console.WriteLine("Are you ready to play Tic Tac Toe? Y/N");
             string answer = Console.ReadLine();
-
             if (answer == "Y")
             {
                 displayInstructions();
@@ -28,48 +26,30 @@ namespace TicTacToeUserInterface
             }
         }
 
-
-        public int getValidSpace(Dictionary<int, string> board, string marker)
+        public string getTypeOfGame()
         {
-            displayBoard(board);
-            var location = getSpace(marker);
-            while (!isValidSpace(location, board))
-            {   
-                Console.Write("Try again! ");
-                location = getSpace(marker);
-            }
-            return Convert.ToInt32(location);
-        }
-        
-
-        public bool isValidSpace(string location, Dictionary<int, string> board)
-        {   
-            try
+            Console.WriteLine("Do you want to play against the computer? Y/N");            
+            string answer = Console.ReadLine();            
+            if (answer == "Y" || answer == "N")
             {
-                var convertedLocation = Convert.ToInt32(location);
-                if (convertedLocation >= 1 && convertedLocation <= Options.BOARD_SIZE)
-                {
-                    return board[convertedLocation] == Options.EMPTY;
-                }
-                else
-                {
-                    return false;
-                }
+                return answer;
             }
-            catch (FormatException)
+            else
             {
-                Console.WriteLine("Please only enter a number.");
-                return false;
+                Console.WriteLine("Please enter Y or N only.");
+                return getTypeOfGame();
             }
         }
 
-
-        public string getSpace(string marker)
+        public bool isSinglePlayerGame(string isSinglePlayer)
         {
-            Console.WriteLine("Player \"{0}\" please enter an empty space between 1 - {1}:", marker, Convert.ToInt32(Options.BOARD_SIZE));
-            return Console.ReadLine();
+            return isSinglePlayer == "Y" ? true : false;
         }
 
+        public void askForMove(string marker)
+        {
+            Console.Write("Player \"{0}\" please enter an empty space between 1 - {1}: ", marker, Convert.ToInt32(Options.BOARD_SIZE));
+        }
 
         public void displayWinOrDraw(bool isDraw, string winnersMarker)
         {
@@ -79,38 +59,45 @@ namespace TicTacToeUserInterface
             }
             else
             {
-                Console.WriteLine("Player \"{0}\" has WON!", winnersMarker);    
+                Console.WriteLine("\"{0}\" has WON!", winnersMarker);    
             }
         }
 
+        public void displaySinglePlayerGameStatus(bool isWon)
+        {
+            if(isWon)
+            {
+                Console.WriteLine("Congrats you are the winner!!");
+            }
+            else
+            {
+                Console.WriteLine("Oh no, the computer is the winner, better luck next time.");
+            }
+        }
 
         public Tuple<string, string> setMarkers()
         {
-            Console.Write("Player One - ");
+            Console.Write("Please choose a symbol for Player One: ");
             var markerOne = chooseMarker();
-            Console.Write("Player Two - ");
-            var markerTwo = chooseMarker();
+            Console.Write("Please choose a symbol for Player Two: ");
 
+            var markerTwo = chooseMarker();
             while (!isMarkerDifferent(markerOne, markerTwo))
             {
                 Console.WriteLine("Please select a different symbol from Player One.");
                 markerTwo = chooseMarker();
             }
             Console.WriteLine("\nA new game has been started!\n\nPlayer One - Your Marker is {0}\nPlayer Two - Your Marker is {1}\n", markerOne, markerTwo);
-
             return Tuple.Create(markerOne, markerTwo);
         }
-
 
         public bool isMarkerDifferent(string marker1, string marker2)
         {
             return marker1 != marker2;
         }
 
-
-        public string chooseMarker()
+        private string chooseMarker()
         {
-            Console.WriteLine("Please choose a symbol for your marker:");
             string marker = Console.ReadLine();
             if(marker == "")
             {
@@ -122,7 +109,6 @@ namespace TicTacToeUserInterface
             }
         }
 
-
         public string displayBoard(Dictionary<int, string> board)
         {
             var displayBoard = "  ———————————  \n | ";
@@ -130,7 +116,6 @@ namespace TicTacToeUserInterface
             {
                 var marker = space.Value;
                 var location = space.Key;
-
                 if(marker == Options.EMPTY)
                 {
                     displayBoard += location.ToString() + " | ";
@@ -147,8 +132,7 @@ namespace TicTacToeUserInterface
             return displayBoard;
         }
 
-
-        public string displayInstructions()
+        private string displayInstructions()
         {
             var instructions = "\nHOW TO PLAY\n===========\nPlayers alternate placing different markers on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their markers in a row, then that player wins.\n";
             Console.WriteLine(instructions);

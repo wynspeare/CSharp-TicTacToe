@@ -16,55 +16,35 @@ namespace TicTacToeTests
         public void aNewBoardIsEmpty()
         {
             var subject = new Board();
-            Assert.True(subject.isEmpty());
+            Assert.True(subject.isBoardEmpty());
         }
-
 
         [Fact]
         public void aBoardCanMarkaSpace()
         {
             var subject = new Board();
-            Assert.True(subject.placeMarker(5, P2_MARKER));
+            subject.placeMarker(5, P2_MARKER);
+            Assert.Equal(P2_MARKER, subject.markerAtLocation(5));
         }
-
-
-        [Fact]
-        public void aNewBoardContainsInstancesOfSpaces()
-        {
-            var subject = new Board();
-            Assert.Equal(9, subject.board[8].location);
-        }
-
-
-        [Fact]
-        public void whenAMarkerIsPlacedTheBoardIsChanged()
-        {
-            var subject = new Board();
-            subject.placeMarker(5, P1_MARKER);
-            Assert.Equal(P1_MARKER, subject.board[4].marker);
-        }
-
 
         [Fact]
         public void aSpecificLocationIsFilledAfterAMarkerIsPlaced()
         {
             var subject = new Board();
             subject.placeMarker(5, P1_MARKER);
-            Assert.False(subject.board[4].isSpaceEmpty());
+            Assert.False(subject.isSpaceOnBoardEmpty(5));
         }
-
 
         [Fact]
         public void aBoardIsNotEmptyAfterAMarkerIsPlaced()
         {
             var subject = new Board();
             subject.placeMarker(5, P1_MARKER);
-            Assert.False(subject.isEmpty());
+            Assert.False(subject.isBoardEmpty());
         }
 
-
         [Fact]
-        public void aBoardCanBeCompletelyFull()
+        public void aWhenNineMarkersArePlacedABoardIsFull()
         {
             var subject = new Board();
             subject.placeMarker(1, P1_MARKER);
@@ -77,9 +57,19 @@ namespace TicTacToeTests
             subject.placeMarker(5, P2_MARKER);
             subject.placeMarker(8, P2_MARKER);
 
-            Assert.False(subject.isEmpty());
-            Assert.True(subject.isFilled());
+            Assert.False(subject.isBoardEmpty());
+            Assert.True(subject.isBoardFilled());
+        }
 
+        [Fact]
+        public void aBoardKnowsWhatSpacesAreStillAvailable()
+        {
+            var subject = new Board();
+            subject.placeMarker(1, P1_MARKER);
+            subject.placeMarker(2, P1_MARKER);
+            subject.placeMarker(3, P1_MARKER);
+            
+            Assert.Equal(new List<int> { 4, 5, 6, 7, 8, 9 }, subject.getAvailableSpaces());
         }
 
     }
