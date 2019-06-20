@@ -47,6 +47,11 @@ namespace TicTacToeApp
         {
             return row.All(space => space == marker) ? true : false; 
         }
+
+        public bool isOver(Board board, string currentMarker)
+        {
+            return checkIfWon(board.board, currentMarker) || checkIfDraw(board, currentMarker);
+        }
         
     }
 }

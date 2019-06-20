@@ -1,4 +1,6 @@
-﻿using TicTacToeApp;
+﻿using System;
+
+using TicTacToeApp;
 using TicTacToeUserInterface;
 
 namespace TicTacToeRunner
@@ -33,14 +35,23 @@ namespace TicTacToeRunner
 
         private void playGameLoop()
         {
+            
+            newGame.currentBoard.partiallyFillBoard();
             gameUI.displayBoard(newGame.currentBoard.createDictBoard());
+            
+
+                var minimax = new Minimax();
+                var score = minimax.minimax(newGame);
+                Console.WriteLine(score);
+                Console.WriteLine(minimax.bestMove);
+
             gameUI.askForMove(newGame.currentPlayer.marker);
             int location = newGame.getCurrentMove(newGame.currentPlayer);
             
             bool successfulTurn = newGame.turn(location);
             if (successfulTurn)
             {
-                playGameLoop();
+                // playGameLoop();
             }
             else
             {

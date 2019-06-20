@@ -16,8 +16,7 @@ namespace TicTacToeApp
             Symbols.P2_MARKER = playerTwoMarker;
             this.currentBoard = new Board();
             this.rules = new Rules();
-            this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);
-            this.currentPlayer = this.playerOne;
+            this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);                
             
             if (isSinglePlayer) 
             {
@@ -27,6 +26,7 @@ namespace TicTacToeApp
             {
                 this.playerTwo = new HumanPlayer(Symbols.P2_MARKER, this.currentBoard);
             }
+            this.currentPlayer = this.playerOne;
         }
 
         public int getCurrentMove(PlayerInterface player)
@@ -61,6 +61,21 @@ namespace TicTacToeApp
         {
             currentBoard.placeMarker(location, marker);
         }
+
+        public Board getNewState(int move, string marker)
+        {
+            var possibleBoard = new Board();
+            for (int i = 1; i <= Symbols.BOARD_SIZE; i++)
+            {
+                if (currentBoard.board[i - 1].isSpaceFilled())
+                {
+                    possibleBoard.board[i - 1].marker = currentBoard.board[i - 1].marker;
+                }                
+            }
+            possibleBoard.board[move - 1].marker = marker;
+            return possibleBoard;
+        }
+
     }
 }
 
