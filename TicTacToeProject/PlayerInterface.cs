@@ -1,12 +1,8 @@
 namespace TicTacToeApp
 {
-    public interface PlayerInterface
+    public interface IPlayer
     {
-        string marker
-        {
-            get;
-            set;
-        }
+        string Marker { get; set; }
 
         string getMove();
     }

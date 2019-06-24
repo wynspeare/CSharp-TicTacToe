@@ -2,53 +2,25 @@ using System;
 
 namespace TicTacToeApp
 {
-    public class ComputerPlayer : PlayerInterface
+    public class ComputerPlayer : IPlayer
     {
-        private string _marker;
-        private Board _board;
-
-        public ComputerPlayer(string marker, Board board)
+        public string Marker { get; set; }
+        public IStrategy strategy;
+        
+        public ComputerPlayer(string Marker)
         {
-            _marker = marker;
-            _board = board;
+            this.Marker = Marker;
         }
-
-        public string marker
-        {
-            get
-            {
-                return _marker;
-            }
-            set
-            {
-                _marker = value;
-            }
-        }       
-
-        public Board board
-        {
-            get
-            {
-                return _board;
-            }
-            set
-            {
-                _board = value;
-            }
-        }       
 
         public string getMove()
         {
-            string location = getRandomSpace().ToString();
-            Console.WriteLine("\nThe computer selected space {0}.", location);
-            return location;
+            return strategy.getMove();
         }
 
-        private int getRandomSpace()
+        public void setStrategy(TicTacToe game)
         {
-            Random random = new Random();
-            int index = random.Next(_board.getAvailableSpaces().Count);
-            return _board.getAvailableSpaces()[index];
+            strategy = new MinimaxStrategy(game);
+            // strategy = new EasyStrategy(game);
         }
     }
 }

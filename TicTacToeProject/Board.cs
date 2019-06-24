@@ -15,15 +15,12 @@ namespace TicTacToeApp
             }
         }
 
-        public void partiallyFillBoard()
+        public void partiallyFillBoard(int[] moves, string marker)
         {
-            placeMarker(3, Symbols.P1_MARKER);
-            placeMarker(4, Symbols.P1_MARKER);
-            placeMarker(7, Symbols.P1_MARKER);
-
-            placeMarker(1, Symbols.P2_MARKER);
-            placeMarker(8, Symbols.P2_MARKER);
-            placeMarker(9, Symbols.P2_MARKER);
+            for (int i = 0; i < moves.GetLength(0); i++)
+            {
+                placeMarker(moves[i], marker);
+            }
         }
 
         public bool isBoardEmpty()

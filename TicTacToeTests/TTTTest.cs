@@ -227,5 +227,52 @@ namespace TicTacToeTests
             Assert.True(subject.rules.checkIfWon(subject.currentBoard.board, subject.currentPlayer.marker));
             Assert.False(subject.rules.checkIfDraw(subject.currentBoard, subject.currentPlayer.marker));
         }
+
+        [Fact]
+        public void aNewGameCanBeConstructedFromAnOriginal()
+        {
+            var originalGame = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
+            var p1_moves = new [] { 3, 4, 7 };
+            var p2_moves = new [] { 1, 8, 9 };
+            originalGame.currentBoard.partiallyFillBoard(p1_moves, P1_MARKER);
+            originalGame.currentBoard.partiallyFillBoard(p2_moves, P2_MARKER);
+            var newGame = new TicTacToe(originalGame);
+
+            Assert.Equal(newGame.currentBoard.getAvailableSpaces(), originalGame.currentBoard.getAvailableSpaces());
+        }
+
+        [Fact]
+        public void aNewGameCanBeAlteredAndTheOriginalBoardIsUnchanged()
+        {
+            var originalGame = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
+            var p1_moves = new [] { 3, 4, 7 };
+            var p2_moves = new [] { 1, 8, 9 };
+
+            originalGame.currentBoard.partiallyFillBoard(p1_moves, P1_MARKER);
+            originalGame.currentBoard.partiallyFillBoard(p2_moves, P2_MARKER);
+
+            var newGame = new TicTacToe(originalGame);
+            newGame.currentBoard.placeMarker(2, newGame.currentPlayer.marker);
+
+            Assert.NotEqual(originalGame.currentBoard.markerAtLocation(2), newGame.currentBoard.markerAtLocation(2));
+            Assert.Equal(P1_MARKER, newGame.currentBoard.markerAtLocation(2));
+            Assert.True(originalGame.currentBoard.isSpaceOnBoardEmpty(2));
+        }
+
+        [Fact]
+        public void aNewGameStateCanBeCreatedWithANewMovePlayed()
+        {
+            var originalGame = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
+            var p1_moves = new [] { 3, 4, 7 };
+            var p2_moves = new [] { 1, 8, 9 };
+
+            originalGame.currentBoard.partiallyFillBoard(p1_moves, P1_MARKER);
+            originalGame.currentBoard.partiallyFillBoard(p2_moves, P2_MARKER);
+            var newGame = originalGame.getNewState(originalGame, 2);
+
+            Assert.NotEqual(originalGame.currentBoard.markerAtLocation(2), newGame.currentBoard.markerAtLocation(2));
+            Assert.Equal(P1_MARKER, newGame.currentBoard.markerAtLocation(2));
+            Assert.True(originalGame.currentBoard.isSpaceOnBoardEmpty(2));
+        }
     }
 }
