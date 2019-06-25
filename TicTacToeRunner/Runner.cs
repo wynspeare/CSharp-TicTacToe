@@ -49,6 +49,8 @@ namespace TicTacToeRunner
             gameUI.displayBoard(newGame.currentBoard.createDictBoard());
             
             gameUI.askForMove(newGame.currentPlayer.Marker);
+
+            
             int location = newGame.getCurrentMove(newGame.currentPlayer);
             
             bool successfulTurn = newGame.turn(location);

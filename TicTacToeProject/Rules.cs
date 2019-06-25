@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,6 +51,7 @@ namespace TicTacToeApp
 
         public bool isOver(Board board, string currentMarker)
         {
+            Console.WriteLine("IS IT GAME OVER? Did this player win:  " + currentMarker);
             return checkIfWon(board.board, currentMarker) || checkIfDraw(board, currentMarker);
         }
         

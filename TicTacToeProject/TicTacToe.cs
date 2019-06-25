@@ -7,8 +7,7 @@ namespace TicTacToeApp
         public Rules rules;
         public Board currentBoard;
         public IPlayer playerOne;
-        // public IPlayer playerTwo;
-        public ComputerPlayer playerTwo;
+        public IPlayer playerTwo;
 
         public IPlayer currentPlayer;
         
@@ -20,19 +19,19 @@ namespace TicTacToeApp
             this.rules = new Rules();
             
             this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);
+            this.currentPlayer = this.playerOne;
             if (isSinglePlayer) 
             {
-                var configuration = new Configuration(true, this.currentBoard, isSinglePlayer);
-                // this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, this.currentBoard);
-                this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER);
-                configuration.setStrategies(this.playerTwo);
+                var configuration = new Configuration(false, this.currentBoard);
 
+                this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, configuration.strategy);
+
+                configuration.strategy.setPlayers(this.playerTwo, this.playerOne);
             }
-            // else
-            // {
-            //     this.playerTwo = new HumanPlayer(Symbols.P2_MARKER, this.currentBoard);
-            // }
-            this.currentPlayer = this.playerOne;
+            else
+            {
+                this.playerTwo = new HumanPlayer(Symbols.P2_MARKER, this.currentBoard);
+            }
         }
 
         public TicTacToe(TicTacToe originalGame)

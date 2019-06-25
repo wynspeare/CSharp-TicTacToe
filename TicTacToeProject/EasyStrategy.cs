@@ -28,6 +28,11 @@ namespace TicTacToeApp
             return board.getAvailableSpaces()[index];
         }
 
+        public void setPlayers(IPlayer playerTwo, IPlayer playerOne)
+        {
+
+        }
+
     }
 }
 
