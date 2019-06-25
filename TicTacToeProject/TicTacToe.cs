@@ -23,6 +23,7 @@ namespace TicTacToeApp
             {
                 // this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, this.currentBoard);
                 this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER);
+                
 
             }
             // else
