@@ -18,12 +18,14 @@ namespace TicTacToeApp
             Symbols.P2_MARKER = playerTwoMarker;
             this.currentBoard = new Board();
             this.rules = new Rules();
+            
             this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);
             if (isSinglePlayer) 
             {
+                var configuration = new Configuration(true, this.currentBoard, isSinglePlayer);
                 // this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, this.currentBoard);
                 this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER);
-                
+                configuration.setStrategies(this.playerTwo);
 
             }
             // else

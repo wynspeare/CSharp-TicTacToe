@@ -16,11 +16,5 @@ namespace TicTacToeApp
         {
             return strategy.getMove();
         }
-
-        public void setStrategy(TicTacToe game)
-        {
-            strategy = new MinimaxStrategy(game);
-            // strategy = new EasyStrategy(game);
-        }
     }
 }

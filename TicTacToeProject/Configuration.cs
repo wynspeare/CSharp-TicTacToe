@@ -5,31 +5,26 @@ namespace TicTacToeApp
     public class Configuration
     {
         public IStrategy strategy;
-        public TicTacToe game;
+        public Board board;
         public bool isSinglePlayer;
 
-        public Configuration(bool isEasyGame, TicTacToe game, bool isSinglePlayer)
+        public Configuration(bool isEasyGame, Board board, bool isSinglePlayer)
         {
-            this.game = game;
             this.isSinglePlayer = isSinglePlayer;
             if (isEasyGame)
             {
-                strategy = new EasyStrategy(game);
+                strategy = new EasyStrategy(board);
             }
-            else
-            {
-                strategy = new MinimaxStrategy(game);
-            }
-
+            // else
+            // {
+            //     strategy = new MinimaxStrategy(game);
+            // }
         }
 
         //Method to reach into CompPlayer and inject strategy into players after the player has been created.
-        public void setStrategies()
+        public void setStrategies(ComputerPlayer player)
         {
-            if (isSinglePlayer)
-            {
-                game.playerTwo.strategy = strategy;
-            }       
+            player.strategy = strategy;     
         }
     }
 }

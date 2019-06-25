@@ -7,11 +7,11 @@ namespace TicTacToeApp
 {
     public class EasyStrategy : IStrategy
     {
-        public TicTacToe game;
+        public Board board;
 
-        public EasyStrategy(TicTacToe game)
+        public EasyStrategy(Board board)
         {
-            this.game = game;
+            this.board = board;
         }
 
         public string getMove()
@@ -24,8 +24,8 @@ namespace TicTacToeApp
         private int getRandomSpace()
         {
             Random random = new Random();
-            int index = random.Next(game.currentBoard.getAvailableSpaces().Count);
-            return game.currentBoard.getAvailableSpaces()[index];
+            int index = random.Next(board.getAvailableSpaces().Count);
+            return board.getAvailableSpaces()[index];
         }
 
     }

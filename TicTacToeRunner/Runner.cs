@@ -10,7 +10,6 @@ namespace TicTacToeRunner
         private TicTacToe newGame;
         private UserInterface gameUI;
         private Options options;
-        public Configuration configuration;
         private bool isGameOver = false;
 
         static void Main(string[] args)
@@ -27,9 +26,6 @@ namespace TicTacToeRunner
                 var isSinglePlayer = gameUI.isSinglePlayerGame(gameUI.getTypeOfGame());
                 options = new Options(gameUI.setMarkers(), isSinglePlayer);
                 newGame = new TicTacToe(options.P1_MARKER, options.P2_MARKER, options.IS_SINGLE_PLAYER);
-
-                configuration = new Configuration(false, newGame, isSinglePlayer);
-                configuration.setStrategies();
 
                 while (!isGameOver)
                 {
