@@ -28,24 +28,25 @@ namespace TicTacToeApp
 
         public string getMove()
         {
-            var score = minimax(board, currentPlayer, opponentPlayer);
+            var depth = 0;
+            var score = minimax(board, currentPlayer, opponentPlayer, depth);
             Console.WriteLine("SCORE: " + score);
             Console.WriteLine("BESTMOVE: " + bestMove);
             return bestMove.ToString();
         }
 
-        public int score(Board board, IPlayer player)
+        public int score(Board board, IPlayer player, int depth)
         {
             bool isWon = rules.checkIfWon(board.board, player.Marker);
             if (isWon && player.Marker == Symbols.P2_MARKER) //And is type of computer?
             {
                 Console.WriteLine("Player " + player.Marker + " has won this match! Score: 10");
-                return 10;
+                return 10 - depth;
             }
             else if (isWon && player.Marker == Symbols.P1_MARKER)
             {
                 Console.WriteLine("Player " + player.Marker + " has won this match! Score: -10");      
-                return -10;
+                return depth -10;
             }
             else
             {
@@ -54,13 +55,13 @@ namespace TicTacToeApp
             }
         }
 
-
-        public int minimax(Board board, IPlayer currentPlayer, IPlayer opponentPlayer)
+        public int minimax(Board board, IPlayer currentPlayer, IPlayer opponentPlayer, int depth)
         {
             if (rules.isOver(board, opponentPlayer.Marker))
             {
-                return score(board, opponentPlayer);
+                return score(board, opponentPlayer, depth);
             }
+            depth += 1;
             var scores = new List<int>();
             var moves = new List<int>();
             
@@ -80,14 +81,9 @@ namespace TicTacToeApp
                     Console.Write("\nPossibleBoard: ");
                     checkBoardArray(possibleBoard);
 
-                scores.Add(minimax(possibleBoard, opponentPlayer, currentPlayer));
+                scores.Add(minimax(possibleBoard, opponentPlayer, currentPlayer, depth));
                 moves.Add(move);
 
-                // Console.WriteLine("\nnextPlayer: " + nextPlayer.Marker);
-                // Console.WriteLine("opponentPlayer: " + opponentPlayer.Marker);
-                // Console.WriteLine("currentPlayer: " + currentPlayer.Marker);
-
-                // Console.WriteLine(scores[scores.Count - 1]);
             }
 
             if (currentPlayer.Marker == Symbols.P2_MARKER)

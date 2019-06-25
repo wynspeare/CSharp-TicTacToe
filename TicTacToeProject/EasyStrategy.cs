@@ -30,7 +30,6 @@ namespace TicTacToeApp
 
         public void setPlayers(IPlayer playerTwo, IPlayer playerOne)
         {
-
         }
 
     }
