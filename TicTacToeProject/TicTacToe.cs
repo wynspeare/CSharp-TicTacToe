@@ -22,25 +22,17 @@ namespace TicTacToeApp
             this.currentPlayer = this.playerOne;
             if (isSinglePlayer) 
             {
-                var configuration = new Configuration(false, this.currentBoard);
+                var isEasyGame = false; //Need to pass in correct bool for easy/hard
+                var configuration = new Configuration(isEasyGame, this.currentBoard); 
 
                 this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, configuration.strategy);
 
-                configuration.strategy.setPlayers(this.playerTwo, this.playerOne);
+                configuration.strategy.setPlayers(this.playerTwo, this.playerOne); //Redundant for easyStrat
             }
             else
             {
                 this.playerTwo = new HumanPlayer(Symbols.P2_MARKER, this.currentBoard);
             }
-        }
-
-        public TicTacToe(TicTacToe originalGame)
-        {
-            this.currentBoard = originalGame.changeBoard();
-            this.rules = originalGame.rules;
-            this.playerOne = originalGame.playerOne;
-            this.playerTwo = originalGame.playerTwo;
-            this.currentPlayer = originalGame.currentPlayer;
         }
 
         public int getCurrentMove(IPlayer player)
@@ -74,29 +66,6 @@ namespace TicTacToeApp
         public void moveMarker(int location, string marker)
         {
             currentBoard.placeMarker(location, marker);
-        }
-
-
-
-        public Board changeBoard()
-        {
-            var possibleBoard = new Board();
-            for (int i = 1; i <= Symbols.BOARD_SIZE; i++)
-            {
-                if (currentBoard.board[i - 1].isSpaceFilled())
-                {
-                    possibleBoard.board[i - 1].marker = currentBoard.board[i - 1].marker;
-                }                
-            }
-            return possibleBoard;
-        }
-
-        public TicTacToe getNewState(TicTacToe game, int move)
-        {
-            //get a copy of a game with a new move applied
-            var possibleGame = new TicTacToe(game);
-            possibleGame.turn(move);
-            return possibleGame;
         }
 
     }

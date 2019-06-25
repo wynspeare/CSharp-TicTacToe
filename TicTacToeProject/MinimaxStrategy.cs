@@ -13,7 +13,6 @@ namespace TicTacToeApp
         public IPlayer opponentPlayer;
         public Rules rules;
 
-
         public MinimaxStrategy(Board board)
         {
             this.rules = new Rules();            
@@ -38,7 +37,7 @@ namespace TicTacToeApp
         public int score(Board board, IPlayer player, int depth)
         {
             bool isWon = rules.checkIfWon(board.board, player.Marker);
-            if (isWon && player.Marker == Symbols.P2_MARKER) //And is type of computer?
+            if (isWon && player.Marker == Symbols.P2_MARKER) //Dependant on p2 being a computer
             {
                 Console.WriteLine("Player " + player.Marker + " has won this match! Score: 10");
                 return 10 - depth;
@@ -83,10 +82,9 @@ namespace TicTacToeApp
 
                 scores.Add(minimax(possibleBoard, opponentPlayer, currentPlayer, depth));
                 moves.Add(move);
-
             }
 
-            if (currentPlayer.Marker == Symbols.P2_MARKER)
+            if (currentPlayer.Marker == Symbols.P2_MARKER) //Dependant on p2 being a computer
             {
                 int maxScoreIndex = scores.IndexOf(scores.Max());
                 bestMove = moves[maxScoreIndex];
@@ -129,109 +127,8 @@ namespace TicTacToeApp
             possibleBoard.placeMarker(move, currentPlayer.Marker);
             
             // Switch players
-
             return Tuple.Create(possibleBoard, opponentPlayer);
         }
 
     }
 }
-
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-
-
-// namespace TicTacToeApp
-// {
-//     public class MinimaxStrategy : IStrategy
-//     {
-//         public int bestMove;
-//         public TicTacToe game;
-
-//         public MinimaxStrategy(TicTacToe game)
-//         {
-//             this.game = game;
-//         }
-
-//         public string getMove()
-//         {
-//             var score = minimax(game);
-//             Console.WriteLine("SCORE: " + score);
-//             Console.WriteLine("BESTMOVE: " + bestMove);
-//             return bestMove.ToString();
-//         }
-
-//         public int score(TicTacToe game)
-//         {
-//             bool isWon = game.rules.checkIfWon(game.currentBoard.board, game.currentPlayer.Marker);
-            
-//             if (isWon && game.currentPlayer == game.playerTwo)
-//             {
-//                 return 10;
-//             }
-//             else if (isWon && game.currentPlayer == game.playerOne)
-//             {
-//                 return -10;
-//             }
-//             else
-//             {
-//                 return 0;
-//             }
-//         }
-
-
-//         public int minimax(TicTacToe game)
-//         {
-//             if (game.rules.isOver(game.currentBoard, game.currentPlayer.Marker))
-//             {
-//                 return score(game);
-//             }
-//             var scores = new List<int>();
-//             var moves = new List<int>();
-            
-//             var availableMoves = game.currentBoard.getAvailableSpaces();
-
-//             foreach (int move in availableMoves)
-//             {
-//                     Console.WriteLine("\nTRY Location: " + move);
-
-//                 var possibleGame = game.getNewState(game, move);
-
-//                     Console.Write("\nCurrentBoard:  ");
-//                     checkBoardArray(game.currentBoard);
-//                     Console.Write("\nPossibleBoard: ");
-//                     checkBoardArray(possibleGame.currentBoard);
-
-//                 scores.Add(minimax(possibleGame));
-//                 moves.Add(move);
-
-//                 Console.WriteLine("\nCurrentPlayer: " + game.currentPlayer.Marker);
-//                 Console.WriteLine(scores[scores.Count - 1]);
-//             }
-
-//             if (game.currentPlayer == game.playerTwo)
-//             {
-//                 int maxScoreIndex = scores.IndexOf(scores.Max());
-//                 bestMove = moves[maxScoreIndex];
-//                 return scores[maxScoreIndex];
-//             }
-//             else
-//             {
-//                 int minScoreIndex = scores.IndexOf(scores.Min());
-//                 bestMove = moves[minScoreIndex];
-//                 return scores[minScoreIndex];
-//             }
-//         }
-
-
-//         public void checkBoardArray(Board board)
-//         {
-//             foreach (Space space in board.board)
-//             {
-//                 Console.Write("{0}: {1} |  ", space.location, space.marker);
-//             }
-//         }
-
-//     }
-// }
-
