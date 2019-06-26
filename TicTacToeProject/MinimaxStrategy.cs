@@ -38,8 +38,7 @@ namespace TicTacToeApp
             setPlayers();            
             var depth = 0;
             var score = minimax(originalBoard, currentPlayerMarker, opponentPlayerMarker, depth);
-            Console.WriteLine("SCORE: " + score);
-            Console.WriteLine("BESTMOVE: " + bestMove);
+            Console.WriteLine("\nThe minimax computer selected space {0}.", bestMove);
             return bestMove.ToString();
         }
 
@@ -47,27 +46,22 @@ namespace TicTacToeApp
         {
             bool isWon = rules.checkIfWon(board.board, playerMarker);
             if (isWon && playerMarker == currentPlayerMarker)
-
             {
-                Console.WriteLine("Player " + playerMarker + " has won this match! Score: 10");
+
                 return 10 - depth;
             }
             else if (isWon && playerMarker == opponentPlayerMarker)
-            {
-                Console.WriteLine("Player " + playerMarker + " has won this match! Score: -10");      
+            {     
                 return depth -10;
             }
             else
             {
-                Console.WriteLine("This match is a draw. Score: 0");
                 return 0;
             }
         }
 
         public int minimax(Board board, string currentPlayerMarker, string opponentPlayerMarker, int depth)
         {
-            Console.WriteLine("MINIMAXCALL: currentPlayer: " + currentPlayerMarker);
-            
             if (rules.isOver(board, opponentPlayerMarker))
             {
                 return score(board, opponentPlayerMarker, depth);
@@ -80,14 +74,7 @@ namespace TicTacToeApp
 
             foreach (int move in availableMoves)
             {
-                    Console.WriteLine("\nTRY Location: " + move + "  FOR Player: " + currentPlayerMarker);
-
                 var possibleBoard = getBoardWithNextMove(board, currentPlayerMarker, move);
-
-                    Console.Write("\nCurrentBoard:  ");
-                    checkBoardArray(board);
-                    Console.Write("\nPossibleBoard: ");
-                    checkBoardArray(possibleBoard);
 
                 scores.Add(minimax(possibleBoard, opponentPlayerMarker, currentPlayerMarker, depth));
                 moves.Add(move);
@@ -107,7 +94,6 @@ namespace TicTacToeApp
             }
         }
 
-
         public void checkBoardArray(Board board)
         {
             foreach (Space space in board.board)
@@ -115,7 +101,6 @@ namespace TicTacToeApp
                 Console.Write("{0}: {1} |  ", space.location, space.marker);
             }
         }
-
 
         public Board getPossibleBoard(Board boardToClone)
         {
