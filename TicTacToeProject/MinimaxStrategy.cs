@@ -2,49 +2,59 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace TicTacToeApp
 {
     public class MinimaxStrategy : IStrategy
     {
         public int bestMove;
-        public Board board;
-        public IPlayer currentPlayer;
-        public IPlayer opponentPlayer;
+        public Board originalBoard;
         public Rules rules;
+        public string currentPlayerMarker;
+        public string opponentPlayerMarker;
 
-        public MinimaxStrategy(Board board)
+        public MinimaxStrategy(Board originalBoard)
         {
             this.rules = new Rules();            
-            this.board = board;
+            this.originalBoard = originalBoard;    
         }
 
-        public void setPlayers(IPlayer playerTwo, IPlayer playerOne)
+        public void setPlayers()
         {
-            currentPlayer = playerTwo;
-            opponentPlayer = playerOne;
+            var current = originalBoard.getCurrentPlayer();
+            if (current == Symbols.P1_MARKER)
+            {
+                currentPlayerMarker = current;
+                opponentPlayerMarker = Symbols.P2_MARKER;
+            }
+            else
+            {
+                currentPlayerMarker = Symbols.P2_MARKER;
+                opponentPlayerMarker = Symbols.P1_MARKER;
+            }
         }
 
         public string getMove()
         {
+            setPlayers();            
             var depth = 0;
-            var score = minimax(board, currentPlayer, opponentPlayer, depth);
+            var score = minimax(originalBoard, currentPlayerMarker, opponentPlayerMarker, depth);
             Console.WriteLine("SCORE: " + score);
             Console.WriteLine("BESTMOVE: " + bestMove);
             return bestMove.ToString();
         }
 
-        public int score(Board board, IPlayer player, int depth)
+        public int score(Board board, string playerMarker, int depth)
         {
-            bool isWon = rules.checkIfWon(board.board, player.Marker);
-            if (isWon && player.Marker == Symbols.P2_MARKER) //Dependant on p2 being a computer
+            bool isWon = rules.checkIfWon(board.board, playerMarker);
+            if (isWon && playerMarker == currentPlayerMarker)
+
             {
-                Console.WriteLine("Player " + player.Marker + " has won this match! Score: 10");
+                Console.WriteLine("Player " + playerMarker + " has won this match! Score: 10");
                 return 10 - depth;
             }
-            else if (isWon && player.Marker == Symbols.P1_MARKER)
+            else if (isWon && playerMarker == opponentPlayerMarker)
             {
-                Console.WriteLine("Player " + player.Marker + " has won this match! Score: -10");      
+                Console.WriteLine("Player " + playerMarker + " has won this match! Score: -10");      
                 return depth -10;
             }
             else
@@ -54,11 +64,13 @@ namespace TicTacToeApp
             }
         }
 
-        public int minimax(Board board, IPlayer currentPlayer, IPlayer opponentPlayer, int depth)
+        public int minimax(Board board, string currentPlayerMarker, string opponentPlayerMarker, int depth)
         {
-            if (rules.isOver(board, opponentPlayer.Marker))
+            Console.WriteLine("MINIMAXCALL: currentPlayer: " + currentPlayerMarker);
+            
+            if (rules.isOver(board, opponentPlayerMarker))
             {
-                return score(board, opponentPlayer, depth);
+                return score(board, opponentPlayerMarker, depth);
             }
             depth += 1;
             var scores = new List<int>();
@@ -68,23 +80,20 @@ namespace TicTacToeApp
 
             foreach (int move in availableMoves)
             {
-                    Console.WriteLine("\nTRY Location: " + move + "  FOR Player: " + currentPlayer.Marker);
+                    Console.WriteLine("\nTRY Location: " + move + "  FOR Player: " + currentPlayerMarker);
 
-                var possibleGame = getNewState(board, currentPlayer, opponentPlayer, move);
-
-                var possibleBoard = possibleGame.Item1; 
-                var nextPlayer = possibleGame.Item2;
+                var possibleBoard = getBoardWithNextMove(board, currentPlayerMarker, move);
 
                     Console.Write("\nCurrentBoard:  ");
                     checkBoardArray(board);
                     Console.Write("\nPossibleBoard: ");
                     checkBoardArray(possibleBoard);
 
-                scores.Add(minimax(possibleBoard, opponentPlayer, currentPlayer, depth));
+                scores.Add(minimax(possibleBoard, opponentPlayerMarker, currentPlayerMarker, depth));
                 moves.Add(move);
             }
 
-            if (currentPlayer.Marker == Symbols.P2_MARKER) //If current persons turn (board method) is current player..
+            if (currentPlayerMarker == originalBoard.getCurrentPlayer())
             {
                 int maxScoreIndex = scores.IndexOf(scores.Max());
                 bestMove = moves[maxScoreIndex];
@@ -108,27 +117,24 @@ namespace TicTacToeApp
         }
 
 
-        public Board getPossibleBoard(Board originalBoard)
+        public Board getPossibleBoard(Board boardToClone)
         {
             var possibleBoard = new Board();
             for (int i = 1; i <= Symbols.BOARD_SIZE; i++)
             {
-                if (originalBoard.board[i - 1].isSpaceFilled())
+                if (boardToClone.board[i - 1].isSpaceFilled())
                 {
-                    possibleBoard.board[i - 1].marker = originalBoard.board[i - 1].marker;
+                    possibleBoard.board[i - 1].marker = boardToClone.board[i - 1].marker;
                 }                
             }
             return possibleBoard;
         }
 
-        public Tuple<Board, IPlayer> getNewState(Board board, IPlayer currentPlayer, IPlayer opponentPlayer, int move)
+        public Board getBoardWithNextMove(Board board, string currentPlayerMarker, int move)
         {
             var possibleBoard = getPossibleBoard(board);
-            possibleBoard.placeMarker(move, currentPlayer.Marker);
-            
-            // Switch players
-            return Tuple.Create(possibleBoard, opponentPlayer);
+            possibleBoard.placeMarker(move, currentPlayerMarker);
+            return possibleBoard;
         }
-
     }
 }

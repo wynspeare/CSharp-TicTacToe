@@ -25,8 +25,6 @@ namespace TicTacToeApp
                 var configuration = new Configuration(isEasyGame, this.currentBoard); 
 
                 this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, configuration.strategy);
-
-                configuration.strategy.setPlayers(this.playerTwo, this.playerOne); //Have board query itself for whose turn it is
             }
             else
             {

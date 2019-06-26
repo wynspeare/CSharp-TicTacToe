@@ -40,11 +40,11 @@ namespace TicTacToeRunner
                 // var p1_moves = new [] { 1, 4 };
                 // var p2_moves = new [] { 2, 5 }; //Comp should choose 8
 
-                // // var p1_moves = new [] { 1, 4, 6 };
-                // // var p2_moves = new [] { 3, 7, 8 }; //Play 9, Comp should choose 5
+                // var p1_moves = new [] { 1, 4, 6 };
+                // var p2_moves = new [] { 3, 7, 8 }; //Play 9, Comp should choose 5
 
-                // // var p1_moves = new [] { 5 };
-                // // var p2_moves = new [] { 7 }; //Play 1, Comp should choose 9
+                // var p1_moves = new [] { 5 };
+                // var p2_moves = new [] { 7 }; //Play 1, Comp should choose 9
                 // newGame.currentBoard.partiallyFillBoard(p1_moves, options.P1_MARKER);
                 // newGame.currentBoard.partiallyFillBoard(p2_moves, options.P2_MARKER);
 //

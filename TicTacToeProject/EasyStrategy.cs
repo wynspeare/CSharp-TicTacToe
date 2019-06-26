@@ -27,11 +27,6 @@ namespace TicTacToeApp
             int index = random.Next(board.getAvailableSpaces().Count);
             return board.getAvailableSpaces()[index];
         }
-
-        public void setPlayers(IPlayer playerTwo, IPlayer playerOne)
-        {
-        }
-
     }
 }
 
