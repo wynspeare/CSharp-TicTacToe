@@ -65,6 +65,18 @@ namespace TicTacToeApp
             }
             return dictBoard;
         }
+
+        public string getCurrentPlayer() {
+            int totalMovesOnBoard = 9 - getAvailableSpaces().Count;
+            if (totalMovesOnBoard % 2 == 0)
+            {
+                return Symbols.P1_MARKER;
+            }
+            else
+            {
+                return Symbols.P2_MARKER;
+            }
+        }
     }
 }
 

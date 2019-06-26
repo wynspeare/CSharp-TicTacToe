@@ -8,7 +8,6 @@ namespace TicTacToeApp
         public Board currentBoard;
         public IPlayer playerOne;
         public IPlayer playerTwo;
-
         public IPlayer currentPlayer;
         
         public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O", bool isSinglePlayer = false)
@@ -27,7 +26,7 @@ namespace TicTacToeApp
 
                 this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, configuration.strategy);
 
-                configuration.strategy.setPlayers(this.playerTwo, this.playerOne); //Redundant for easyStrat
+                configuration.strategy.setPlayers(this.playerTwo, this.playerOne); //Have board query itself for whose turn it is
             }
             else
             {

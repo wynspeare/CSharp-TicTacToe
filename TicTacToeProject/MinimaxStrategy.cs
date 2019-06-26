@@ -84,7 +84,7 @@ namespace TicTacToeApp
                 moves.Add(move);
             }
 
-            if (currentPlayer.Marker == Symbols.P2_MARKER) //Dependant on p2 being a computer
+            if (currentPlayer.Marker == Symbols.P2_MARKER) //If current persons turn (board method) is current player..
             {
                 int maxScoreIndex = scores.IndexOf(scores.Max());
                 bestMove = moves[maxScoreIndex];

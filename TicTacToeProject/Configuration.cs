@@ -19,11 +19,5 @@ namespace TicTacToeApp
             }
         }
 
-
-        // Method to reach into CompPlayer and inject strategy into players after the player has been created.
-        // public void setStrategies(IPlayer player)
-        // {
-        //     player.strategy = strategy;     
-        // }
     }
 }
