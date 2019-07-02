@@ -40,6 +40,5 @@ namespace TicTacToeTests
             var typeOfGame = "Y";
             Assert.True(subject.isSinglePlayerGame(typeOfGame));
         }
-
     }
 }

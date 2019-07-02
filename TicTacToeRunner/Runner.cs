@@ -1,4 +1,6 @@
-﻿using TicTacToeApp;
+﻿using System;
+
+using TicTacToeApp;
 using TicTacToeUserInterface;
 
 namespace TicTacToeRunner
@@ -34,7 +36,9 @@ namespace TicTacToeRunner
         private void playGameLoop()
         {
             gameUI.displayBoard(newGame.currentBoard.createDictBoard());
-            gameUI.askForMove(newGame.currentPlayer.marker);
+            
+            gameUI.askForMove(newGame.currentPlayer.Marker);
+
             int location = newGame.getCurrentMove(newGame.currentPlayer);
             
             bool successfulTurn = newGame.turn(location);
@@ -44,7 +48,7 @@ namespace TicTacToeRunner
             }
             else
             {
-                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayer.marker);
+                getCompletedGameStatus(newGame.currentBoard, newGame.currentPlayer.Marker);
             }
         }
 
@@ -61,7 +65,7 @@ namespace TicTacToeRunner
         private void getSinglePlayerGameStatus(string marker, bool isDraw)
         {
             bool isSinglePlayerAndNotDraw = options.IS_SINGLE_PLAYER != isDraw;
-            bool isHumansTurn = marker == newGame.playerOne.marker;
+            bool isHumansTurn = marker == newGame.playerOne.Marker;
 
             if ((isSinglePlayerAndNotDraw) && (isHumansTurn))
             {

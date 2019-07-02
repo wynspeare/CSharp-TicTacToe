@@ -72,5 +72,28 @@ namespace TicTacToeTests
             Assert.Equal(new List<int> { 4, 5, 6, 7, 8, 9 }, subject.getAvailableSpaces());
         }
 
+        [Fact]
+        public void aBoardCanBePartiallyFilledByPassingInAnArrayOfMoves()
+        {
+            var subject = new Board();
+            var p1_moves = new [] { 1, 2, 6, 7, 9 };
+            subject.partiallyFillBoard(p1_moves, P1_MARKER);
+
+            Assert.Equal(new List<int> { 3, 4, 5, 8 }, subject.getAvailableSpaces());
+        }
+
+        [Fact]
+        public void aBoardCanBeFilledByPassingInTwoArraysOfMoves()
+        {
+            var subject = new Board();
+            var p1_moves = new [] { 1, 2, 6, 7, 9 };
+            var p2_moves = new [] { 3, 4, 5, 8 };
+
+            subject.partiallyFillBoard(p1_moves, P1_MARKER);
+            subject.partiallyFillBoard(p2_moves, P2_MARKER);
+
+            Assert.True(subject.isBoardFilled());
+        }
+
     }
 }

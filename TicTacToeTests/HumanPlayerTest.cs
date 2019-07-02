@@ -14,7 +14,7 @@ namespace TicTacToeTests
             var board = new Board();
             var subject = new HumanPlayer(P1_MARKER, board);
 
-            Assert.Equal(P1_MARKER, subject.marker);
+            Assert.Equal(P1_MARKER, subject.Marker);
         }
 
         [Fact]

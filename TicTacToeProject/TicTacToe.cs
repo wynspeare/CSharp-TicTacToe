@@ -6,9 +6,9 @@ namespace TicTacToeApp
     {
         public Rules rules;
         public Board currentBoard;
-        public PlayerInterface playerOne;
-        public PlayerInterface playerTwo;
-        public PlayerInterface currentPlayer;
+        public IPlayer playerOne;
+        public IPlayer playerTwo;
+        public IPlayer currentPlayer;
         
         public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O", bool isSinglePlayer = false)
         {
@@ -16,12 +16,16 @@ namespace TicTacToeApp
             Symbols.P2_MARKER = playerTwoMarker;
             this.currentBoard = new Board();
             this.rules = new Rules();
+            
             this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);
             this.currentPlayer = this.playerOne;
-            
             if (isSinglePlayer) 
             {
-                this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, this.currentBoard);
+                var isEasyGame = false; //Need to pass in correct bool for easy/hard
+                var configuration = new Configuration(isEasyGame, this.currentBoard); 
+
+                this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, configuration.strategy);
+
             }
             else
             {
@@ -29,17 +33,17 @@ namespace TicTacToeApp
             }
         }
 
-        public int getCurrentMove(PlayerInterface player)
+        public int getCurrentMove(IPlayer player)
         {
             return Convert.ToInt32(player.getMove());
         }
 
         public bool turn(int location)
         {
-            moveMarker(location, currentPlayer.marker);
+            moveMarker(location, currentPlayer.Marker);
             
-            bool notWon = !rules.checkIfWon(currentBoard.board, currentPlayer.marker);
-            bool notDrawn = !rules.checkIfDraw(currentBoard, currentPlayer.marker);
+            bool notWon = !rules.checkIfWon(currentBoard.board, currentPlayer.Marker);
+            bool notDrawn = !rules.checkIfDraw(currentBoard, currentPlayer.Marker);
             bool notOver = notWon && notDrawn;
             if (notOver)
             {
@@ -61,6 +65,7 @@ namespace TicTacToeApp
         {
             currentBoard.placeMarker(location, marker);
         }
+
     }
 }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -46,6 +47,11 @@ namespace TicTacToeApp
         public bool isRowComplete(List <string> row, string marker) 
         {
             return row.All(space => space == marker) ? true : false; 
+        }
+
+        public bool isOver(Board board, string currentMarker)
+        {
+            return checkIfWon(board.board, currentMarker) || checkIfDraw(board, currentMarker);
         }
         
     }

@@ -15,6 +15,14 @@ namespace TicTacToeApp
             }
         }
 
+        public void partiallyFillBoard(int[] moves, string marker)
+        {
+            for (int i = 0; i < moves.GetLength(0); i++)
+            {
+                placeMarker(moves[i], marker);
+            }
+        }
+
         public bool isBoardEmpty()
         {
             return board.TrueForAll(space => space.isSpaceEmpty());
@@ -56,6 +64,18 @@ namespace TicTacToeApp
                 dictBoard.Add(space.location, space.marker);
             }
             return dictBoard;
+        }
+
+        public string getCurrentPlayer() {
+            int totalMovesOnBoard = 9 - getAvailableSpaces().Count;
+            if (totalMovesOnBoard % 2 == 0)
+            {
+                return Symbols.P1_MARKER;
+            }
+            else
+            {
+                return Symbols.P2_MARKER;
+            }
         }
     }
 }

@@ -2,40 +2,16 @@ using System;
 
 namespace TicTacToeApp
 {
-    public class HumanPlayer : PlayerInterface
+    public class HumanPlayer : IPlayer
     {
-        private string _marker;
-        private Board _board;
+        public string Marker { get; set; }
+        public Board Board;
 
-        public HumanPlayer(string marker, Board board)
+        public HumanPlayer(string Marker, Board Board)
         {
-            _marker = marker;
-            _board = board;
+            this.Marker = Marker;
+            this.Board = Board;
         }
-
-        public string marker
-        {
-            get
-            {
-                return _marker;
-            }
-            set
-            {
-                _marker = value;
-            }
-        }
-        
-        public Board board
-        {
-            get
-            {
-                return _board;
-            }
-            set
-            {
-                _board = value;
-            }
-        }       
 
         public string getMove()
         {
@@ -58,7 +34,7 @@ namespace TicTacToeApp
             try
             {
                 var convertedLocation = Convert.ToInt32(location);
-                return _board.getAvailableSpaces().Contains(convertedLocation);
+                return Board.getAvailableSpaces().Contains(convertedLocation);
             }
             catch (FormatException)
             {
