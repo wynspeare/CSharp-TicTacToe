@@ -41,7 +41,7 @@ namespace TicTacToeApp
 
         public bool checkIfDraw(Board board, string currentMarker)
         {
-            return board.isBoardFilled() && !checkIfWon(board.board, currentMarker);
+            return board.isBoardFilled() && !checkIfWon(board.spaces, currentMarker);
         }
 
         public bool isRowComplete(List <string> row, string marker) 
@@ -51,7 +51,7 @@ namespace TicTacToeApp
 
         public bool isOver(Board board, string currentMarker)
         {
-            return checkIfWon(board.board, currentMarker) || checkIfDraw(board, currentMarker);
+            return checkIfWon(board.spaces, currentMarker) || checkIfDraw(board, currentMarker);
         }
         
     }

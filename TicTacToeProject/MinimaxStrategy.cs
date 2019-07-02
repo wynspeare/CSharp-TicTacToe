@@ -43,7 +43,7 @@ namespace TicTacToeApp
 
         public int score(Board board, string playerMarker, int depth)
         {
-            bool isWon = rules.checkIfWon(board.board, playerMarker);
+            bool isWon = rules.checkIfWon(board.spaces, playerMarker);
             if (isWon && playerMarker == maximizingPlayer)
             {
 
@@ -95,7 +95,7 @@ namespace TicTacToeApp
 
         public void checkBoardArray(Board board)
         {
-            foreach (Space space in board.board)
+            foreach (Space space in board.spaces)
             {
                 Console.Write("{0}: {1} |  ", space.location, space.marker);
             }
@@ -106,9 +106,9 @@ namespace TicTacToeApp
             var possibleBoard = new Board();
             for (int i = 1; i <= Symbols.BOARD_SIZE; i++)
             {
-                if (boardToClone.board[i - 1].isSpaceFilled())
+                if (boardToClone.spaces[i - 1].isSpaceFilled())
                 {
-                    possibleBoard.board[i - 1].marker = boardToClone.board[i - 1].marker;
+                    possibleBoard.spaces[i - 1].marker = boardToClone.spaces[i - 1].marker;
                 }                
             }
             return possibleBoard;

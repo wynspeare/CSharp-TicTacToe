@@ -42,7 +42,7 @@ namespace TicTacToeApp
         {
             moveMarker(location, currentPlayer.Marker);
             
-            bool notWon = !rules.checkIfWon(currentBoard.board, currentPlayer.Marker);
+            bool notWon = !rules.checkIfWon(currentBoard.spaces, currentPlayer.Marker);
             bool notDrawn = !rules.checkIfDraw(currentBoard, currentPlayer.Marker);
             bool notOver = notWon && notDrawn;
             if (notOver)

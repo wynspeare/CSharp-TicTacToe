@@ -28,8 +28,8 @@ namespace TicTacToeTests
             board.partiallyFillBoard(p1_moves, P1_MARKER);
             board.partiallyFillBoard(p2_moves, P2_MARKER);
 
-            Assert.True(subject.rules.isOver(board, subject.currentPlayerMarker));
-            Assert.True(subject.rules.checkIfDraw(board, subject.currentPlayerMarker));
+            Assert.True(subject.rules.isOver(board, subject.maximizingPlayer));
+            Assert.True(subject.rules.checkIfDraw(board, subject.maximizingPlayer));
  
             Assert.Equal(0, subject.score(board, P1_MARKER, 0));
         }
@@ -45,11 +45,11 @@ namespace TicTacToeTests
             board.partiallyFillBoard(p1_moves, P1_MARKER);
             board.partiallyFillBoard(p2_moves, P2_MARKER);
 
-            subject.currentPlayerMarker = P2_MARKER;
-            subject.opponentPlayerMarker = P1_MARKER;
+            subject.maximizingPlayer = P2_MARKER;
+            subject.minimizingPlayer = P1_MARKER;
 
             Assert.True(subject.rules.isOver(board, P2_MARKER));
-            Assert.False(subject.rules.checkIfWon(board.board, P1_MARKER));
+            Assert.False(subject.rules.checkIfWon(board.spaces, P1_MARKER));
             Assert.Equal(10, subject.score(board, P2_MARKER, 0));
         }
 
@@ -64,11 +64,11 @@ namespace TicTacToeTests
             board.partiallyFillBoard(p1_moves, P1_MARKER);
             board.partiallyFillBoard(p2_moves, P2_MARKER);
 
-            subject.currentPlayerMarker = P2_MARKER;
-            subject.opponentPlayerMarker = P1_MARKER;
+            subject.maximizingPlayer = P2_MARKER;
+            subject.minimizingPlayer = P1_MARKER;
 
             Assert.True(subject.rules.isOver(board, P1_MARKER));
-            Assert.True(subject.rules.checkIfWon(board.board, P1_MARKER));
+            Assert.True(subject.rules.checkIfWon(board.spaces, P1_MARKER));
             Assert.Equal(-10, subject.score(board, P1_MARKER, 0));
         }
     }
