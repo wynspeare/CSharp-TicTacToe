@@ -7,15 +7,14 @@ namespace TicTacToeApp
     public class MinimaxStrategy : IStrategy
     {
         public int bestMove;
-        public Board originalBoard;
+        public Board originalBoard; 
         public Rules rules;
         public string maximizingPlayer;
         public string minimizingPlayer;
 
-        public MinimaxStrategy(Board originalBoard)
+        public MinimaxStrategy()
         {
             this.rules = new Rules();            
-            this.originalBoard = originalBoard;    
         }
 
         public void getMinimizingPlayer(string currentPlayer)
@@ -32,8 +31,9 @@ namespace TicTacToeApp
             }
         }
 
-        public string getMove(string maximizingPlayer)
+        public string getMove(string maximizingPlayer, Board board)
         {
+            originalBoard = board;    
             getMinimizingPlayer(maximizingPlayer);          
             var depth = 0;
             var score = minimax(originalBoard, maximizingPlayer, minimizingPlayer, depth);
@@ -45,8 +45,7 @@ namespace TicTacToeApp
         {
             bool isWon = rules.checkIfWon(board.spaces, playerMarker);
             if (isWon && playerMarker == maximizingPlayer)
-            {
-
+            { 
                 return 10 - depth;
             }
             else if (isWon && playerMarker == minimizingPlayer)

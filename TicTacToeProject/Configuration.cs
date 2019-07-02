@@ -7,15 +7,15 @@ namespace TicTacToeApp
         public IStrategy strategy;
         public Board board;
 
-        public Configuration(bool isEasyGame, Board board)
+        public Configuration(bool isEasyGame)
         {
             if (isEasyGame)
             {
-                strategy = new EasyStrategy(board);
+                strategy = new EasyStrategy();
             }
             else
             {
-                strategy = new MinimaxStrategy(board);
+                strategy = new MinimaxStrategy();
             }
         }
 

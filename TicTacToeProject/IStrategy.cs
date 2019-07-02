@@ -2,6 +2,6 @@ namespace TicTacToeApp
 {
     public interface IStrategy
     {
-        string getMove(string Marker);
+        string getMove(string Marker, Board Board);
     }
 }

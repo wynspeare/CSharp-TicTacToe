@@ -4,6 +4,6 @@ namespace TicTacToeApp
     {
         string Marker { get; set; }
 
-        string getMove();
+        string getMove(Board Board);
     }
 }

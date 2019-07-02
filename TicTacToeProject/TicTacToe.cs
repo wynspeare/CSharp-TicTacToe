@@ -17,25 +17,23 @@ namespace TicTacToeApp
             this.currentBoard = new Board();
             this.rules = new Rules();
             
-            this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);
+            this.playerOne = new HumanPlayer(Symbols.P1_MARKER);
             this.currentPlayer = this.playerOne;
             if (isSinglePlayer) 
             {
                 var isEasyGame = false; //Need to pass in correct bool for easy/hard
-                var configuration = new Configuration(isEasyGame, this.currentBoard); 
-
+                var configuration = new Configuration(isEasyGame);
                 this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, configuration.strategy);
-
             }
             else
             {
-                this.playerTwo = new HumanPlayer(Symbols.P2_MARKER, this.currentBoard);
+                this.playerTwo = new HumanPlayer(Symbols.P2_MARKER);
             }
         }
 
         public int getCurrentMove(IPlayer player)
         {
-            return Convert.ToInt32(player.getMove());
+            return Convert.ToInt32(player.getMove(currentBoard));
         }
 
         public bool turn(int location)
