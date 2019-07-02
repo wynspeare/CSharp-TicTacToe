@@ -14,7 +14,7 @@ namespace TicTacToeApp
             this.board = board;
         }
 
-        public string getMove()
+        public string getMove(string Marker)
         {
             string location = getRandomSpace().ToString();
             Console.WriteLine("\nThe computer selected space {0}.", location);

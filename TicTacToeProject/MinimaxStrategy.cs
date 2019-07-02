@@ -9,8 +9,8 @@ namespace TicTacToeApp
         public int bestMove;
         public Board originalBoard;
         public Rules rules;
-        public string currentPlayerMarker;
-        public string opponentPlayerMarker;
+        public string maximizingPlayer;
+        public string minimizingPlayer;
 
         public MinimaxStrategy(Board originalBoard)
         {
@@ -18,26 +18,25 @@ namespace TicTacToeApp
             this.originalBoard = originalBoard;    
         }
 
-        public void setPlayers()
+        public void getMinimizingPlayer(string currentPlayer)
         {
-            var current = originalBoard.getCurrentPlayer();
-            if (current == Symbols.P1_MARKER)
+            if (currentPlayer == Symbols.P1_MARKER)
             {
-                currentPlayerMarker = current;
-                opponentPlayerMarker = Symbols.P2_MARKER;
+                maximizingPlayer = currentPlayer;
+                minimizingPlayer = Symbols.P2_MARKER;
             }
             else
             {
-                currentPlayerMarker = Symbols.P2_MARKER;
-                opponentPlayerMarker = Symbols.P1_MARKER;
+                maximizingPlayer = Symbols.P2_MARKER;
+                minimizingPlayer = Symbols.P1_MARKER;
             }
         }
 
-        public string getMove()
+        public string getMove(string maximizingPlayer)
         {
-            setPlayers();            
+            getMinimizingPlayer(maximizingPlayer);          
             var depth = 0;
-            var score = minimax(originalBoard, currentPlayerMarker, opponentPlayerMarker, depth);
+            var score = minimax(originalBoard, maximizingPlayer, minimizingPlayer, depth);
             Console.WriteLine("\nThe minimax computer selected space {0}.", bestMove);
             return bestMove.ToString();
         }
@@ -45,12 +44,12 @@ namespace TicTacToeApp
         public int score(Board board, string playerMarker, int depth)
         {
             bool isWon = rules.checkIfWon(board.board, playerMarker);
-            if (isWon && playerMarker == currentPlayerMarker)
+            if (isWon && playerMarker == maximizingPlayer)
             {
 
                 return 10 - depth;
             }
-            else if (isWon && playerMarker == opponentPlayerMarker)
+            else if (isWon && playerMarker == minimizingPlayer)
             {     
                 return depth -10;
             }
@@ -60,11 +59,11 @@ namespace TicTacToeApp
             }
         }
 
-        public int minimax(Board board, string currentPlayerMarker, string opponentPlayerMarker, int depth)
+        public int minimax(Board board, string maximizingPlayer, string minimizingPlayer, int depth)
         {
-            if (rules.isOver(board, opponentPlayerMarker))
+            if (rules.isOver(board, minimizingPlayer))
             {
-                return score(board, opponentPlayerMarker, depth);
+                return score(board, minimizingPlayer, depth);
             }
             depth += 1;
             var scores = new List<int>();
@@ -74,13 +73,13 @@ namespace TicTacToeApp
 
             foreach (int move in availableMoves)
             {
-                var possibleBoard = getBoardWithNextMove(board, currentPlayerMarker, move);
+                var possibleBoard = getBoardWithNextMove(board, maximizingPlayer, move);
 
-                scores.Add(minimax(possibleBoard, opponentPlayerMarker, currentPlayerMarker, depth));
+                scores.Add(minimax(possibleBoard, minimizingPlayer, maximizingPlayer, depth));
                 moves.Add(move);
             }
 
-            if (currentPlayerMarker == originalBoard.getCurrentPlayer())
+            if (maximizingPlayer == originalBoard.getCurrentPlayer())
             {
                 int maxScoreIndex = scores.IndexOf(scores.Max());
                 bestMove = moves[maxScoreIndex];

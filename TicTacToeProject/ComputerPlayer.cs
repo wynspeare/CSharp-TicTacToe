@@ -15,7 +15,7 @@ namespace TicTacToeApp
 
         public string getMove()
         {
-            return strategy.getMove();
+            return strategy.getMove(Marker); // pass in own marker
         }
     }
 }
