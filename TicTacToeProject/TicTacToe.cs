@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 
 namespace TicTacToeApp
 {
@@ -9,26 +11,14 @@ namespace TicTacToeApp
         public IPlayer playerOne;
         public IPlayer playerTwo;
         public IPlayer currentPlayer;
-        
-        public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O", bool isSinglePlayer = false)
+
+        public TicTacToe(List<IPlayer> players)
         {
-            Symbols.P1_MARKER = playerOneMarker;
-            Symbols.P2_MARKER = playerTwoMarker;
             this.currentBoard = new Board();
             this.rules = new Rules();
-            
-            this.playerOne = new HumanPlayer(Symbols.P1_MARKER);
+            this.playerOne = players[0];
+            this.playerTwo = players[1];
             this.currentPlayer = this.playerOne;
-            if (isSinglePlayer) 
-            {
-                var isEasyGame = false; //Need to pass in correct bool for easy/hard
-                var configuration = new Configuration(isEasyGame);
-                this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, configuration.strategy);
-            }
-            else
-            {
-                this.playerTwo = new HumanPlayer(Symbols.P2_MARKER);
-            }
         }
 
         public int getCurrentMove(IPlayer player)
