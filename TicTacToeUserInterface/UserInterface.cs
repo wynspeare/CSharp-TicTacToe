@@ -30,13 +30,12 @@ namespace TicTacToeUserInterface
         {
             Console.WriteLine("Do you want play an unbeatable computer? Y/N");            
             string answer = Console.ReadLine();            
-            if (answer == "Y" || answer == "N")
+            if (isValidYesOrNoInput(answer))
             {
                 return answer;
             }
             else
             {
-                Console.WriteLine("Please enter Y or N only.");
                 return getDifficultyLevel();
             }
         }
@@ -45,13 +44,12 @@ namespace TicTacToeUserInterface
         {
             Console.WriteLine("Do you want to go first? Y/N");            
             string answer = Console.ReadLine();            
-            if (answer == "Y" || answer == "N")
+            if (isValidYesOrNoInput(answer))
             {
                 return answer;
             }
             else
             {
-                Console.WriteLine("Please enter Y or N only.");
                 return getPlayerOrder();
             }
         }
@@ -60,20 +58,41 @@ namespace TicTacToeUserInterface
         {
             Console.WriteLine("Do you want to play against the computer? Y/N");            
             string answer = Console.ReadLine();            
-            if (answer == "Y" || answer == "N")
+            if (isValidYesOrNoInput(answer))
             {
                 return answer;
             }
             else
             {
-                Console.WriteLine("Please enter Y or N only.");
                 return getTypeOfGame();
             }
         }
 
-        public bool isSinglePlayerGame(string isSinglePlayer)
+        public string isCompVCompGame()
         {
-            return isSinglePlayer == "Y" ? true : false;
+            Console.WriteLine("Do you want to watch an unbeatable computer play a random computer? Y/N");            
+            string answer = Console.ReadLine();
+            if (isValidYesOrNoInput(answer))
+            {
+                return answer;
+            }
+            else
+            {
+                return isCompVCompGame();
+            }            
+        }
+
+        public bool isValidYesOrNoInput(string userInput)
+        {   
+            if (userInput == "Y" || userInput == "N")
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Please enter Y or N only.");
+                return false;
+            }
         }
 
         public bool isUserInputYes(string userInput)
@@ -94,19 +113,7 @@ namespace TicTacToeUserInterface
             }
             else
             {
-                Console.WriteLine("\"{0}\" has WON!", winnersMarker);    
-            }
-        }
-
-        public void displaySinglePlayerGameStatus(bool isWon)
-        {
-            if(isWon)
-            {
-                Console.WriteLine("Congrats you are the winner!!");
-            }
-            else
-            {
-                Console.WriteLine("Oh no, the computer is the winner, better luck next time.");
+                Console.WriteLine("Player \"{0}\" has WON!", winnersMarker);    
             }
         }
 

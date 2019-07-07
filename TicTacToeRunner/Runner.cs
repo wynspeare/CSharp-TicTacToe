@@ -25,29 +25,27 @@ namespace TicTacToeRunner
             {
                 var isEasyGame = false;
                 var isHumanFirst = false;
+                var isCompVCompGame = false;
                 var isSinglePlayer = gameUI.isUserInputYes(gameUI.getTypeOfGame());
                 if (isSinglePlayer)
                 {
                     isEasyGame = !gameUI.isUserInputYes(gameUI.getDifficultyLevel());
                     
                     isHumanFirst = gameUI.isUserInputYes(gameUI.getPlayerOrder());
-                    
-                    // options = new Options(gameUI.setMarkers(), isSinglePlayer);
+                }
+                else
+                {
+                    isCompVCompGame = gameUI.isUserInputYes(gameUI.isCompVCompGame());
                 }
                 options = new Options(gameUI.setMarkers(), isSinglePlayer);
-                
-                options.setPlayer(isSinglePlayer, isEasyGame, isHumanFirst);
 
-                // options.setPlayer(isSinglePlayer);
+                options.setPlayer(isSinglePlayer, isEasyGame, isHumanFirst, isCompVCompGame);
 
                 var config = new Configuration(options.P1_MARKER, options.P2_MARKER);
 
                 var players = config.buildPlayers(options.playerTypes);
                 
-                // newGame = new TicTacToe(options.IS_SINGLE_PLAYER);
                 newGame = new TicTacToe(players);
-
-
                 while (!isGameOver)
                 {
                     playGameLoop();
@@ -80,23 +78,8 @@ namespace TicTacToeRunner
 
             gameUI.displayBoard(newGame.currentBoard.createDictBoard());
             gameUI.displayWinOrDraw(isDraw, marker);
-            getSinglePlayerGameStatus(marker, isDraw);
             isGameOver = true;
         }
 
-        private void getSinglePlayerGameStatus(string marker, bool isDraw)
-        {
-            bool isSinglePlayerAndNotDraw = options.IS_SINGLE_PLAYER != isDraw;
-            bool isHumansTurn = marker == newGame.playerOne.Marker;
-
-            if ((isSinglePlayerAndNotDraw) && (isHumansTurn))
-            {
-                gameUI.displaySinglePlayerGameStatus(true);
-            }
-            else if (isSinglePlayerAndNotDraw)
-            {
-                gameUI.displaySinglePlayerGameStatus(false);
-            }
-        }
     }
 }
