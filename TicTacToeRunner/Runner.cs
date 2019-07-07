@@ -6,7 +6,7 @@ using TicTacToeUserInterface;
 namespace TicTacToeRunner
 {
     class Runner
-    {
+    { 
         private TicTacToe newGame;
         private UserInterface gameUI;
         private Options options;
@@ -23,8 +23,22 @@ namespace TicTacToeRunner
             gameUI = new UserInterface();
             if (gameUI.startNewGame())
             {
-                var isSinglePlayer = gameUI.isSinglePlayerGame(gameUI.getTypeOfGame());
+                var isEasyGame = false;
+                var isHumanFirst = false;
+                var isSinglePlayer = gameUI.isUserInputYes(gameUI.getTypeOfGame());
+                if (isSinglePlayer)
+                {
+                    isEasyGame = !gameUI.isUserInputYes(gameUI.getDifficultyLevel());
+                    
+                    isHumanFirst = gameUI.isUserInputYes(gameUI.getPlayerOrder());
+                    
+                    // options = new Options(gameUI.setMarkers(), isSinglePlayer);
+                }
                 options = new Options(gameUI.setMarkers(), isSinglePlayer);
+                
+                options.setPlayer(isSinglePlayer, isEasyGame, isHumanFirst);
+
+                // options.setPlayer(isSinglePlayer);
 
                 var config = new Configuration(options.P1_MARKER, options.P2_MARKER);
 

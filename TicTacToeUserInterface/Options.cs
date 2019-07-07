@@ -17,19 +17,43 @@ namespace TicTacToeUserInterface
         public Dictionary<int, List<string>> playerTypes = new Dictionary<int, List<string>>();
 
 
-        public Options (Tuple<string, string> markers, bool isSinglePlayer = false)
+        public Options (Tuple<string, string> markers, bool isSinglePlayer)
         {
             this.P1_MARKER = markers.Item1;
             this.P2_MARKER = markers.Item2;
             this.IS_SINGLE_PLAYER = isSinglePlayer;
 
-            playerTypes.Add(1, new List<string> { "computer", markers.Item1, "hard"});
-            playerTypes.Add(2, new List<string> { "computer", markers.Item2, "easy" });
-
-            // playerTypes.Add(1, new List<string> { "human", markers.Item1 });
-            // playerTypes.Add(2, new List<string> { "computer", markers.Item2, "easy"});
-
-
+            // playerTypes.Add(1, new List<string> { "computer", markers.Item1, "hard"});
+            // playerTypes.Add(2, new List<string> { "computer", markers.Item2, "easy" });
+        }
+    
+        public void setPlayer(bool isSinglePlayer, bool isEasyGame = false, bool isHumanFirst = false)
+        {
+            if (isSinglePlayer && isHumanFirst && isEasyGame) //easy human first
+            {
+                playerTypes.Add(1, new List<string> { "human", P1_MARKER});
+                playerTypes.Add(2, new List<string> { "computer", P2_MARKER, "easy"});
+            } 
+            else if (isSinglePlayer && isHumanFirst) //minimax human first
+            {
+                playerTypes.Add(1, new List<string> { "human", P1_MARKER});
+                playerTypes.Add(2, new List<string> { "computer", P2_MARKER, "hard"});
+            }
+            else if (isEasyGame) // easy comp first
+            {
+                playerTypes.Add(1, new List<string> { "computer", P1_MARKER, "easy"});
+                playerTypes.Add(2, new List<string> { "human", P2_MARKER});
+            }
+            else if (isSinglePlayer) //minimax comp first
+            {
+                playerTypes.Add(1, new List<string> { "computer", P1_MARKER, "hard"});
+                playerTypes.Add(2, new List<string> { "human", P2_MARKER});
+            }
+            else // human game
+            {
+                playerTypes.Add(1, new List<string> { "human", P1_MARKER});
+                playerTypes.Add(2, new List<string> { "human", P2_MARKER});
+            }
         }
     }
 }

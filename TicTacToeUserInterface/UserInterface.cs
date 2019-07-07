@@ -26,6 +26,36 @@ namespace TicTacToeUserInterface
             }
         }
 
+        public string getDifficultyLevel()
+        {
+            Console.WriteLine("Do you want play an unbeatable computer? Y/N");            
+            string answer = Console.ReadLine();            
+            if (answer == "Y" || answer == "N")
+            {
+                return answer;
+            }
+            else
+            {
+                Console.WriteLine("Please enter Y or N only.");
+                return getDifficultyLevel();
+            }
+        }
+
+        public string getPlayerOrder()
+        {
+            Console.WriteLine("Do you want to go first? Y/N");            
+            string answer = Console.ReadLine();            
+            if (answer == "Y" || answer == "N")
+            {
+                return answer;
+            }
+            else
+            {
+                Console.WriteLine("Please enter Y or N only.");
+                return getPlayerOrder();
+            }
+        }
+
         public string getTypeOfGame()
         {
             Console.WriteLine("Do you want to play against the computer? Y/N");            
@@ -44,6 +74,11 @@ namespace TicTacToeUserInterface
         public bool isSinglePlayerGame(string isSinglePlayer)
         {
             return isSinglePlayer == "Y" ? true : false;
+        }
+
+        public bool isUserInputYes(string userInput)
+        {
+            return userInput == "Y" ? true : false;
         }
 
         public void askForMove(string marker)
