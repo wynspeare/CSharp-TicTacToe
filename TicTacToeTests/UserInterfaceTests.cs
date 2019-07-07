@@ -34,11 +34,13 @@ namespace TicTacToeTests
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void singlePlayerGameCanBeSelected()
+        public void yesOrNoUserInputCanBeChangedToTrueOrFalse()
         {
             var subject = new UserInterface();
-            var typeOfGame = "Y";
-            Assert.True(subject.isSinglePlayerGame(typeOfGame));
+
+            Assert.True(subject.isValidYesOrNoInput("Y"));
+            Assert.True(subject.isValidYesOrNoInput("N"));
+            Assert.False(subject.isValidYesOrNoInput("1"));
         }
     }
 }

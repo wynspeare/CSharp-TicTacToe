@@ -11,55 +11,51 @@ namespace TicTacToeTests
         public const string EMPTY = "_";
         public const string P1_MARKER = "+";
         public const string P2_MARKER = "o";
-        public const bool IS_SINGLE_PLAYER = true;
 
         [Fact]
-        public void twoPlayerGameInitializesWithDefaultPlayerMarkersXandO()
+        public void anHvHGameInitializesProvidedPlayerMarkers()
         {
-            var subject = new TicTacToe();
-            
-            Assert.Equal("X", subject.playerOne.Marker);
-            Assert.Equal("O", subject.playerTwo.Marker);
-        }
-
-        [Fact]
-        public void twoPlayerGameInitializesProvidedPlayerMarkers()
-        {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);
 
             Assert.Equal(P1_MARKER, subject.playerOne.Marker);
             Assert.Equal(P2_MARKER, subject.playerTwo.Marker);
         }
         
         [Fact]
-        public void currentMarkerInTwoPlayerGameIsPlayerOne()
+        public void currentMarkerInANewGameIsPlayerOne()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+
+            var subject = new TicTacToe(players);
 
             Assert.Equal(P1_MARKER, subject.currentPlayer.Marker);
         }
 
         [Fact]
-        public void gameInitializesWithNewInstanceOfBoard()
+        public void gameInitializesWithAnEmptyBoard()
         {
-            var subject = new TicTacToe();
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);
 
-            Assert.NotNull(subject.currentBoard);
+            Assert.True(subject.currentBoard.isBoardEmpty());
         }
 
         [Fact]
         public void aNewGameCanMarkaSpace()
         {
-            var subject = new TicTacToe(P1_MARKER);
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);
             subject.moveMarker(3, P1_MARKER);
 
             Assert.Equal(P1_MARKER, subject.currentBoard.markerAtLocation(3));
         }
 
         [Fact]
-        public void twoPlayerGameAPlayerCanBeSwitched()
+        public void anHvHGamePlayersCanBeSwitched()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);
             Assert.Equal("+", subject.currentPlayer.Marker);
 
             subject.switchPlayer();
@@ -67,10 +63,12 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void twoPlayerGameATurnCanBePlayedAndThePlayerIsSwitched()
+        public void aTurnCanBePlayedAndThePlayerIsSwitched()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
-            Assert.Equal("+", subject.currentPlayer.Marker);
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);    
+
+            Assert.Equal(P1_MARKER, subject.currentPlayer.Marker);
             subject.turn(1);
             Assert.Equal(P2_MARKER, subject.currentPlayer.Marker);
         }
@@ -78,7 +76,8 @@ namespace TicTacToeTests
         [Fact]
         public void RowOfThreeSameMarkersReturnsTrue()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players); 
             var row = new List<string> {P1_MARKER, P1_MARKER, P1_MARKER};
 
             Assert.True(subject.rules.isRowComplete(row, P1_MARKER));
@@ -87,7 +86,8 @@ namespace TicTacToeTests
         [Fact]
         public void aBoardWithThreeHorizontalMarkersInARowWinsGame()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);           
             subject.moveMarker(4, subject.playerOne.Marker);
             subject.moveMarker(5, subject.playerOne.Marker);
             subject.moveMarker(6, subject.playerOne.Marker);
@@ -98,7 +98,8 @@ namespace TicTacToeTests
         [Fact]
         public void aBoardWithThreeDiagonalMarkersInARowWinsGame()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);            
             subject.moveMarker(1, subject.playerOne.Marker);
             subject.moveMarker(5, subject.playerOne.Marker);
             subject.moveMarker(9, subject.playerOne.Marker);
@@ -109,7 +110,8 @@ namespace TicTacToeTests
         [Fact]
         public void aBoardWithThreeVerticalMarkersInARowWinsGame()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);            
             subject.moveMarker(3, subject.playerOne.Marker);
             subject.moveMarker(6, subject.playerOne.Marker);
             subject.moveMarker(9, subject.playerOne.Marker);
@@ -121,7 +123,8 @@ namespace TicTacToeTests
         [Fact]
         public void aFullBoardWithNoWinnerIsADraw()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);            
             subject.moveMarker(1, subject.playerOne.Marker);
             subject.moveMarker(2, subject.playerOne.Marker);
             subject.moveMarker(6, subject.playerOne.Marker);
@@ -136,9 +139,10 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void aTwoPlayerGameCanBeADrawWithPlayersSwitchingTurns()
+        public void anHvHGameCanBeADrawWithPlayersSwitchingTurns()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);            
             subject.turn(1);
             subject.turn(3);
             subject.turn(2);
@@ -154,9 +158,10 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void aTwoPlayerGameCanBeWonWithPlayersSwitchingTurns()
+        public void anHvHGameCanBeWonWithPlayersSwitchingTurns()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER);           
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new HumanPlayer(P2_MARKER)};
+            var subject = new TicTacToe(players);            
             subject.turn(1);
             subject.turn(6);
             subject.turn(9);
@@ -171,25 +176,20 @@ namespace TicTacToeTests
         [Fact]
         public void singlePlayerGameInitializesProvidedPlayerMarkers()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new ComputerPlayer(P2_MARKER, new EasyStrategy())};
+            var subject = new TicTacToe(players); 
 
             Assert.Equal(P1_MARKER, subject.playerOne.Marker);
             Assert.Equal(P2_MARKER, subject.playerTwo.Marker);
         }
         
-        [Fact]
-        public void currentMarkerInSinglePlayerGameIsPlayerOne()
-        {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);
-
-            Assert.Equal(P1_MARKER, subject.currentPlayer.Marker);
-        }
 
         [Fact]
         public void singlePlayerGameAPlayerCanBeSwitched()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);           
-            Assert.Equal("+", subject.currentPlayer.Marker);
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new ComputerPlayer(P2_MARKER, new EasyStrategy())};
+            var subject = new TicTacToe(players);           
+            Assert.Equal(P1_MARKER, subject.currentPlayer.Marker);
             
             subject.switchPlayer();
             Assert.Equal(P2_MARKER, subject.currentPlayer.Marker);
@@ -198,7 +198,8 @@ namespace TicTacToeTests
         [Fact]
         public void aSinglePlayerGameCanBeADrawWithMockedLocations()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);           
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new ComputerPlayer(P2_MARKER, new EasyStrategy())};
+            var subject = new TicTacToe(players);            
             subject.turn(1);
             subject.turn(3);
             subject.turn(2);
@@ -216,7 +217,8 @@ namespace TicTacToeTests
         [Fact]
         public void aSinglePlayerGameCanBeWonWithMockedLocations()
         {
-            var subject = new TicTacToe(P1_MARKER, P2_MARKER, IS_SINGLE_PLAYER);           
+            var players = new List<IPlayer>() { new HumanPlayer(P1_MARKER), new ComputerPlayer(P2_MARKER, new EasyStrategy())};
+            var subject = new TicTacToe(players);            
             subject.turn(1);
             subject.turn(6);
             subject.turn(9);

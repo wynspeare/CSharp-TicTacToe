@@ -37,9 +37,8 @@ namespace TicTacToeRunner
                 {
                     isCompVCompGame = gameUI.isUserInputYes(gameUI.isCompVCompGame());
                 }
-                options = new Options(gameUI.setMarkers(), isSinglePlayer);
+                options = new Options(gameUI.setMarkers(), isSinglePlayer, isEasyGame, isHumanFirst, isCompVCompGame);
 
-                options.setPlayer(isSinglePlayer, isEasyGame, isHumanFirst, isCompVCompGame);
 
                 var config = new Configuration(options.P1_MARKER, options.P2_MARKER);
 
