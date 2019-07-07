@@ -9,7 +9,6 @@ namespace TicTacToeApp
         public HumanPlayer(string Marker)
         {
             this.Marker = Marker;
-            // this.rules = rules;
         }
 
         public string getMove(Board Board)
