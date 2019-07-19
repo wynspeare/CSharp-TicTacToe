@@ -7,53 +7,30 @@ namespace TicTacToeUserInterface
 {
     public class Options {
 
+        enum PlayerSetting {human, easy, hard};
+
         public string P1_MARKER;
         public string P2_MARKER;
 
         public const string EMPTY = Symbols.EMPTY;
         public const int BOARD_SIZE = Symbols.BOARD_SIZE;
 
-        public Dictionary<string, List<string>> playerTypes = new Dictionary<string, List<string>>();
-
-        public Options (Tuple<string, string> markers, bool isSinglePlayer = false, bool isEasyGame = false, bool isHumanFirst = false, bool isCompVCompGame = false)
+        public Dictionary<string, string> playerTypes = new Dictionary<string, string>();
+        public Options (Tuple<string, string> markers, int p1Setting, int p2Setting)
         {
             this.P1_MARKER = markers.Item1;
             this.P2_MARKER = markers.Item2;
-            this.setPlayers(isSinglePlayer, isEasyGame, isHumanFirst, isCompVCompGame);
+            this.setPlayers(p1Setting, p2Setting);
         }
-    
-        private void setPlayers(bool isSinglePlayer, bool isEasyGame, bool isHumanFirst, bool isCompVCompGame)
+
+        private void setPlayers(int p1Setting, int p2Setting)
         {
-            if (isCompVCompGame)
-            {
-                playerTypes.Add(P1_MARKER, new List<string> { "computer", "hard"});
-                playerTypes.Add(P2_MARKER, new List<string> { "computer", "easy"});
-            }
-            else if (isSinglePlayer && isHumanFirst && isEasyGame)
-            {
-                playerTypes.Add(P1_MARKER, new List<string> { "human" });
-                playerTypes.Add(P2_MARKER, new List<string> { "computer", "easy"});
-            } 
-            else if (isSinglePlayer && isHumanFirst)
-            {
-                playerTypes.Add(P1_MARKER, new List<string> { "human" });
-                playerTypes.Add(P2_MARKER, new List<string> { "computer", "hard"});
-            }
-            else if (isEasyGame)
-            {
-                playerTypes.Add(P1_MARKER, new List<string> { "computer", "easy"});
-                playerTypes.Add(P2_MARKER, new List<string> { "human" });
-            }
-            else if (isSinglePlayer)
-            {
-                playerTypes.Add(P1_MARKER, new List<string> { "computer", "hard"});
-                playerTypes.Add(P2_MARKER, new List<string> { "human" });
-            }
-            else
-            {
-                playerTypes.Add(P1_MARKER, new List<string> { "human" });
-                playerTypes.Add(P2_MARKER, new List<string> { "human"});
-            }
+                PlayerSetting p1 = (PlayerSetting)p1Setting;
+                PlayerSetting p2 = (PlayerSetting)p2Setting;
+
+                playerTypes.Add(P1_MARKER, p1.ToString());
+                playerTypes.Add(P2_MARKER, p2.ToString());
         }
     }
 }
+

@@ -23,22 +23,45 @@ namespace TicTacToeRunner
             gameUI = new UserInterface();
             if (gameUI.startNewGame())
             {
-                var isEasyGame = false;
-                var isHumanFirst = false;
-                var isCompVCompGame = false;
+                int p1Setting = 0;
+                int p2Setting = 0;
                 var isSinglePlayer = gameUI.isUserInputYes(gameUI.getTypeOfGame());
                 if (isSinglePlayer)
                 {
-                    isEasyGame = !gameUI.isUserInputYes(gameUI.getDifficultyLevel());
-                    
-                    isHumanFirst = gameUI.isUserInputYes(gameUI.getPlayerOrder());
+                    if (gameUI.isUserInputYes(gameUI.getPlayerOrder()))
+                    {
+                        p1Setting = 0;
+                        if (!gameUI.isUserInputYes(gameUI.getDifficultyLevel()))
+                        {
+                            p2Setting = 1;
+                        }
+                        else
+                        {
+                            p2Setting = 2;
+                        }
+                    }
+                    else
+                    {
+                        p2Setting = 0;
+                        if (!gameUI.isUserInputYes(gameUI.getDifficultyLevel()))
+                        {
+                            p1Setting = 1;
+                        }
+                        else
+                        {
+                            p1Setting = 2;
+                        }
+                    }
                 }
                 else
                 {
-                    isCompVCompGame = gameUI.isUserInputYes(gameUI.isCompVCompGame());
+                    if (gameUI.isUserInputYes(gameUI.isCompVCompGame()))
+                    {
+                        p1Setting = 2;
+                        p2Setting = 1;
+                    }
                 }
-                options = new Options(gameUI.setMarkers(), isSinglePlayer, isEasyGame, isHumanFirst, isCompVCompGame);
-
+                options = new Options(gameUI.setMarkers(), p1Setting, p2Setting);
 
                 var config = new Configuration(options.P1_MARKER, options.P2_MARKER);
 

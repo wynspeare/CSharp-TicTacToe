@@ -18,7 +18,7 @@ namespace TicTacToeTests
         {
             var subject = new UserInterface();
             var markers = new Tuple<string, string> ( P1_MARKER, P2_MARKER );
-            var options = new Options(markers);
+            var options = new Options(markers, 0, 0);
             Assert.Equal("+", options.P1_MARKER);
             Assert.Equal("o", options.P2_MARKER);
         }
