@@ -5,23 +5,21 @@ namespace TicTacToeApp
     public class HumanPlayer : IPlayer
     {
         public string Marker { get; set; }
-        public Board Board;
 
-        public HumanPlayer(string Marker, Board Board)
+        public HumanPlayer(string Marker)
         {
             this.Marker = Marker;
-            this.Board = Board;
         }
 
-        public string getMove()
-        {
-            return getValidSpace();
+        public string GetMove(Board Board)
+        {      
+            return getValidSpace(Board);
         }
         
-        private string getValidSpace()
+        private string getValidSpace(Board Board)
         {
             var location = getSpace();
-            while(!isValidSpace(location))
+            while(!isValidSpace(location, Board))
             {
                 Console.Write("Try again! ");                
                 location = getSpace();
@@ -29,12 +27,12 @@ namespace TicTacToeApp
             return location;
         }
 
-        public bool isValidSpace(string location)
+        public bool isValidSpace(string location, Board Board)
         {   
             try
             {
                 var convertedLocation = Convert.ToInt32(location);
-                return Board.getAvailableSpaces().Contains(convertedLocation);
+                return Board.GetAvailableSpaces().Contains(convertedLocation);
             }
             catch (FormatException)
             {

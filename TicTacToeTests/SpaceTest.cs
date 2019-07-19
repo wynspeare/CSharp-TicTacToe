@@ -9,14 +9,14 @@ namespace TicTacToeTests
     public class SpaceTest
     {
         [Fact]
-        public void aNewSpaceIsEmpty()
+        public void NewSpaceIsEmpty()
         {
             var subject = new Space(1);
-            Assert.True(subject.isSpaceEmpty());
+            Assert.True(subject.IsSpaceEmpty());
         }
 
         [Fact]
-        public void aSpacesMarkerCanBeChanged()
+        public void SpacesMarkerCanBeChanged()
         {
             var subject = new Space(1);
             subject.marker = "X";
@@ -24,19 +24,19 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void aMarkedSpaceIsNotEmpty()
+        public void MarkedSpaceIsNotEmpty()
         {
             var subject = new Space(1);
             subject.marker = "X";
-            Assert.False(subject.isSpaceEmpty());
+            Assert.False(subject.IsSpaceEmpty());
         }
 
         [Fact]
-        public void aMarkedSpaceIsFilled()
+        public void MarkedSpaceIsFilled()
         {
             var subject = new Space(1);
             subject.marker = "X";
-            Assert.True(subject.isSpaceFilled());
+            Assert.True(subject.IsSpaceFilled());
         }
     }
 }

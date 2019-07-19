@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 
 namespace TicTacToeApp
 {
@@ -9,45 +11,31 @@ namespace TicTacToeApp
         public IPlayer playerOne;
         public IPlayer playerTwo;
         public IPlayer currentPlayer;
-        
-        public TicTacToe(string playerOneMarker = "X", string playerTwoMarker = "O", bool isSinglePlayer = false)
+
+        public TicTacToe(List<IPlayer> players)
         {
-            Symbols.P1_MARKER = playerOneMarker;
-            Symbols.P2_MARKER = playerTwoMarker;
             this.currentBoard = new Board();
             this.rules = new Rules();
-            
-            this.playerOne = new HumanPlayer(Symbols.P1_MARKER, this.currentBoard);
+            this.playerOne = players[0];
+            this.playerTwo = players[1];
             this.currentPlayer = this.playerOne;
-            if (isSinglePlayer) 
-            {
-                var isEasyGame = false; //Need to pass in correct bool for easy/hard
-                var configuration = new Configuration(isEasyGame, this.currentBoard); 
-
-                this.playerTwo = new ComputerPlayer(Symbols.P2_MARKER, configuration.strategy);
-
-            }
-            else
-            {
-                this.playerTwo = new HumanPlayer(Symbols.P2_MARKER, this.currentBoard);
-            }
         }
 
-        public int getCurrentMove(IPlayer player)
+        public int GetCurrentMove(IPlayer player)
         {
-            return Convert.ToInt32(player.getMove());
+            return Convert.ToInt32(player.GetMove(currentBoard));
         }
 
-        public bool turn(int location)
+        public bool Turn(int location)
         {
-            moveMarker(location, currentPlayer.Marker);
+            MoveMarker(location, currentPlayer.Marker);
             
-            bool notWon = !rules.checkIfWon(currentBoard.board, currentPlayer.Marker);
-            bool notDrawn = !rules.checkIfDraw(currentBoard, currentPlayer.Marker);
+            bool notWon = !rules.CheckIfWon(currentBoard.spaces, currentPlayer.Marker);
+            bool notDrawn = !rules.CheckIfDraw(currentBoard, currentPlayer.Marker);
             bool notOver = notWon && notDrawn;
             if (notOver)
             {
-                switchPlayer();
+                SwitchPlayer();
                 return true;
             }
             else
@@ -56,14 +44,14 @@ namespace TicTacToeApp
             }
         }
 
-        public void switchPlayer()
+        public void SwitchPlayer()
         {
             currentPlayer = (currentPlayer == playerOne) ? playerTwo : playerOne;
         }
 
-        public void moveMarker(int location, string marker)
+        public void MoveMarker(int location, string marker)
         {
-            currentBoard.placeMarker(location, marker);
+            currentBoard.PlaceMarker(location, marker);
         }
 
     }

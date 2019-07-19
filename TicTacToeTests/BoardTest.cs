@@ -13,86 +13,86 @@ namespace TicTacToeTests
         public const string P2_MARKER = "*";
 
         [Fact]
-        public void aNewBoardIsEmpty()
+        public void ANewBoardIsEmpty()
         {
             var subject = new Board();
-            Assert.True(subject.isBoardEmpty());
+            Assert.True(subject.IsBoardEmpty());
         }
 
         [Fact]
-        public void aBoardCanMarkaSpace()
+        public void ABoardCanMarkaSpace()
         {
             var subject = new Board();
-            subject.placeMarker(5, P2_MARKER);
-            Assert.Equal(P2_MARKER, subject.markerAtLocation(5));
+            subject.PlaceMarker(5, P2_MARKER);
+            Assert.Equal(P2_MARKER, subject.MarkerAtLocation(5));
         }
 
         [Fact]
-        public void aSpecificLocationIsFilledAfterAMarkerIsPlaced()
+        public void ASpecificLocationIsFilledAfterAMarkerIsPlaced()
         {
             var subject = new Board();
-            subject.placeMarker(5, P1_MARKER);
-            Assert.False(subject.isSpaceOnBoardEmpty(5));
+            subject.PlaceMarker(5, P1_MARKER);
+            Assert.False(subject.IsSpaceOnBoardEmpty(5));
         }
 
         [Fact]
-        public void aBoardIsNotEmptyAfterAMarkerIsPlaced()
+        public void ABoardIsNotEmptyAfterAMarkerIsPlaced()
         {
             var subject = new Board();
-            subject.placeMarker(5, P1_MARKER);
-            Assert.False(subject.isBoardEmpty());
+            subject.PlaceMarker(5, P1_MARKER);
+            Assert.False(subject.IsBoardEmpty());
         }
 
         [Fact]
-        public void aWhenNineMarkersArePlacedABoardIsFull()
+        public void AWhenNineMarkersArePlacedABoardIsFull()
         {
             var subject = new Board();
-            subject.placeMarker(1, P1_MARKER);
-            subject.placeMarker(2, P1_MARKER);
-            subject.placeMarker(6, P1_MARKER);
-            subject.placeMarker(7, P1_MARKER);
-            subject.placeMarker(9, P1_MARKER);
-            subject.placeMarker(3, P2_MARKER);
-            subject.placeMarker(4, P2_MARKER);
-            subject.placeMarker(5, P2_MARKER);
-            subject.placeMarker(8, P2_MARKER);
+            subject.PlaceMarker(1, P1_MARKER);
+            subject.PlaceMarker(2, P1_MARKER);
+            subject.PlaceMarker(6, P1_MARKER);
+            subject.PlaceMarker(7, P1_MARKER);
+            subject.PlaceMarker(9, P1_MARKER);
+            subject.PlaceMarker(3, P2_MARKER);
+            subject.PlaceMarker(4, P2_MARKER);
+            subject.PlaceMarker(5, P2_MARKER);
+            subject.PlaceMarker(8, P2_MARKER);
 
-            Assert.False(subject.isBoardEmpty());
-            Assert.True(subject.isBoardFilled());
+            Assert.False(subject.IsBoardEmpty());
+            Assert.True(subject.IsBoardFilled());
         }
 
         [Fact]
-        public void aBoardKnowsWhatSpacesAreStillAvailable()
+        public void ABoardKnowsWhatSpacesAreStillAvailable()
         {
             var subject = new Board();
-            subject.placeMarker(1, P1_MARKER);
-            subject.placeMarker(2, P1_MARKER);
-            subject.placeMarker(3, P1_MARKER);
+            subject.PlaceMarker(1, P1_MARKER);
+            subject.PlaceMarker(2, P1_MARKER);
+            subject.PlaceMarker(3, P1_MARKER);
             
-            Assert.Equal(new List<int> { 4, 5, 6, 7, 8, 9 }, subject.getAvailableSpaces());
+            Assert.Equal(new List<int> { 4, 5, 6, 7, 8, 9 }, subject.GetAvailableSpaces());
         }
 
         [Fact]
-        public void aBoardCanBePartiallyFilledByPassingInAnArrayOfMoves()
+        public void ABoardCanBePartiallyFilledByPassingInAnArrayOfMoves()
         {
             var subject = new Board();
             var p1_moves = new [] { 1, 2, 6, 7, 9 };
-            subject.partiallyFillBoard(p1_moves, P1_MARKER);
+            subject.PartiallyFillBoard(p1_moves, P1_MARKER);
 
-            Assert.Equal(new List<int> { 3, 4, 5, 8 }, subject.getAvailableSpaces());
+            Assert.Equal(new List<int> { 3, 4, 5, 8 }, subject.GetAvailableSpaces());
         }
 
         [Fact]
-        public void aBoardCanBeFilledByPassingInTwoArraysOfMoves()
+        public void ABoardCanBeFilledByPassingInTwoArraysOfMoves()
         {
             var subject = new Board();
             var p1_moves = new [] { 1, 2, 6, 7, 9 };
             var p2_moves = new [] { 3, 4, 5, 8 };
 
-            subject.partiallyFillBoard(p1_moves, P1_MARKER);
-            subject.partiallyFillBoard(p2_moves, P2_MARKER);
+            subject.PartiallyFillBoard(p1_moves, P1_MARKER);
+            subject.PartiallyFillBoard(p2_moves, P2_MARKER);
 
-            Assert.True(subject.isBoardFilled());
+            Assert.True(subject.IsBoardFilled());
         }
 
     }

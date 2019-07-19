@@ -7,18 +7,17 @@ namespace TicTacToeApp
     public class MinimaxStrategy : IStrategy
     {
         public int bestMove;
-        public Board originalBoard;
+        public Board originalBoard; 
         public Rules rules;
         public string maximizingPlayer;
         public string minimizingPlayer;
 
-        public MinimaxStrategy(Board originalBoard)
+        public MinimaxStrategy()
         {
             this.rules = new Rules();            
-            this.originalBoard = originalBoard;    
         }
 
-        public void getMinimizingPlayer(string currentPlayer)
+        public void GetMinimizingPlayer(string currentPlayer)
         {
             if (currentPlayer == Symbols.P1_MARKER)
             {
@@ -32,21 +31,21 @@ namespace TicTacToeApp
             }
         }
 
-        public string getMove(string maximizingPlayer)
+        public string GetMove(string maximizingPlayer, Board board)
         {
-            getMinimizingPlayer(maximizingPlayer);          
+            originalBoard = board;    
+            GetMinimizingPlayer(maximizingPlayer);          
             var depth = 0;
-            var score = minimax(originalBoard, maximizingPlayer, minimizingPlayer, depth);
+            var score = Minimax(originalBoard, maximizingPlayer, minimizingPlayer, depth);
             Console.WriteLine("\nThe minimax computer selected space {0}.", bestMove);
             return bestMove.ToString();
         }
 
-        public int score(Board board, string playerMarker, int depth)
+        public int Score(Board board, string playerMarker, int depth)
         {
-            bool isWon = rules.checkIfWon(board.board, playerMarker);
+            bool isWon = rules.CheckIfWon(board.spaces, playerMarker);
             if (isWon && playerMarker == maximizingPlayer)
-            {
-
+            { 
                 return 10 - depth;
             }
             else if (isWon && playerMarker == minimizingPlayer)
@@ -59,27 +58,27 @@ namespace TicTacToeApp
             }
         }
 
-        public int minimax(Board board, string maximizingPlayer, string minimizingPlayer, int depth)
+        public int Minimax(Board board, string maximizingPlayer, string minimizingPlayer, int depth)
         {
-            if (rules.isOver(board, minimizingPlayer))
+            if (rules.IsOver(board, minimizingPlayer))
             {
-                return score(board, minimizingPlayer, depth);
+                return Score(board, minimizingPlayer, depth);
             }
             depth += 1;
             var scores = new List<int>();
             var moves = new List<int>();
             
-            var availableMoves = board.getAvailableSpaces();
+            var availableMoves = board.GetAvailableSpaces();
 
             foreach (int move in availableMoves)
             {
-                var possibleBoard = getBoardWithNextMove(board, maximizingPlayer, move);
+                var possibleBoard = GetBoardWithNextMove(board, maximizingPlayer, move);
 
-                scores.Add(minimax(possibleBoard, minimizingPlayer, maximizingPlayer, depth));
+                scores.Add(Minimax(possibleBoard, minimizingPlayer, maximizingPlayer, depth));
                 moves.Add(move);
             }
 
-            if (maximizingPlayer == originalBoard.getCurrentPlayer())
+            if (maximizingPlayer == originalBoard.GetCurrentPlayer())
             {
                 int maxScoreIndex = scores.IndexOf(scores.Max());
                 bestMove = moves[maxScoreIndex];
@@ -93,31 +92,31 @@ namespace TicTacToeApp
             }
         }
 
-        public void checkBoardArray(Board board)
+        public void CheckBoardArray(Board board)
         {
-            foreach (Space space in board.board)
+            foreach (Space space in board.spaces)
             {
                 Console.Write("{0}: {1} |  ", space.location, space.marker);
             }
         }
 
-        public Board getPossibleBoard(Board boardToClone)
+        public Board GetPossibleBoard(Board boardToClone)
         {
             var possibleBoard = new Board();
             for (int i = 1; i <= Symbols.BOARD_SIZE; i++)
             {
-                if (boardToClone.board[i - 1].isSpaceFilled())
+                if (boardToClone.spaces[i - 1].IsSpaceFilled())
                 {
-                    possibleBoard.board[i - 1].marker = boardToClone.board[i - 1].marker;
+                    possibleBoard.spaces[i - 1].marker = boardToClone.spaces[i - 1].marker;
                 }                
             }
             return possibleBoard;
         }
 
-        public Board getBoardWithNextMove(Board board, string currentPlayerMarker, int move)
+        public Board GetBoardWithNextMove(Board board, string currentPlayerMarker, int move)
         {
-            var possibleBoard = getPossibleBoard(board);
-            possibleBoard.placeMarker(move, currentPlayerMarker);
+            var possibleBoard = GetPossibleBoard(board);
+            possibleBoard.PlaceMarker(move, currentPlayerMarker);
             return possibleBoard;
         }
     }

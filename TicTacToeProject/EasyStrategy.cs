@@ -7,25 +7,18 @@ namespace TicTacToeApp
 {
     public class EasyStrategy : IStrategy
     {
-        public Board board;
-
-        public EasyStrategy(Board board)
+        public string GetMove(string Marker, Board Board)
         {
-            this.board = board;
-        }
-
-        public string getMove(string Marker)
-        {
-            string location = getRandomSpace().ToString();
+            string location = getRandomSpace(Board).ToString();
             Console.WriteLine("\nThe computer selected space {0}.", location);
             return location;
         }
 
-        private int getRandomSpace()
+        private int getRandomSpace(Board Board)
         {
             Random random = new Random();
-            int index = random.Next(board.getAvailableSpaces().Count);
-            return board.getAvailableSpaces()[index];
+            int index = random.Next(Board.GetAvailableSpaces().Count);
+            return Board.GetAvailableSpaces()[index];
         }
     }
 }

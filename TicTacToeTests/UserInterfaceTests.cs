@@ -14,31 +14,33 @@ namespace TicTacToeTests
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void markersCanBeSetWithGivenSymbols()
+        public void MarkersCanBeSetWithGivenSymbols()
         {
             var subject = new UserInterface();
             var markers = new Tuple<string, string> ( P1_MARKER, P2_MARKER );
-            var options = new Options(markers);
+            var options = new Options(markers, 0, 0);
             Assert.Equal("+", options.P1_MARKER);
             Assert.Equal("o", options.P2_MARKER);
         }
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void markersCannotBeTheSame()
+        public void MarkersCannotBeTheSame()
         {
             var subject = new UserInterface();
-            Assert.True(subject.isMarkerDifferent(P1_MARKER, P2_MARKER));
-            Assert.False(subject.isMarkerDifferent(P1_MARKER, P1_MARKER));
+            Assert.True(subject.IsMarkerDifferent(P1_MARKER, P2_MARKER));
+            Assert.False(subject.IsMarkerDifferent(P1_MARKER, P1_MARKER));
         }
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void singlePlayerGameCanBeSelected()
+        public void YesOrNoUserInputCanBeChangedToTrueOrFalse()
         {
             var subject = new UserInterface();
-            var typeOfGame = "Y";
-            Assert.True(subject.isSinglePlayerGame(typeOfGame));
+
+            Assert.True(subject.IsValidYesOrNoInput("Y"));
+            Assert.True(subject.IsValidYesOrNoInput("N"));
+            Assert.False(subject.IsValidYesOrNoInput("1"));
         }
     }
 }

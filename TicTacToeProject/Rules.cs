@@ -18,7 +18,7 @@ namespace TicTacToeApp
             { 2, 5, 8 },
         };
 
-        public bool checkIfWon(List<Space> board, string currentMarker)
+        public bool CheckIfWon(List<Space> board, string currentMarker)
         {
             List<string> tempRow = new List<string>();
             var isWon = false;
@@ -30,7 +30,7 @@ namespace TicTacToeApp
                     int index = winCombinations[i, j];
                     tempRow.Add(board[index].marker);
                 }
-                if (isRowComplete(tempRow, currentMarker))
+                if (IsRowComplete(tempRow, currentMarker))
                 {
                     isWon = true;
                 }
@@ -39,19 +39,19 @@ namespace TicTacToeApp
             return isWon;
         }
 
-        public bool checkIfDraw(Board board, string currentMarker)
+        public bool CheckIfDraw(Board board, string currentMarker)
         {
-            return board.isBoardFilled() && !checkIfWon(board.board, currentMarker);
+            return board.IsBoardFilled() && !CheckIfWon(board.spaces, currentMarker);
         }
 
-        public bool isRowComplete(List <string> row, string marker) 
+        public bool IsRowComplete(List <string> row, string marker) 
         {
             return row.All(space => space == marker) ? true : false; 
         }
 
-        public bool isOver(Board board, string currentMarker)
+        public bool IsOver(Board board, string currentMarker)
         {
-            return checkIfWon(board.board, currentMarker) || checkIfDraw(board, currentMarker);
+            return CheckIfWon(board.spaces, currentMarker) || CheckIfDraw(board, currentMarker);
         }
         
     }

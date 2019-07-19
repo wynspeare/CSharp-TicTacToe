@@ -5,69 +5,69 @@ namespace TicTacToeApp
 {
     public class Board
     {
-        public List<Space> board = new List<Space>(); 
+        public List<Space> spaces = new List<Space>(); 
         
         public Board()
         {
             for (int i = 1; i <= Symbols.BOARD_SIZE; i++)
             {
-                this.board.Add(new Space(i));
+                this.spaces.Add(new Space(i));
             }
         }
 
-        public void partiallyFillBoard(int[] moves, string marker)
+        public void PartiallyFillBoard(int[] moves, string marker)
         {
             for (int i = 0; i < moves.GetLength(0); i++)
             {
-                placeMarker(moves[i], marker);
+                PlaceMarker(moves[i], marker);
             }
         }
 
-        public bool isBoardEmpty()
+        public bool IsBoardEmpty()
         {
-            return board.TrueForAll(space => space.isSpaceEmpty());
+            return spaces.TrueForAll(space => space.IsSpaceEmpty());
         }
 
-        public bool isBoardFilled()
+        public bool IsBoardFilled()
         {
-            return board.TrueForAll(space => !space.isSpaceEmpty());
+            return spaces.TrueForAll(space => !space.IsSpaceEmpty());
         }
 
-        public void placeMarker(int location, string playerMarker) 
+        public void PlaceMarker(int location, string playerMarker) 
         {
-            board[location - 1].marker = playerMarker;
+            spaces[location - 1].marker = playerMarker;
         }
 
-        public string markerAtLocation(int location) 
+        public string MarkerAtLocation(int location) 
         {
-            return board[location - 1].marker;
+            return spaces[location - 1].marker;
         }
 
-        public bool isSpaceOnBoardEmpty(int location)
+        public bool IsSpaceOnBoardEmpty(int location)
         {
-            return board[location - 1].isSpaceEmpty();
+            return spaces[location - 1].IsSpaceEmpty();
         }
 
-        public List<int> getAvailableSpaces()
+        public List<int> GetAvailableSpaces()
         {
-            return board
-                .Where(space => space.isSpaceEmpty())
+            return spaces
+                .Where(space => space.IsSpaceEmpty())
                 .Select(space => space.location)
                 .ToList();
         }
 
-        public Dictionary<int, string> createDictBoard()
+        public Dictionary<int, string> CreateDictBoard()
         {
             var dictBoard = new Dictionary<int, string>();
-            foreach (Space space in board)
+            foreach (Space space in spaces)
             {
                 dictBoard.Add(space.location, space.marker);
             }
             return dictBoard;
         }
 
-        public string getCurrentPlayer() {
-            int totalMovesOnBoard = 9 - getAvailableSpaces().Count;
+        public string GetCurrentPlayer() {
+            int totalMovesOnBoard = 9 - GetAvailableSpaces().Count;
             if (totalMovesOnBoard % 2 == 0)
             {
                 return Symbols.P1_MARKER;

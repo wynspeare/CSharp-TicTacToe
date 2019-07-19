@@ -9,23 +9,21 @@ namespace TicTacToeTests
         public const string P1_MARKER = "+";
 
         [Fact]
-        public void aComputerPlayerInstantiatesWithAMarker()
+        public void ComputerPlayerInstantiatesWithAMarker()
         {
-            var board = new Board();
-            var strategy = new EasyStrategy(board);
+            var strategy = new EasyStrategy();
             var subject = new ComputerPlayer(P1_MARKER, strategy);
 
             Assert.Equal(P1_MARKER, subject.Marker);
         }
 
         [Fact]
-        public void aComputerPlayerCanGenerateARandomMoveFromAvailableSpaces()
+        public void ComputerPlayerCanGenerateARandomMoveFromAvailableSpaces()
         {
             var board = new Board();
-            var strategy = new EasyStrategy(board);
-
+            var strategy = new EasyStrategy();
             var subject = new ComputerPlayer(P1_MARKER, strategy);
-            string selectedSpace = subject.getMove();
+            string selectedSpace = subject.GetMove(board);
 
             Assert.InRange(Convert.ToInt32(selectedSpace), 1, 9);
         }
