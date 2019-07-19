@@ -13,9 +13,9 @@ namespace TicTacToeApp
             this.strategy = strategy;
         }
 
-        public string getMove(Board Board)
+        public string GetMove(Board Board)
         {
-            return strategy.getMove(Marker, Board);
+            return strategy.GetMove(Marker, Board);
         }
     }
 }

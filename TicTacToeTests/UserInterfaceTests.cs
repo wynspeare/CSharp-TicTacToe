@@ -14,7 +14,7 @@ namespace TicTacToeTests
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void markersCanBeSetWithGivenSymbols()
+        public void MarkersCanBeSetWithGivenSymbols()
         {
             var subject = new UserInterface();
             var markers = new Tuple<string, string> ( P1_MARKER, P2_MARKER );
@@ -25,22 +25,22 @@ namespace TicTacToeTests
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void markersCannotBeTheSame()
+        public void MarkersCannotBeTheSame()
         {
             var subject = new UserInterface();
-            Assert.True(subject.isMarkerDifferent(P1_MARKER, P2_MARKER));
-            Assert.False(subject.isMarkerDifferent(P1_MARKER, P1_MARKER));
+            Assert.True(subject.IsMarkerDifferent(P1_MARKER, P2_MARKER));
+            Assert.False(subject.IsMarkerDifferent(P1_MARKER, P1_MARKER));
         }
 
         [Trait("Category", "UITest")]
         [Fact]
-        public void yesOrNoUserInputCanBeChangedToTrueOrFalse()
+        public void YesOrNoUserInputCanBeChangedToTrueOrFalse()
         {
             var subject = new UserInterface();
 
-            Assert.True(subject.isValidYesOrNoInput("Y"));
-            Assert.True(subject.isValidYesOrNoInput("N"));
-            Assert.False(subject.isValidYesOrNoInput("1"));
+            Assert.True(subject.IsValidYesOrNoInput("Y"));
+            Assert.True(subject.IsValidYesOrNoInput("N"));
+            Assert.False(subject.IsValidYesOrNoInput("1"));
         }
     }
 }

@@ -21,21 +21,21 @@ namespace TicTacToeApp
             this.currentPlayer = this.playerOne;
         }
 
-        public int getCurrentMove(IPlayer player)
+        public int GetCurrentMove(IPlayer player)
         {
-            return Convert.ToInt32(player.getMove(currentBoard));
+            return Convert.ToInt32(player.GetMove(currentBoard));
         }
 
-        public bool turn(int location)
+        public bool Turn(int location)
         {
-            moveMarker(location, currentPlayer.Marker);
+            MoveMarker(location, currentPlayer.Marker);
             
-            bool notWon = !rules.checkIfWon(currentBoard.spaces, currentPlayer.Marker);
-            bool notDrawn = !rules.checkIfDraw(currentBoard, currentPlayer.Marker);
+            bool notWon = !rules.CheckIfWon(currentBoard.spaces, currentPlayer.Marker);
+            bool notDrawn = !rules.CheckIfDraw(currentBoard, currentPlayer.Marker);
             bool notOver = notWon && notDrawn;
             if (notOver)
             {
-                switchPlayer();
+                SwitchPlayer();
                 return true;
             }
             else
@@ -44,14 +44,14 @@ namespace TicTacToeApp
             }
         }
 
-        public void switchPlayer()
+        public void SwitchPlayer()
         {
             currentPlayer = (currentPlayer == playerOne) ? playerTwo : playerOne;
         }
 
-        public void moveMarker(int location, string marker)
+        public void MoveMarker(int location, string marker)
         {
-            currentBoard.placeMarker(location, marker);
+            currentBoard.PlaceMarker(location, marker);
         }
 
     }

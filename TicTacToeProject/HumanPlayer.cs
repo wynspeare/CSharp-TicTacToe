@@ -11,7 +11,7 @@ namespace TicTacToeApp
             this.Marker = Marker;
         }
 
-        public string getMove(Board Board)
+        public string GetMove(Board Board)
         {      
             return getValidSpace(Board);
         }
@@ -32,7 +32,7 @@ namespace TicTacToeApp
             try
             {
                 var convertedLocation = Convert.ToInt32(location);
-                return Board.getAvailableSpaces().Contains(convertedLocation);
+                return Board.GetAvailableSpaces().Contains(convertedLocation);
             }
             catch (FormatException)
             {

@@ -11,12 +11,12 @@ namespace TicTacToeApp
             this.marker = marker;
         }
 
-        public bool isSpaceEmpty()
+        public bool IsSpaceEmpty()
         {
             return marker == Symbols.EMPTY;
         }
 
-        public bool isSpaceFilled()
+        public bool IsSpaceFilled()
         {
             return marker != Symbols.EMPTY;
         }

@@ -20,10 +20,10 @@ namespace TicTacToeUserInterface
         {
             this.P1_MARKER = markers.Item1;
             this.P2_MARKER = markers.Item2;
-            this.setPlayers(p1Setting, p2Setting);
+            this.SetPlayers(p1Setting, p2Setting);
         }
 
-        private void setPlayers(int p1Setting, int p2Setting)
+        private void SetPlayers(int p1Setting, int p2Setting)
         {
                 PlayerSetting p1 = (PlayerSetting)p1Setting;
                 PlayerSetting p2 = (PlayerSetting)p2Setting;

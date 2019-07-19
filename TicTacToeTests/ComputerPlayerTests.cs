@@ -9,7 +9,7 @@ namespace TicTacToeTests
         public const string P1_MARKER = "+";
 
         [Fact]
-        public void aComputerPlayerInstantiatesWithAMarker()
+        public void ComputerPlayerInstantiatesWithAMarker()
         {
             var strategy = new EasyStrategy();
             var subject = new ComputerPlayer(P1_MARKER, strategy);
@@ -18,12 +18,12 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void aComputerPlayerCanGenerateARandomMoveFromAvailableSpaces()
+        public void ComputerPlayerCanGenerateARandomMoveFromAvailableSpaces()
         {
             var board = new Board();
             var strategy = new EasyStrategy();
             var subject = new ComputerPlayer(P1_MARKER, strategy);
-            string selectedSpace = subject.getMove(board);
+            string selectedSpace = subject.GetMove(board);
 
             Assert.InRange(Convert.ToInt32(selectedSpace), 1, 9);
         }

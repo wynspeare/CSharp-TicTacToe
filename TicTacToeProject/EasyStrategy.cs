@@ -7,7 +7,7 @@ namespace TicTacToeApp
 {
     public class EasyStrategy : IStrategy
     {
-        public string getMove(string Marker, Board Board)
+        public string GetMove(string Marker, Board Board)
         {
             string location = getRandomSpace(Board).ToString();
             Console.WriteLine("\nThe computer selected space {0}.", location);
@@ -17,8 +17,8 @@ namespace TicTacToeApp
         private int getRandomSpace(Board Board)
         {
             Random random = new Random();
-            int index = random.Next(Board.getAvailableSpaces().Count);
-            return Board.getAvailableSpaces()[index];
+            int index = random.Next(Board.GetAvailableSpaces().Count);
+            return Board.GetAvailableSpaces()[index];
         }
     }
 }

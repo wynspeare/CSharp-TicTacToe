@@ -9,7 +9,7 @@ namespace TicTacToeTests
         public const string P1_MARKER = "+";
 
         [Fact]
-        public void aHumanPlayerInstantiatesWithAMarker()
+        public void HumanPlayerInstantiatesWithAMarker()
         {
             var subject = new HumanPlayer(P1_MARKER);
 
@@ -17,7 +17,7 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void aHumanPlayerCanKnowIfSelectedSpaceIsValid()
+        public void HumanPlayerCanKnowIfSelectedSpaceIsValid()
         {
             var subject = new HumanPlayer(P1_MARKER);
             var board = new Board();      

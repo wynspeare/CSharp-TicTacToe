@@ -15,48 +15,48 @@ namespace TicTacToeApp
             }
         }
 
-        public void partiallyFillBoard(int[] moves, string marker)
+        public void PartiallyFillBoard(int[] moves, string marker)
         {
             for (int i = 0; i < moves.GetLength(0); i++)
             {
-                placeMarker(moves[i], marker);
+                PlaceMarker(moves[i], marker);
             }
         }
 
-        public bool isBoardEmpty()
+        public bool IsBoardEmpty()
         {
-            return spaces.TrueForAll(space => space.isSpaceEmpty());
+            return spaces.TrueForAll(space => space.IsSpaceEmpty());
         }
 
-        public bool isBoardFilled()
+        public bool IsBoardFilled()
         {
-            return spaces.TrueForAll(space => !space.isSpaceEmpty());
+            return spaces.TrueForAll(space => !space.IsSpaceEmpty());
         }
 
-        public void placeMarker(int location, string playerMarker) 
+        public void PlaceMarker(int location, string playerMarker) 
         {
             spaces[location - 1].marker = playerMarker;
         }
 
-        public string markerAtLocation(int location) 
+        public string MarkerAtLocation(int location) 
         {
             return spaces[location - 1].marker;
         }
 
-        public bool isSpaceOnBoardEmpty(int location)
+        public bool IsSpaceOnBoardEmpty(int location)
         {
-            return spaces[location - 1].isSpaceEmpty();
+            return spaces[location - 1].IsSpaceEmpty();
         }
 
-        public List<int> getAvailableSpaces()
+        public List<int> GetAvailableSpaces()
         {
             return spaces
-                .Where(space => space.isSpaceEmpty())
+                .Where(space => space.IsSpaceEmpty())
                 .Select(space => space.location)
                 .ToList();
         }
 
-        public Dictionary<int, string> createDictBoard()
+        public Dictionary<int, string> CreateDictBoard()
         {
             var dictBoard = new Dictionary<int, string>();
             foreach (Space space in spaces)
@@ -66,8 +66,8 @@ namespace TicTacToeApp
             return dictBoard;
         }
 
-        public string getCurrentPlayer() {
-            int totalMovesOnBoard = 9 - getAvailableSpaces().Count;
+        public string GetCurrentPlayer() {
+            int totalMovesOnBoard = 9 - GetAvailableSpaces().Count;
             if (totalMovesOnBoard % 2 == 0)
             {
                 return Symbols.P1_MARKER;
